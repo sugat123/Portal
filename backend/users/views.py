@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from jobs import urls
+from django.db import transaction
 
 from .forms import *
 
@@ -49,15 +50,22 @@ def logout_user(request):
         return redirect('users:login_user')
 
 
+@transaction.atomic
 def register(request):
     if request.method == "POST":
-        form = AddUserForm(request.POST or None)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.save()
+        user_form = AddUserForm(request.POST or None)
+        # profile_form = ProfileForm(request.POST or None)
+        if user_form.is_valid():
+
+            user = user_form.save()
+            # profile = profile_form.save(commit=False)
+            # if profile.user_id is None:
+            #     profile.user_id = new_user.id
+            # profile.save()
             messages.success(
                 request, 'user created with username {}'.format(user.username))
-            return redirect('register')
+            return redirect('jobs:index')
     else:
-        form = AddUserForm()
-    return render(request, 'users/register.html', {'form': form})
+        user_form = AddUserForm()
+        # profile_form = ProfileForm()
+    return render(request, 'users/register.html', {'user_form': user_form})
