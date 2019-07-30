@@ -54,7 +54,7 @@ def register(request):
         form = AddUserForm(request.POST or None)
         if form.is_valid():
             user = form.save()
-            # user.save()
+            user.save()
             messages.success(
                 request, 'user created with username {}'.format(user.username)
                 )
