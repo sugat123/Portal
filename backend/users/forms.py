@@ -12,7 +12,6 @@ class LoginForm(forms.Form):
 
 
 class AddUserForm(UserCreationForm):
-    
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -22,11 +21,12 @@ class AddUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', "email", "password1",
-                  "password2",  'is_superuser']
+        fields = ['first_name', 'last_name', 'username', "email", "password1",
+                  "password2"]
 
 
-# class ProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         fields = ('number',)
+class ProfileForm(forms.ModelForm):
+    
+    class Meta:
+        model = Profile
+        fields = ('number', 'user_type')
