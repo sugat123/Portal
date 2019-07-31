@@ -15,13 +15,16 @@ def login_user(request):
             password = form.cleaned_data['password']
             remember_me = form.cleaned_data['remember_me']
             user = authenticate(request, username=username, password=password)
-            if user and user.is_superuser:
+            if user:
                 login(request, user)
                 if not remember_me:
                     request.session.set_expiry(0)
                 # redirect_url = request.GET.get('next', 'users/base')
                 # messages.info(request, 'You are logged in as an admin .')
-                return redirect('jobs:index')
+                if user.profile.user_type == 'seeker':
+                    return redirect('jobs:seeker')
+                else:
+                    return redirect('jobs:giver')
             # elif user and user.is_staff:
             #     login(request, user)
             #     if not remember_me:
@@ -46,19 +49,31 @@ def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
         messages.success(request, 'logged out successfully')
-        return redirect('users:login_user')
+        return redirect('jobs:index')
 
 
 def register(request):
     if request.method == "POST":
-        form = AddUserForm(request.POST or None)
-        if form.is_valid():
-            user = form.save()
-            user.save()
-            messages.success(
-                request, 'user created with username {}'.format(user.username)
-                )
-            return redirect('jobs:index')
+        user_form = AddUserForm(request.POST or None)
+        profile_form = ProfileForm(request.POST or None)
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user = user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+            username = user_form.cleaned_data.get('username')
+            password = user_form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            # messages.success(request, 'user created with username {}'.format(user.username))
+            if user.profile.user_type == 'seeker':
+                return redirect('jobs:seeker')
+            else:
+                return redirect('jobs:giver')
+
     else:
-        form = AddUserForm()
-    return render(request, 'users/register.html', {'form': form})
+        user_form = AddUserForm()
+        profile_form = ProfileForm()
+    return render(request, 'users/register.html', {'user_form': user_form, 'profile_form': profile_form})
