@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from .forms import *
 
 
 def index(request):
@@ -14,3 +15,16 @@ def giver(request):
 @login_required
 def seeker(request):
     return render(request, 'jobs/seeker.html')
+
+
+@login_required
+def add_job(request):
+    if request.method == 'POST':
+        form = AddJobTypeForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('jobs:index')
+    else:
+        form = AddJobTypeForm()
+
+    return render(request, 'jobs/add_job.html', {'form': form})
