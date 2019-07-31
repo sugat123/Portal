@@ -43,15 +43,43 @@ ul.formclick li a:hover {
     color: #00AEEF;
 }
 
-/*.banner-image{
+.banner-image{
 	background-image: url(../img/banner.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
-}*/
-
-.banner-image img{
-	width: 100%;
+  background-size: cover;
 }
+.input-field .location {
+    height: 52px;
+    width: 100%;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #000;
+    background-color: #fff;
+}
+.search-form .col-md-4,.search-form .col-md-2,.search-form .col-md-3 {
+    padding: 0;
+}
+.input-field {
+    border-right: 1px solid #ccc;
+    width: 100%;
+}
+.input-field .form-control {
+    height: 52px;
+    width: 100%;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #000;
+    background-color: #fff;
+    border-radius: 0;
+}
+/*.banner-image img{
+	width: 100%;
+}*/
 
 .job-title h1 {
     text-align: center;
@@ -172,12 +200,12 @@ button.btn:hover{
 
 
 .app-field{
-	background-image: url(../img/app.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
+	  background-image: url(../img/app.jpg);
+	  background-repeat: no-repeat;
+	  background-position: center;
     background-size: cover;
-	margin-top: 50px;
-	margin-bottom: 50px;
+	  margin-top: 50px;
+	  margin-bottom: 50px;
 }
 .app-content {
     padding-top: 50px;
