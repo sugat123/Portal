@@ -1,4 +1,4 @@
-{% extends 'jobs/index.html' %}
+{% extends 'jobs/base.html' %}
 
 {% block title %}Sign Up{% endblock %}
 
@@ -8,7 +8,7 @@
     {% csrf_token %}
     {{ user_form.as_p }}
     {{ profile_form.as_p }}
-
+    
     <button type="submit">Register</button>
 </form>
 {% endblock %}
