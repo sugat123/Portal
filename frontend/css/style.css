@@ -50,7 +50,7 @@ ul.formclick li a:hover {
   background-size: cover;
 }
 .input-field .location {
-    height: 52px;
+    height: 46px;
     width: 100%;
     border: none;
     padding: 6px 12px;
@@ -59,15 +59,11 @@ ul.formclick li a:hover {
     color: #000;
     background-color: #fff;
 }
-.search-form .col-md-4,.search-form .col-md-2,.search-form .col-md-3 {
-    padding: 0;
-}
 .input-field {
-    border-right: 1px solid #ccc;
     width: 100%;
 }
 .input-field .form-control {
-    height: 52px;
+    height: 46px;
     width: 100%;
     border: none;
     padding: 6px 12px;
@@ -76,6 +72,23 @@ ul.formclick li a:hover {
     color: #000;
     background-color: #fff;
     border-radius: 0;
+}
+input.search-btn {
+    width: 100%;
+    height: 46px;
+    background-color: #ED1C24;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+.banner-text {
+    padding: 60px;
+    text-align: center;
+}
+.banner-text h1 {
+    color: #fff;
+    margin-bottom: 30px;
 }
 /*.banner-image img{
 	width: 100%;
@@ -87,12 +100,13 @@ ul.formclick li a:hover {
     color: #444;
 }
 .job-categories {
-    margin: 40px 0px;
+    margin: 20px 0px;
 }
 .job-category {
     text-align: center;
     border: 1px solid #ddd;
     padding: 50px;
+    margin-top: 20px;
 }
 .job-category:hover {
     box-shadow: 0 5px 25px rgba(0, 0, 0, .3);
@@ -313,12 +327,11 @@ ul.ft-list .ft-item a:hover {
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 50%;
+  width: 40%;
   position: relative;
   transition: all 5s ease-in-out;
   z-index: 1;
 }
-
 .popup h2 {
   margin-top: 0;
   color: #333;
@@ -326,20 +339,20 @@ ul.ft-list .ft-item a:hover {
 }
 .popup .close {
   position: absolute;
-  top: 20px;
+  top: 12px;
   right: 30px;
   transition: all 200ms;
   font-size: 30px;
   font-weight: bold;
   text-decoration: none;
-  color: #333;
+  color: #000;
 }
 .popup .close:hover {
-  color: #06D85F;
+  color: #00AEEF;
 }
 .popup-content {
-    text-align: center;
-    padding: 10px 0;
+    /*text-align: center;
+    padding: 10px 0;*/
 }
 .popup-left {
     background: #ED1C24;
