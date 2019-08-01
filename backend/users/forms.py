@@ -21,12 +21,18 @@ class AddUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', "email", "password1",
+        fields = ['first_name','last_name','username',"email", "password1",
                   "password2"]
 
 
 class ProfileForm(forms.ModelForm):
-    
+    # user_type=forms.ChoiceField(choices = TYPES,widget=forms.RadioSelect())
     class Meta:
         model = Profile
-        fields = ('number', 'user_type')
+        fields = ('number','user_type')
+
+    def clean_number(self):
+        number = self.cleaned_data['number']
+        if Profile.objects.filter(number = number).exists():
+            raise ValidationError('Phone Number Already Exists')
+        return number

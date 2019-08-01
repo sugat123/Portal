@@ -11,6 +11,6 @@ urlpatterns = [
     path('add_facility/', views.add_facility, name='add_facility'),
     path('<slug>/post_job/', views.post_job, name='post_job'),
     path('<slug>/list_job/', views.list_job, name='list_job'),
-
+    path('add_skill/',views.add_skill, name= 'add_skill')
 
 ]

@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from jobs import urls
-from django.db import transaction
 
 from .forms import *
 
@@ -53,7 +52,6 @@ def logout_user(request):
         return redirect('jobs:index')
 
 
-@transaction.atomic
 def register(request):
     if request.method == "POST":
         user_form = AddUserForm(request.POST or None)

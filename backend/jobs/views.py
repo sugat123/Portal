@@ -68,3 +68,17 @@ def add_facility(request):
     else:
         form = AddFacilityForm()
     return render(request, 'jobs/add_facility.html', {'form': form})
+
+
+@login_required
+def add_skill(request):
+    if request.method == 'POST':
+        form = AddSkillForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+            return redirect('jobs:add_skill')
+    else:
+        form = AddSkillForm()
+
+    return render(request, 'jobs/add_skill.html', {'form': form})
