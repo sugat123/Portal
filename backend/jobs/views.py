@@ -17,7 +17,9 @@ def giver(request):
 
 @login_required
 def seeker(request):
-    return render(request, 'jobs/seeker.html')
+    job_types = JobType.objects.all()
+    context = {'job_types': job_types}
+    return render(request, 'jobs/seeker.html', context)
 
 
 @login_required
@@ -45,3 +47,11 @@ def post_job(request, slug):
                'experiences': experiences,
                'facilities': facilities}
     return render(request, 'jobs/post_job.html', context)
+
+
+@login_required
+def list_job(request, slug):
+    type = get_object_or_404(JobType, slug=slug)
+    posted_jobs = PostedJob.objects.all()
+    context = {'posted_jobs': posted_jobs, 'type': type}
+    return render(request, 'jobs/list_job.html', context)

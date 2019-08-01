@@ -5,7 +5,20 @@
 {% block content %}
 <h2>Hello seeker {{ user.username }}</h2>
 {% if user.is_authenticated %}
-<h4>Your number is {{ user.profile.number }}</h4>
+<h4>What job do you need ?</h4>
+<ul>
+    {% for job in job_types %}
+    <li>
+
+        <a href="{% url 'jobs:list_job' job.slug %}">{{job.title}}</a>
+
+    </li>
+    {% endfor %}
+    <button><a href="{% url 'jobs:add_job'  %}">Add Job</a></button>
+</ul>
+<br>
+
+
 <a href="{% url 'users:logout' %}">logout</a>
 {% endif %}
 {% endblock %}
