@@ -55,3 +55,16 @@ def list_job(request, slug):
     posted_jobs = PostedJob.objects.all()
     context = {'posted_jobs': posted_jobs, 'type': type}
     return render(request, 'jobs/list_job.html', context)
+
+
+@login_required
+def add_facility(request):
+    if request.method == 'POST':
+        form = AddFacilityForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+            return redirect('jobs:add_facility')
+    else:
+        form = AddFacilityForm()
+    return render(request, 'jobs/add_facility.html', {'form': form})

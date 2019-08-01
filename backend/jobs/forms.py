@@ -6,3 +6,8 @@ class AddJobTypeForm(forms.ModelForm):
         model = JobType
         fields = '__all__'
 
+class AddFacilityForm(forms.ModelForm):
+    class Meta:
+        model =Facility
+        fields = '__all__'
+
