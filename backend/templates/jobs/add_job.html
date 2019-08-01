@@ -1,4 +1,4 @@
-{% extends 'jobs/index.html' %}
+{% extends 'jobs/base.html' %}
 
 {% block title %}Login{% endblock %}
 
@@ -9,6 +9,7 @@
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit">Add</button>
+    <button onClick="javascript:history.go(-1);">Go back</button>
 </form>
 
 {% endblock %}

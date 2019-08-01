@@ -1,11 +1,22 @@
-{% extends 'jobs/index.html' %}
+{% extends 'jobs/base.html' %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
 <h2>Hello giver {{ user.username }}</h2>
 {% if user.is_authenticated %}
-<h4>Your number is {{ user.profile.number }}</h4>
+<h4>What are you looking for?</h4>
+<ul>
+    {% for job in job_types %}
+    <li>
+
+        <a href="{% url 'jobs:post_job' job.slug %}">{{job.title}}</a>
+
+    </li>
+    {% endfor %}
+    <button><a href="{% url 'jobs:add_job'  %}">Add Job</a></button>
+</ul>
+
 <a href="{% url 'users:logout' %}">logout</a>
 {% endif %}
 {% endblock %}
