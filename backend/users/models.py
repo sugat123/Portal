@@ -4,20 +4,20 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django import forms
 
-# TYPES = [
-#     ('seeker', 'seeker'),
-#     ('giver', 'giver')
-# ]
+TYPES = [
+    ('seeker', 'seeker'),
+    ('giver', 'giver')
+]
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     number = models.CharField(max_length=10)
-    # user_type = models.CharField(max_length=15, choices=TYPES)
+    user_type = models.CharField(max_length=15, choices=TYPES)
 
     def __str__(self):
-        return '{}'.format(self.user.username)
+        return '{}'.format(self.number)
 
-
+ 
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
 #     if created:
