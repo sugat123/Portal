@@ -53,6 +53,7 @@ class PostedJob(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.PROTECT)
     skills = models.ForeignKey(Skills, on_delete=models.PROTECT)
     facility = models.ForeignKey(Facility, on_delete=models.PROTECT)
+    location = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return "Job Posted for: {}".format(self.job_type)

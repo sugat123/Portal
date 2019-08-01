@@ -1,0 +1,25 @@
+{% extends 'jobs/base.html' %}
+
+{% block title %}List Job{% endblock %}
+
+{% block content %}
+
+<h2>{{type.title}}</h2>
+
+{% for posted_job in posted_jobs %}
+{% if posted_job.job_type_id == type.id %}
+
+{{posted_job.experience.years}}
+<br>
+{{posted_job.skills.title}}
+<br>
+{{posted_job.facility.title}}
+<br>
+{{posted_job.location}}
+<br>
+<br>
+{% endif %}
+{% endfor %}
+
+
+{% endblock %}
