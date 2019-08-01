@@ -32,6 +32,9 @@ class Facility(models.Model):
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, blank=True, null=True)
 
+    def __str__(self):
+        return "{0}'s Facility: {1}".format(self.job_type, self.title)
+
 
 class Experience(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -42,3 +45,24 @@ class Experience(models.Model):
 
     def __str__(self):
         return "{0}: {1} years".format(self.job_type, self.years)
+
+
+class PostedJob(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    job_type = models.ForeignKey(JobType, on_delete=models.PROTECT)
+    experience = models.ForeignKey(Experience, on_delete=models.PROTECT)
+    skills = models.ForeignKey(Skills, on_delete=models.PROTECT)
+    facility = models.ForeignKey(Facility, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return "Job Posted for: {}".format(self.job_type)
+
+
+class AppliedJob(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    job_type = models.ForeignKey(JobType, on_delete=models.PROTECT)
+    experience = models.ForeignKey(Experience, on_delete=models.PROTECT)
+    skills = models.ForeignKey(Skills, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return "Job Applied by: {}".format(self.user)
