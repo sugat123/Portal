@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 from django.db import models
 from autoslug import AutoSlugField
 from users.models import *
@@ -44,4 +42,13 @@ class Experience(models.Model):
 
     def __str__(self):
         return "{0}: {1} years".format(self.job_type, self.years)
->>>>>>> 0a6167a3938aa766a6fbfaa30a698d70adb4a945
+
+class PostedJob(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    job_type = models.ForeignKey(JobType,on_delete=models.PROTECT)
+    experience = models.ForeignKey(Experience,on_delete=models.PROTECT)
+    skills = models.ForeignKey(Skills,on_delete=models.PROTECT)
+    facility = models.ForeignKey(Facility,on_delete=models.PROTECT)
+    
+    def __str__(self):
+        return "Job Posted for: {}".format(self.job_type)
