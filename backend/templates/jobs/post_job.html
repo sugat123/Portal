@@ -6,8 +6,23 @@
 <h2>{{type.title}}</h2>
 <br>
 
-{{skills.title}}
-
+{% for skill in skills %}
+{% if skill.job_type_id == type.id %}
+{{skill.title}}
+{% endif %}
+{% endfor %}
+<hr>
+{% for experience in experiences %}
+{% if experience.job_type_id == type.id %}
+{{experience.years}}
+{% endif %}
+{% endfor %}
+<hr>
+{% for facility in facilities %}
+{% if facility.job_type_id == type.id %}
+{{facility.title}}
+{% endif %}
+{% endfor %}
 
 
 {% endblock %}

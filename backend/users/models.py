@@ -15,7 +15,7 @@ class Profile(models.Model):
     user_type = models.CharField(max_length=15, choices=TYPES)
 
     def __str__(self):
-        return '{}'.format(self.number)
+        return '{}'.format(self.user.username)
 
  
 # @receiver(post_save, sender=User)

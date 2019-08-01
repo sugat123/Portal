@@ -37,5 +37,11 @@ def add_job(request):
 @login_required
 def post_job(request, slug):
     type = get_object_or_404(JobType, slug=slug)
-    skills = Skills.objects.filter(job_type_id=2)
-    return render(request, 'jobs/post_job.html', {'type': type, 'skills': skills})
+    skills = Skills.objects.all()
+    experiences = Experience.objects.all()
+    facilities = Facility.objects.all()
+    context = {'type': type,
+               'skills': skills,
+               'experiences': experiences,
+               'facilities': facilities}
+    return render(request, 'jobs/post_job.html', context)
