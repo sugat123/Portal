@@ -20,6 +20,8 @@
 <hr>
 {% for facility in facilities %}
 {% if facility.job_type_id == type.id %}
+{{facility.salary}}
+{{facility.working_time}}
 {{facility.title}}
 {% endif %}
 {% endfor %}

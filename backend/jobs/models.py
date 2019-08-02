@@ -24,16 +24,23 @@ class Skills(models.Model):
     def __str__(self):
         return "{0}'s Skill: {1}".format(self.job_type, self.title)
 
+    class Meta:
+        verbose_name_plural = 'Skill'
+
 
 class Facility(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(unique_with='id', populate_from='title')
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
+
     title = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return "{0}'s Facility: {1}".format(self.job_type, self.title)
+
+    class Meta:
+        verbose_name_plural = 'Facility'
 
 
 class Experience(models.Model):
@@ -53,6 +60,8 @@ class PostedJob(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.PROTECT)
     skills = models.ForeignKey(Skills, on_delete=models.PROTECT)
     facility = models.ForeignKey(Facility, on_delete=models.PROTECT)
+    salary = models.IntegerField(blank=True, null=True)
+    working_time = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
@@ -64,6 +73,7 @@ class AppliedJob(models.Model):
     job_type = models.ForeignKey(JobType, on_delete=models.PROTECT)
     experience = models.ForeignKey(Experience, on_delete=models.PROTECT)
     skills = models.ForeignKey(Skills, on_delete=models.PROTECT)
+    location = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return "Job Applied by: {}".format(self.user)
