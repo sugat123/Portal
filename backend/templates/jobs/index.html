@@ -13,6 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static '/css/responsive.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/skill.css' %}">
+
 </head>
 
 <body>
@@ -378,6 +380,16 @@
 			$('.head').removeClass('header-fixed');
 		}
 	});
+</script>
+
+<script>
+	var slider = document.getElementById("range");
+	var output = document.getElementById("demo");
+	output.innerHTML = slider.value;
+
+	slider.oninput = function () {
+		output.innerHTML = this.value;
+	}
 </script>
 
 </html>
