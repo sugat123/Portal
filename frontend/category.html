@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Jobportal/login</title>
+	<title>Jobpotal/category</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" type="text/css" href="css/category.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 <body>
@@ -31,67 +31,72 @@
 				</div>
 			</div>
 	</header>
-	<div id="popup1" class="overlay">
-		<div class="popup">
-			<h2>Signup</h2>
-			<a class="close" href="#">&times;</a>
-			<div class="popup-content">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="popup-left">
-							<div class="p-icon"><img src="img/user.png"></div>
-							<div class="p-title">For employer</div>
-							<div class="p-button"><a href="">Signup</a></div>
+
+	<section class="category-banner">
+		<div class="category-title">Category</div>
+	</section>
+
+	<section class="job-all">
+			<div class="container">
+				<div class="job-title">
+					<h1>Browse Jobs</h1>
+				</div>
+				<div class="job-categories">
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+							<div class="job-category">
+								<div class="job-icon"><i class="fas fa-laptop"></i></div>
+								<div class="job-title">IT Engineer</div>
+							</div>
 						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="popup-right">
-							<div class="p-icon"><img src="img/jobseeker.png"></div>
-							<div class="p-title">For jobseeker</div>
-							<div class="p-button"><a href="">Signup</a></div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+							<div class="job-category">
+								<div class="job-icon"><i class="fas fa-concierge-bell"></i></div>
+								<div class="job-title">Cook</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+							<div class="job-category">
+								<div class="job-icon"><i class="fas fa-stethoscope"></i></div>
+								<div class="job-title">Doctor</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+							<div class="job-category">
+								<div class="job-icon"><i class="fas fa-plane"></i></div>
+								<div class="job-title">Pilot</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+							<div class="job-category">
+								<div class="job-icon"><i class="fab fa-hire-a-helper"></i></div>
+								<div class="job-title">Helper</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+							<div class="job-category">
+								<div class="job-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+								<div class="job-title">Teacher</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+							<div class="job-category">
+								<div class="job-icon"><i class="fas fa-book-reader"></i></div>
+								<div class="job-title">Accoutant</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+							<div class="job-category">
+								<div class="job-icon"><i class="fas fa-user-plus"></i></div>
+								<div class="job-title">Plumber</div>
+							</div>
 						</div>
 					</div>
 				</div>
+				<div class="more-btn"><a href="">View More</a></div>
 			</div>
-		</div>
-	</div>
+		</section>
 
-	<section class="login-banner">
-		<div class="login-title">Login</div>
-	</section>
-
-	<section class="login-form">
-		<div class="form-content">
-			<h3>Login form</h3>
-			<form>
-				<div class="form-field">
-					<label>Email</label>
-					<input type="email" name="email" placeholder="Username" class="form-control">
-				</div>
-				<div class="form-field">
-					<label>Password</label>
-					<input type="password" name="password" placeholder="Password" class="form-control">
-				</div>
-				<div class="remember">
-					<div class="rem-left">
-						<input type="checkbox" name="checkbox">
-						<span>Remember me</span>
-					</div>
-					<div class="rem-right">
-						<a href="">Forget Password?</a>
-					</div>
-				</div>
-				<div class="login-btn">
-					<input type="submit" name="submit" class="l-btn">
-				</div>
-				<div class="new-user">
-					<div class="u-icon">
-						<i class="fas fa-user"></i>New user ?<span><a href="">Register here</a></span>
-					</div>
-				</div>
-			</form>
-		</div>
-	</section>
 	<section class="footer">	
 		<div class="container">
 			<div class="footer-part">
@@ -136,6 +141,7 @@
 		</div>
 	</section>
 
+
 </body>
 <script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -149,4 +155,4 @@
     }
 });
 </script>
-</html>
+</html>	

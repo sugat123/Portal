@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Jobportal/login</title>
+	<title>Jobportal/register</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" type="text/css" href="css/register.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 <body>
@@ -56,42 +56,45 @@
 		</div>
 	</div>
 
-	<section class="login-banner">
-		<div class="login-title">Login</div>
+		<section class="register-banner">
+		<div class="register-title">Register</div>
 	</section>
 
-	<section class="login-form">
+	<section class="register-form">
 		<div class="form-content">
-			<h3>Login form</h3>
+			<h3>Register Form</h3>
 			<form>
 				<div class="form-field">
-					<label>Email</label>
-					<input type="email" name="email" placeholder="Username" class="form-control">
+					<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
+					<input type="name" name="name" placeholder="Full name" class="form-control">
 				</div>
 				<div class="form-field">
-					<label>Password</label>
+					<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
+					<input type="name" name="name" placeholder="User name" class="form-control">
+				</div>
+				<div class="form-field">
+					<span class="form-field-icon"><i class="fas fa-envelope"></i></span>
+					<input type="email" name="email" placeholder="Email" class="form-control">
+				</div>
+				<div class="form-field">
+					<span class="form-field-icon"><i class="fas fa-star"></i></span>
 					<input type="password" name="password" placeholder="Password" class="form-control">
 				</div>
-				<div class="remember">
-					<div class="rem-left">
-						<input type="checkbox" name="checkbox">
-						<span>Remember me</span>
-					</div>
-					<div class="rem-right">
-						<a href="">Forget Password?</a>
-					</div>
+				<div class="form-field">
+					<span class="form-field-icon"><i class="fas fa-star"></i></span>
+					<input type="password" name="password" placeholder="Confirm Password" class="form-control">
 				</div>
-				<div class="login-btn">
-					<input type="submit" name="submit" class="l-btn">
+				<div class="form-field">
+					<input type="radio" name="" id="employer"><label class="emplo">Employer</label>
+					<input type="radio" name="" id="jobseeker"><label class="job">Job Seeker</label>
 				</div>
-				<div class="new-user">
-					<div class="u-icon">
-						<i class="fas fa-user"></i>New user ?<span><a href="">Register here</a></span>
-					</div>
+				<div class="register-btn">
+					<input type="submit" name="register" value="Register" class="r-btn">
 				</div>
 			</form>
 		</div>
 	</section>
+
 	<section class="footer">	
 		<div class="container">
 			<div class="footer-part">

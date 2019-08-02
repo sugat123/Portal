@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Jobportal/login</title>
+	<title>Jobpotal/efacilities</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" type="text/css" href="css/facilities.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 <body>
@@ -31,67 +31,67 @@
 				</div>
 			</div>
 	</header>
-	<div id="popup1" class="overlay">
-		<div class="popup">
-			<h2>Signup</h2>
-			<a class="close" href="#">&times;</a>
-			<div class="popup-content">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="popup-left">
-							<div class="p-icon"><img src="img/user.png"></div>
-							<div class="p-title">For employer</div>
-							<div class="p-button"><a href="">Signup</a></div>
-						</div>
+
+	<section class="efacilities-banner">
+		<div class="efacilities-title">Facilities</div>
+	</section>
+
+	<section class="efacilities-employer">
+		<div class="efacilities-content">
+			<div class="skill-list">
+				<h3>Choose the below facilities:</h3>
+				<div class="row facilities">
+					<div class="col-md-4 list-img">
+						<img src="img/skill.jpg">
 					</div>
-					<div class="col-lg-6">
-						<div class="popup-right">
-							<div class="p-icon"><img src="img/jobseeker.png"></div>
-							<div class="p-title">For jobseeker</div>
-							<div class="p-button"><a href="">Signup</a></div>
-						</div>
+					<div class="col-md-8 lists-list">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce at rhoncus diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non, scelerisque justo.</p>					
 					</div>
+				</div>
+				<div class="row facilities">
+						<form class="fill-facilities">
+							<div class="form-input">
+								<label>Salary</label>
+								<input type="number" name="salary" class="form-control">
+							</div>
+							<div class="form-input">
+								<label>Office time</label>
+								<input type="number" name="time" class="form-control">
+							</div>
+							<div class="form-input">
+								<label>Holidays</label>
+								<input type="text" name="holiday" class="form-control">
+							</div>
+							<div class="form-input">
+								<label>Provident fund</label>
+								<input type="text" name="holiday" class="form-control">
+							</div>
+							<div class="form-input">
+								<label>Medical care</label>
+								<input type="text" name="holiday" class="form-control">
+							</div>
+						</form>
+				</div>
+				<div class="submit-btn">
+					<div class="more-btn"><a href="">Submit</a></div>
+					<span><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<section class="login-banner">
-		<div class="login-title">Login</div>
-	</section>
-
-	<section class="login-form">
-		<div class="form-content">
-			<h3>Login form</h3>
-			<form>
-				<div class="form-field">
-					<label>Email</label>
-					<input type="email" name="email" placeholder="Username" class="form-control">
+		<div id="popup1" class="overlay">
+			<div class="popup">
+				<h4>Please enter the prefer facilities</h4>
+				<a class="close" href="#">&times;</a>
+				<div class="popup-content">
+					<form>
+						<textarea name="message" id="message"></textarea>
+						<div class="more-btn"><a href="">Add</a></div>
+					</form>
 				</div>
-				<div class="form-field">
-					<label>Password</label>
-					<input type="password" name="password" placeholder="Password" class="form-control">
-				</div>
-				<div class="remember">
-					<div class="rem-left">
-						<input type="checkbox" name="checkbox">
-						<span>Remember me</span>
-					</div>
-					<div class="rem-right">
-						<a href="">Forget Password?</a>
-					</div>
-				</div>
-				<div class="login-btn">
-					<input type="submit" name="submit" class="l-btn">
-				</div>
-				<div class="new-user">
-					<div class="u-icon">
-						<i class="fas fa-user"></i>New user ?<span><a href="">Register here</a></span>
-					</div>
-				</div>
-			</form>
+			</div>
 		</div>
 	</section>
+
 	<section class="footer">	
 		<div class="container">
 			<div class="footer-part">
@@ -135,6 +135,7 @@
 			</div>
 		</div>
 	</section>
+
 
 </body>
 <script src="js/jquery.min.js"></script>
