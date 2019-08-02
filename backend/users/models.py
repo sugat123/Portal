@@ -5,19 +5,20 @@ from django.dispatch import receiver
 from django import forms
 
 TYPES = [
-    ('seeker', 'seeker'),
-    ('giver', 'giver')
+    ('Employeer', 'Employeer'),
+    ('Job Seeker', 'Job Seeker')
 ]
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     number = models.CharField(max_length=10)
-    user_type = models.CharField(max_length=15, choices=TYPES)
+    user_type = models.CharField(max_length=15, choices=TYPES, default='Job Seeker')
 
     def __str__(self):
         return '{}'.format(self.user.username)
 
- 
+
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
 #     if created:

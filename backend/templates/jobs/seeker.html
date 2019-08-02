@@ -1,24 +1,46 @@
-{% extends 'jobs/base.html' %}
-
-{% block title %}Login{% endblock %}
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %}{% endblock %}
 
 {% block content %}
-<h2>Hello seeker {{ user.username }}</h2>
+
+<section class="register-banner">
+    <div class="register-title"> Seeker {{ user.username }}</div>
+</section>
+
+
 {% if user.is_authenticated %}
-<h4>What job do you need ?</h4>
-<ul>
-    {% for job in job_types %}
-    <li>
-
-        <a href="{% url 'jobs:list_job' job.slug %}">{{job.title}}</a>
-
-    </li>
-    {% endfor %}
-    <button><a href="{% url 'jobs:add_job'  %}">Add Job</a></button>
-</ul>
-<br>
 
 
-<a href="{% url 'users:logout' %}">logout</a>
+<section class="job-all">
+    <div class="container">
+        <div class="job-title">
+            <h1>What job do you need?</h1>
+        </div>
+        <div class="job-categories">
+            <div class="row">
+                {% for job in job_types %}
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <a href="{% url 'jobs:post_job' job.slug %}">
+                        <div class="job-category">
+                            <div class="job-icon"><i class="{{ job.icon }}"></i></div>
+                            <div class="job-title">{{job.title}}</div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+                <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <div class="job-category">
+                        <div class="job-icon"><i class="fas fa-concierge-bell"></i></div>
+                        <div class="job-title">Cook</div>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
 {% endif %}
 {% endblock %}

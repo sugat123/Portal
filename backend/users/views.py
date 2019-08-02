@@ -21,7 +21,7 @@ def login_user(request):
                     request.session.set_expiry(0)
                 # redirect_url = request.GET.get('next', 'users/base')
                 # messages.info(request, 'You are logged in as an admin .')
-                if user.profile.user_type == 'seeker':
+                if user.profile.user_type == 'Job Seeker':
                     return redirect('jobs:seeker')
                 else:
                     return redirect('jobs:giver')
@@ -68,7 +68,7 @@ def register(request):
             user = authenticate(request, username=username, password=password)
             login(request, user)
             # messages.success(request, 'user created with username {}'.format(user.username))
-            if user.profile.user_type == 'seeker':
+            if user.profile.user_type == 'Job Seeker':
                 return redirect('jobs:seeker')
             else:
                 return redirect('jobs:giver')
@@ -76,4 +76,4 @@ def register(request):
     else:
         user_form = AddUserForm()
         profile_form = ProfileForm()
-    return render(request, 'users/register.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'users/register_2.html', {'user_form': user_form, 'profile_form': profile_form})

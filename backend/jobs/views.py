@@ -6,7 +6,8 @@ from .models import *
 
 
 def index(request):
-    return render(request, 'jobs/base.html')
+    profile = Profile.objects.all()
+    return render(request, 'jobs/index.html', {'profile': profile})
 
 
 @login_required

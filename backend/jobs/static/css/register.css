@@ -67,3 +67,11 @@ span.form-field-icon {
     color: #00AEEF;
     padding-left: 7px;
 }
+
+
+.form-field .emplo {
+    margin-right: 10px;
+}
+input#employer,input#jobseeker {
+    margin-right: 5px;
+}

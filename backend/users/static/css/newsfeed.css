@@ -1,0 +1,38 @@
+.news-banner{
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.news-title {
+    color: #fff;
+    text-align: center;
+    padding: 60px 0;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+.newsfeed {
+    margin-top: 50px;
+}
+.news-content {
+    background: #EFEFEF;
+    width: 60%;
+    margin: 0 auto;
+    padding: 30px;
+}
+.news-content h3 {
+    margin-top: 0;
+    padding-bottom: 20px;
+}
+.jobseeker-list {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.jsv-btn a {
+    background: #ED1C24;
+    color: #fff;
+    padding: 10px 20px;
+}

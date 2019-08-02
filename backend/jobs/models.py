@@ -5,9 +5,11 @@ from django.contrib.auth.models import User
 
 
 class JobType(models.Model):
-    title = models.CharField(max_length=25)
+    title = models.CharField(max_length=25, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    icon = models.CharField(max_length=50, blank=True,
+                            null=True, default='fas fa-briefcase')
     slug = AutoSlugField(unique_with='id', populate_from='title')
 
     def __str__(self):
@@ -58,8 +60,8 @@ class PostedJob(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     job_type = models.ForeignKey(JobType, on_delete=models.PROTECT)
     experience = models.ForeignKey(Experience, on_delete=models.PROTECT)
-    skills = models.ForeignKey(Skills, on_delete=models.PROTECT)
-    facility = models.ForeignKey(Facility, on_delete=models.PROTECT)
+    skills = models.ManyToManyField(Skills, blank=True, null=True)
+    facility = models.ManyToManyField(Facility, blank=True, null=True)
     salary = models.IntegerField(blank=True, null=True)
     working_time = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=100, null=True, blank=True)

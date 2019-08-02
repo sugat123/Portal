@@ -1,0 +1,77 @@
+.register-banner{
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.register-title {
+    color: #fff;
+    text-align: center;
+    padding: 60px 0;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+.form-content {
+    background: #EFEFEF;
+    margin: 0 auto;
+    width: 40%;
+    padding: 30px;
+}
+.register-form {
+    margin-top: 50px;
+}
+.form-content h3 {
+    margin-top: 0;
+    padding-bottom: 20px;
+}
+.form-field {
+    margin-bottom: 15px;
+    display: flex;
+}
+span.form-field-icon {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-right: 0;
+}
+.form-control{
+	border-radius: 0;
+}
+.register-btn .r-btn {
+    background: #ED1C24;
+    color: #fff;
+    padding: 8px 12px;
+    width: 100%;
+    border: none;
+    font-size: 19px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.new-user {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #000;
+}
+.r-icon i {
+    font-size: 13px;
+    padding-right: 5px;
+}
+.r-icon span a {
+    color: #00AEEF;
+    padding-left: 7px;
+}
+
+
+.form-field .emplo {
+    margin-right: 10px;
+}
+input#employer,input#jobseeker {
+    margin-right: 5px;
+}
