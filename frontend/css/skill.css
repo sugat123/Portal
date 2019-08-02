@@ -75,6 +75,19 @@ span.other i {
 .other {
     margin: 15px 0;
 }
+.facilities {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-input {
+    margin-top: 20px;
+}
+.facility {
+    margin-bottom: 15px;
+}
+
+
+
 
 /*jobseeker skill*/
 .jsskill-banner{
