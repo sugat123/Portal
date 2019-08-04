@@ -98,7 +98,7 @@ def add_facility(request):
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddFacilityForm()
     return render(request, 'jobs/add_facility.html', {'form': form})
@@ -111,7 +111,7 @@ def add_skill(request):
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddSkillForm()
 
