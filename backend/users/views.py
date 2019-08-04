@@ -21,10 +21,9 @@ def login_user(request):
                     request.session.set_expiry(0)
                 # redirect_url = request.GET.get('next', 'users/base')
                 # messages.info(request, 'You are logged in as an admin .')
-                if user.profile.user_type == 'Job Seeker':
-                    return redirect('jobs:seeker')
-                else:
-                    return redirect('jobs:giver')
+
+                return redirect('jobs:dashboard')
+
             # elif user and user.is_staff:
             #     login(request, user)
             #     if not remember_me:
@@ -68,10 +67,8 @@ def register(request):
             user = authenticate(request, username=username, password=password)
             login(request, user)
             # messages.success(request, 'user created with username {}'.format(user.username))
-            if user.profile.user_type == 'Job Seeker':
-                return redirect('jobs:seeker')
-            else:
-                return redirect('jobs:giver')
+
+            return redirect('jobs:dashboard')
 
     else:
         user_form = AddUserForm()

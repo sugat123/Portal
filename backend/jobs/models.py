@@ -45,21 +45,10 @@ class Facility(models.Model):
         verbose_name_plural = 'Facility'
 
 
-class Experience(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    slug = AutoSlugField(unique_with='id', populate_from='years')
-    job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
-    years = models.IntegerField(blank=True, null=True, default=0)
-
-    def __str__(self):
-        return "{0}: {1} years".format(self.job_type, self.years)
-
-
 class PostedJob(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    job_type = models.ForeignKey(JobType, on_delete=models.PROTECT)
-    experience = models.ForeignKey(Experience, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
+    experience = models.IntegerField(blank=True, null=True)
     skills = models.ManyToManyField(Skills, blank=True, null=True)
     facility = models.ManyToManyField(Facility, blank=True, null=True)
     salary = models.IntegerField(blank=True, null=True)
@@ -71,10 +60,10 @@ class PostedJob(models.Model):
 
 
 class AppliedJob(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    job_type = models.ForeignKey(JobType, on_delete=models.PROTECT)
-    experience = models.ForeignKey(Experience, on_delete=models.PROTECT)
-    skills = models.ForeignKey(Skills, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
+    experience = models.IntegerField(null=True, blank=True)
+    skills = models.ManyToManyField(Skills, null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):

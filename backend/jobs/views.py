@@ -11,16 +11,10 @@ def index(request):
 
 
 @login_required
-def giver(request):
-    job_types = JobType.objects.all()
-    return render(request, 'jobs/giver.html', {'job_types': job_types})
-
-
-@login_required
-def seeker(request):
+def dashboard(request):
     job_types = JobType.objects.all()
     context = {'job_types': job_types}
-    return render(request, 'jobs/seeker.html', context)
+    return render(request, 'jobs/dashboard.html', context)
 
 
 @login_required
@@ -41,13 +35,52 @@ def add_job(request):
 def post_job(request, slug):
     type = get_object_or_404(JobType, slug=slug)
     skills = Skills.objects.all()
-    experiences = Experience.objects.all()
+
     facilities = Facility.objects.all()
+    # selected_skill = Skills.objects.filter(
+    #     id__in=request.POST.getlist('skill'))
+    # print(selected_skill)
+    # selected_facility = Facility.objects.filter(
+    #     id__in=request.POST.getlist('facility'))
+    # print(selected_facility)
+    if request.method == 'POST':
+
+        form = AddPostedJobForm(request.POST or None)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect('jobs:dashboard')
+    else:
+        form = AddPostedJobForm()
+
     context = {'type': type,
                'skills': skills,
-               'experiences': experiences,
-               'facilities': facilities}
-    return render(request, 'jobs/post_job.html', context)
+
+               'facilities': facilities,
+               'form': form}
+
+    return render(request, 'jobs/apply_job.html', context)
+
+
+@login_required
+def apply_job(request, slug):
+    type = get_object_or_404(JobType, slug=slug)
+    skills = Skills.objects.all()
+    facilities = Facility.objects.all()
+    if request.method == 'POST':
+        form = AddAppliedJobForm(request.POST or none)
+        if form.is_valid():
+            form.save()
+            return redirect('jobs:dashboard')
+    else:
+        form = AddAppliedJobForm()
+    context = {'type': type,
+               'skills': skills,
+               'facilities': facilities,
+               'form': form}
+    return render(request, 'jobs/apply_job.html', context)
 
 
 @login_required
@@ -65,7 +98,7 @@ def add_facility(request):
         if form.is_valid():
             form.save()
 
-            return redirect('jobs:add_facility')
+            return redirect('/')
     else:
         form = AddFacilityForm()
     return render(request, 'jobs/add_facility.html', {'form': form})
@@ -78,7 +111,7 @@ def add_skill(request):
         if form.is_valid():
             form.save()
 
-            return redirect('jobs:add_skill')
+            return redirect('/')
     else:
         form = AddSkillForm()
 
