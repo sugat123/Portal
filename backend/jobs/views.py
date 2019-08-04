@@ -47,7 +47,7 @@ def post_job(request, slug):
                'skills': skills,
                'experiences': experiences,
                'facilities': facilities}
-    return render(request, 'jobs/post_job.html', context)
+    return render(request, 'jobs/eskill.html', context)
 
 
 @login_required
