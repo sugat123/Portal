@@ -38,20 +38,14 @@
 }
 
 .news-add {
-    width: 60%;
-    margin: 0 auto;
-    padding: 30px;
-    border: 1px solid #EFEFEF;
-    border-bottom: none;
-    display: flex;
-    justify-content: space-between;
+    float: right;
+    margin-bottom: 30px;
 }
 .add-button a{
     background: #ED1C24;
     color: #fff;
     padding: 10px 20px;
 }
-.add-title {
-    font-size: 20px;
-    text-transform: uppercase;
+.add-button a:hover{
+    background: #00AEEF;
 }
