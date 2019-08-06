@@ -41,11 +41,14 @@
     float: right;
     margin-bottom: 30px;
 }
-.add-button a{
-    background: #ED1C24;
+.add-button a {
+    background: #00AEEF;
     color: #fff;
-    padding: 10px 20px;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 32px;
 }
 .add-button a:hover{
-    background: #00AEEF;
+    background: #ED1C24;
 }
