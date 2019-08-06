@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 from .forms import *
 from .models import *
 
@@ -106,13 +107,68 @@ def add_facility(request):
 
 @login_required
 def add_skill(request):
+
     if request.method == 'POST':
         form = AddSkillForm(request.POST or None)
         if form.is_valid():
             form.save()
 
+            # return redirect(request.META['HTTP_REFERER'])
             return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddSkillForm()
 
     return render(request, 'jobs/add_skill.html', {'form': form})
+
+
+@login_required
+def job_list(request, slug):
+    type = get_object_or_404(JobType, slug=slug)
+
+    posted_jobs = PostedJob.objects.all().order_by('created')
+    applied_jobs = AppliedJob.objects.all().order_by('created')
+
+    context = {'posted_jobs': posted_jobs,
+               'applied_jobs': applied_jobs,
+               'type': type}
+
+    return render(request, 'jobs/job_list.html', context)
+
+# @login_required
+# def job_list_giver(request, slug):
+#     type = get_object_or_404(JobType, slug=slug)
+
+
+#     applied_jobs = AppliedJob.objects.all().order_by('created')
+
+#     context = {
+#                'applied_jobs': applied_jobs,
+#                'type': type}
+
+#     return render(request, 'jobs/job_list.html', context)
+
+
+@login_required
+def job_detail(request, slug, id):
+    type = get_object_or_404(JobType, slug=slug)
+    posted_jobs = get_object_or_404(PostedJob.objects.order_by('-created'), id=id)
+    # applied_jobs = AppliedJob.objects.get(id=id)
+
+    context = {'posted_jobs': posted_jobs,
+               #   'applied_jobs': applied_jobs,
+               'type': type}
+
+    return render(request, 'jobs/job_detail.html', context)
+
+
+@login_required
+def applied_job_detail(request, slug, id):
+    type = get_object_or_404(JobType, slug=slug)
+    # posted_jobs = PostedJob.objects.get(id=id)
+    applied_jobs = get_object_or_404(AppliedJob.objects.order_by('-created'), id=id)
+
+    context = {  # 'posted_jobs': posted_jobs,
+        'applied_jobs': applied_jobs,
+        'type': type}
+
+    return render(request, 'jobs/applied_job_detail.html', context)
