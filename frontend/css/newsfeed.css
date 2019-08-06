@@ -36,3 +36,22 @@
     color: #fff;
     padding: 10px 20px;
 }
+
+.news-add {
+    width: 60%;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #EFEFEF;
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+}
+.add-button a{
+    background: #ED1C24;
+    color: #fff;
+    padding: 10px 20px;
+}
+.add-title {
+    font-size: 20px;
+    text-transform: uppercase;
+}
