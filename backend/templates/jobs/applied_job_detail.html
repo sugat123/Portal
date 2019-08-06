@@ -1,0 +1,54 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+<section class="detail-banner">
+    <div class="detail-title">Detail</div>
+</section>
+
+<section class="detail">
+
+    <div class="detail-content">
+        <h3>Applicant details</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr class="table-row">
+                        <td>Skills</td>
+                        <td>:</td>
+                        <td>
+                            {% for skill in applied_jobs.skills.all %}
+                            <span class="stext">{{skill.title}}</span>
+                            {% endfor %}
+                        </td>
+                    </tr>
+
+                    <tr class="table-row">
+                        <td>Experiance</td>
+                        <td>:</td>
+                        <td>{{applied_jobs.experience}}</td>
+                    </tr>
+                    <!-- <tr class="table-row">
+                        <td>Expected salary</td>
+                        <td>:</td>
+                        <td>Rs. 50000</td>
+                    </tr> -->
+
+                    <tr class="table-row">
+                        <td>Address</td>
+                        <td>:</td>
+                        <td><span class="stext">{{applied_jobs.location}}</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endif %}
+{% endblock %}

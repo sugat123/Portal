@@ -14,6 +14,7 @@
 	.list-img img {display: none;}
 	.get-app {margin-bottom: 20px;}
 	.cat-right {text-align: center;}
+	.detail-content{width: 100%;}
 }
 @media screen and (min-width : 320px) and (max-width:479px) {
 	.formclick > :first-child {display: none;}
@@ -25,4 +26,5 @@
 	.list-img img {display: none;}
 	.get-app {margin-bottom: 20px;}
 	.cat-right {text-align: center;}
+	.detail-content{width: 100%;}
 }

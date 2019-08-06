@@ -1,0 +1,72 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+<section class="detail-banner">
+	<div class="detail-title">Detail</div>
+</section>
+
+<section class="detail">
+
+	<div class="detail-content">
+		<h3>Posted Job details</h3>
+		<div class="table-responsive">
+			<table class="table">
+
+
+				<tbody>
+					<tr class="table-row">
+						<td>Skills</td>
+						<td>:</td>
+						<td>
+							{% for skill in posted_jobs.skills.all %}
+							<span class="stext">{{ skill.title }}</span>
+
+							{%endfor%}
+						</td>
+					</tr>
+					<tr class="table-row">
+						<td>Facilities</td>
+						<td>:</td>
+						<td>
+							{% for facility in posted_jobs.facility.all %}
+							<span class="stext">{{facility.title}}</span>
+
+							{% endfor %}
+						</td>
+					</tr>
+					<tr class="table-row">
+						<td>Experiance</td>
+						<td>:</td>
+						<td>{{ posted_jobs.experience }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Expected salary</td>
+						<td>:</td>
+						<td>Rs. {{ posted_jobs.salary }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Office time</td>
+						<td>:</td>
+						<td>{{ posted_jobs.working_time }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Location</td>
+						<td>:</td>
+						<td><span class="stext">{{ posted_jobs.location }}</span></td>
+					</tr>
+				</tbody>
+
+
+			</table>
+		</div>
+	</div>
+</section>
+
+{% endif %}
+{% endblock %}

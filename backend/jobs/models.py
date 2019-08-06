@@ -21,7 +21,8 @@ class Skills(models.Model):
     updated = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(unique_with='id', populate_from='title')
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100, blank=True, null=True)
+    title = models.CharField(
+        max_length=100, blank=True, null=True)
 
     def __str__(self):
         return "{0}'s Skill: {1}".format(self.job_type, self.title)
@@ -36,7 +37,8 @@ class Facility(models.Model):
     slug = AutoSlugField(unique_with='id', populate_from='title')
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
 
-    title = models.CharField(max_length=100, blank=True, null=True)
+    title = models.CharField(
+        max_length=100, blank=True, null=True)
 
     def __str__(self):
         return "{0}'s Facility: {1}".format(self.job_type, self.title)
@@ -54,6 +56,9 @@ class PostedJob(models.Model):
     salary = models.IntegerField(blank=True, null=True)
     working_time = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=100, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    slug = AutoSlugField(unique_with='id', populate_from='user')
 
     def __str__(self):
         return "Job Posted for: {}".format(self.job_type)
@@ -65,6 +70,9 @@ class AppliedJob(models.Model):
     experience = models.IntegerField(null=True, blank=True)
     skills = models.ManyToManyField(Skills, null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    slug = AutoSlugField(unique_with='id', populate_from='user')
 
     def __str__(self):
         return "Job Applied by: {}".format(self.user)

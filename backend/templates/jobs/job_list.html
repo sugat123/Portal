@@ -1,0 +1,48 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+<section class="news-banner">
+	<div class="news-title">Newsfeed</div>
+</section>
+
+<section class="newsfeed">
+	<div class="news-content">
+		{% if user.profile.user_type == 'Job Seeker' %}
+		<h3>Employer list</h3>
+		{% for posted_job in posted_jobs %}
+		{% if posted_job.job_type_id == type.id %}
+		<div class="jobseeker-list">
+			<div class="js-title">{{ posted_job.job_type.title }}</div>
+			<div class="jsv-btn"><a href="{% url 'jobs:job_detail' type.slug posted_job.id %}">View</a></div>
+		</div>
+		{% endif %}
+		{% endfor %}
+
+		{% else %}
+		<h3>Job seekers list</h3>
+		{% for applied_job in applied_jobs %}
+		{% if applied_job.job_type_id == type.id %}
+		<div class="jobseeker-list">
+			<div class="js-title">{{ applied_job.job_type.title }}</div>
+			<div class="jsv-btn"><a href="{% url 'jobs:applied_job_detail' type.slug applied_job.id  %}">View</a>
+			</div>
+		</div>
+		{% endif %}
+		{% endfor %}
+
+		{% endif %}
+	</div>
+</section>
+
+
+
+
+
+{% endif %}
+{% endblock %}
