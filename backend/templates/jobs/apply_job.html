@@ -149,25 +149,25 @@
 
                     <div class="row facilities">
                         <div class="form-input">
-                            <label>User</label>
+                            <label>Posted by</label>
                             <select name="user" required class="form-control">
                                 <option value="{{user.id}}">{{user.username}}</option>
                             </select>
 
                         </div>
                         <div class="form-input">
-                            <label>Job_type</label>
+                            <label>Job type</label>
                             <select name="job_type" class="form-control" required>
                                 <option value="{{type.id}}">{{type.title}}</option>
                             </select>
 
                         </div>
                         <div class="form-input">
-                            <label>Salary</label>
+                            <label>Salary (in Rs.)</label>
                             <input type="number" name="salary" class="form-control">
                         </div>
                         <div class="form-input">
-                            <label>Office time</label>
+                            <label>Office time (From-To)</label>
                             <div class="row">
                                 <div class="col-md-6">
                                     <input type="text" name="working_time" class="form-control">

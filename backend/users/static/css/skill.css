@@ -31,9 +31,11 @@
 input[type="checkbox"] {
     margin-right: 10px;
 }
-.more-btn {
-    text-align: unset;
-    margin-top: 0;
+.btn-submit {
+    background: #ED1C24;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
 }
 .submit-btn {
     margin-top: 25px;

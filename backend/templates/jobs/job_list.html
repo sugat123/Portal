@@ -12,13 +12,24 @@
 </section>
 
 <section class="newsfeed">
+	<div class="container">
+		<div class="news-add">
+			{% if user.profile.user_type == 'Job Seeker' %}
+			<div class="add-button"><a href="{% url 'jobs:apply_job' type.slug  %}">Apply for job</a></div>
+			{% else %}
+			<div class="add-button"><a href="{% url 'jobs:post_job' type.slug  %}">Post your job</a></div>
+			{% endif %}
+		</div>
+	</div>
 	<div class="news-content">
 		{% if user.profile.user_type == 'Job Seeker' %}
+
 		<h3>Employer list</h3>
 		{% for posted_job in posted_jobs %}
 		{% if posted_job.job_type_id == type.id %}
 		<div class="jobseeker-list">
-			<div class="js-title">{{ posted_job.job_type.title }}</div>
+			<div class="js-title">Job posted <span class="location-symbol">@</span> <span
+					class="list-name">{{ posted_job.location }}</span></div>
 			<div class="jsv-btn"><a href="{% url 'jobs:job_detail' type.slug posted_job.id %}">View</a></div>
 		</div>
 		{% endif %}
@@ -26,10 +37,11 @@
 
 		{% else %}
 		<h3>Job seekers list</h3>
+
 		{% for applied_job in applied_jobs %}
 		{% if applied_job.job_type_id == type.id %}
 		<div class="jobseeker-list">
-			<div class="js-title">{{ applied_job.job_type.title }}</div>
+			<div class="js-title">Applied by: <span class="list-name">{{ applied_job.user.username }}</div>
 			<div class="jsv-btn"><a href="{% url 'jobs:applied_job_detail' type.slug applied_job.id  %}">View</a>
 			</div>
 		</div>

@@ -1,9 +1,10 @@
-.news-banner{
-	background-image: url(../img/banner.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+.news-banner {
+    background-image: url(../img/banner.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
+
 .news-title {
     color: #fff;
     text-align: center;
@@ -11,19 +12,23 @@
     font-size: 50px;
     text-transform: uppercase;
 }
+
 .newsfeed {
     margin-top: 50px;
 }
+
 .news-content {
     background: #EFEFEF;
     width: 60%;
     margin: 0 auto;
     padding: 30px;
 }
+
 .news-content h3 {
     margin-top: 0;
     padding-bottom: 20px;
 }
+
 .jobseeker-list {
     display: flex;
     justify-content: space-between;
@@ -31,8 +36,35 @@
     padding: 15px;
     margin-bottom: 20px;
 }
+
 .jsv-btn a {
     background: #ED1C24;
     color: #fff;
     padding: 10px 20px;
+}
+
+.news-add {
+    float: right;
+    margin-bottom: 30px;
+}
+
+.add-button a {
+    background: #00AEEF;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 32px;
+}
+
+.add-button a:hover {
+    background: #ED1C24;
+}
+
+.js-title .location-symbol {
+    color: #00AEEF;
+}
+
+.js-title .list-name {
+    font-size: 17px;
 }
