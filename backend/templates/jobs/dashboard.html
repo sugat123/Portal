@@ -5,7 +5,7 @@
 {% block content %}
 
 <section class="register-banner">
-    <div class="register-title"> Seeker {{ user.username }}</div>
+    <div class="register-title"> {{ user.profile.user_type }} {{ user.username }}</div>
 </section>
 
 
@@ -15,13 +15,23 @@
 <section class="job-all">
     <div class="container">
         <div class="job-title">
+            {% if user.profile.user_type == 'Job Seeker' %}
             <h1>What job do you need?</h1>
+            {% else %}
+            <h1>What are you looking for?</h1>
+            {% endif %}
+
         </div>
         <div class="job-categories">
             <div class="row">
                 {% for job in job_types %}
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                    <a href="{% url 'jobs:post_job' job.slug %}">
+                    <a href="
+                    
+                    
+                    {% url 'jobs:apply_job' job.slug %}
+                   
+                    ">
                         <div class="job-category">
                             <div class="job-icon"><i class="{{ job.icon }}"></i></div>
                             <div class="job-title">{{job.title}}</div>

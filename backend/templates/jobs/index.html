@@ -61,13 +61,10 @@
 
 
 							<li>
-								{% if user.profile.user_type == 'Job Seeker' %}
-								<a href="{% url 'jobs:seeker' %}">
-									{{ user.username }}</a>
-								{% else %}
-								<a href="{% url 'jobs:giver' %}">
-									{{ user.username }}</a>
-								{% endif %}
+
+								<a href="{% url 'jobs:dashboard' %}">{{ user.username }}
+								</a>
+
 
 
 							</li>

@@ -1,0 +1,233 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+{% if user.profile.user_type == 'Job Seeker' %}
+
+<section class="eskill-banner">
+    <div class="eskill-title">Apply for the Job</div>
+</section>
+
+<section class="skill-employer">
+    <div class="skill-content">
+        <div class="skill-list">
+
+            <div class="row skills">
+                <div class="col-md-4 list-img">
+                    <img src="{% static 'img/skill.jpg' %}">
+                </div>
+                <div class="col-md-8 lists-list">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce at rhoncus
+                        diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non, scelerisque justo.</p>
+                </div>
+            </div>
+
+            {% if form.errors %}
+            {{form.errors}}
+            {% endif %}
+            <form action="{% url 'jobs:apply_job' type.slug %}" method="post">
+                {% csrf_token %}
+                <div class="row skills">
+                    <div class="col-md-6 col-sm-6 col-xs-6 list-img">
+                        <h3>Choose the below skills:</h3>
+
+                        {% for skill in skills %}
+                        {% if skill.job_type_id == type.id %}
+                        <div class="form-check">
+                            <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
+                            <label for="skill-{{ skill.id }}">{{skill.title}}</label>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        <span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row facilities">
+                    <div class="form-input">
+                        <label>User</label>
+                        <select name="user" required class="form-control">
+                            <option value="{{user.id}}">{{user.username}}</option>
+                        </select>
+
+                    </div>
+                    <div class="form-input">
+                        <label>Job_type</label>
+                        <select name="job_type" class="form-control" required>
+                            <option value="{{type.id}}">{{type.title}}</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-input">
+                        <label>Address</label>
+                        <input type="text" name="location" class="form-control">
+                    </div>
+
+                </div>
+                <div class="experiance">
+                    <h3>Your experience in this field</h3>
+                    <div class="slidecontainer">
+                        <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
+                        <p>Experiance in year: <span id="demo"></span></p>
+                    </div>
+                </div>
+                <div class="submit-btn">
+                    <div class="more-btn"><button type="submit">Submit</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    {% else %}
+
+
+
+    <section class="eskill-banner">
+        <div class="eskill-title">Post your Job</div>
+    </section>
+
+    <section class="skill-employer">
+        <div class="skill-content">
+            <div class="skill-list">
+
+                <div class="row skills">
+                    <div class="col-md-4 list-img">
+                        <img src="{% static 'img/skill.jpg' %}">
+                    </div>
+                    <div class="col-md-8 lists-list">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce at
+                            rhoncus
+                            diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non, scelerisque justo.
+                        </p>
+                    </div>
+                </div>
+
+                {% if form.errors %}
+                {{form.errors}}
+                {% endif %}
+                <form action="{% url 'jobs:post_job' type.slug %}" method="post">
+                    {% csrf_token %}
+                    <div class="row skills">
+                        <div class="col-md-6 col-sm-6 col-xs-6 list-img">
+                            <h3>Choose the below skills:</h3>
+
+                            {% for skill in skills %}
+                            {% if skill.job_type_id == type.id %}
+                            <div class="form-check">
+                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
+                                <label for="skill-{{ skill.id }}">{{skill.title}}</label>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
+                            <h3>Choose the facilities below:</h3>
+                            {% for facility in facilities %}
+                            {% if facility.job_type_id == type.id %}
+                            <div class="form-check">
+                                <input type="checkbox" name="facility" id="facility-{{facility.id}}"
+                                    value="{{ facility.id }}">
+                                <label for="facility-{{facility.id}}">{{ facility.title }}</label>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <span class="other"><i class="fas fa-angle-right"></i><a href="#popup2">Others</a></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row facilities">
+                        <div class="form-input">
+                            <label>User</label>
+                            <select name="user" required class="form-control">
+                                <option value="{{user.id}}">{{user.username}}</option>
+                            </select>
+
+                        </div>
+                        <div class="form-input">
+                            <label>Job_type</label>
+                            <select name="job_type" class="form-control" required>
+                                <option value="{{type.id}}">{{type.title}}</option>
+                            </select>
+
+                        </div>
+                        <div class="form-input">
+                            <label>Salary</label>
+                            <input type="number" name="salary" class="form-control">
+                        </div>
+                        <div class="form-input">
+                            <label>Office time</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="working_time" class="form-control">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <label>Location</label>
+                            <input type="text" name="location" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="experiance">
+                        <h3>Your experience in this field</h3>
+                        <div class="slidecontainer">
+                            <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
+                            <p>Experiance in year: <span id="demo"></span></p>
+                        </div>
+                    </div>
+                    <div class="submit-btn">
+                        <div class="more-btn"><button type="submit">Submit</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <h4>Please enter the prefer skills</h4>
+                <a class="close" href="#">&times;</a>
+                <div class="popup-content">
+                    <form action="{% url 'jobs:add_skill' %}" method="POST">
+                        {% csrf_token %}
+                        <select name="job_type" class="form-control" required>
+                            <option value="{{type.id}}">{{type.title}}</option>
+                        </select>
+                        <textarea name="title"></textarea>
+                        <div class="more-btn"><button type="submit">Add</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="popup2" class="overlay">
+            <div class="popup">
+                <h4>Please enter the prefer facility</h4>
+                <a class="close" href="#">&times;</a>
+                <div class="popup-content">
+                    <form action="{% url 'jobs:add_facility' %}" method="POST">
+                        {% csrf_token %}
+                        <select name="job_type" class="form-control" required>
+                            <option value="{{type.id}}">{{type.title}}</option>
+                        </select>
+                        <textarea name="title"></textarea>
+                        <div class="more-btn"><button type="submit">Add</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endif %}
+    {% endblock %}
