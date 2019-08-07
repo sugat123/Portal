@@ -4,6 +4,7 @@ from users.models import *
 from django.contrib.auth.models import User
 
 
+
 class JobType(models.Model):
     title = models.CharField(max_length=25, unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -51,8 +52,8 @@ class PostedJob(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     experience = models.IntegerField(blank=True, null=True)
-    skills = models.ManyToManyField(Skills, blank=True, null=True)
-    facility = models.ManyToManyField(Facility, blank=True, null=True)
+    skills = models.ManyToManyField(Skills, blank=True)
+    facility = models.ManyToManyField(Facility, blank=True)
     salary = models.IntegerField(blank=True, null=True)
     working_time = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=100, null=True, blank=True)
@@ -63,12 +64,18 @@ class PostedJob(models.Model):
     def __str__(self):
         return "Job Posted for: {}".format(self.job_type)
 
+    def get_skills(self):
+        return "\n,".join([s.title for s in self.skills.all()])
+
+    def get_facility(self):
+        return "\n".join([f.title for f in self.facility.all()])
+
 
 class AppliedJob(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     experience = models.IntegerField(null=True, blank=True)
-    skills = models.ManyToManyField(Skills, null=True, blank=True)
+    skills = models.ManyToManyField(Skills, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -76,3 +83,6 @@ class AppliedJob(models.Model):
 
     def __str__(self):
         return "Job Applied by: {}".format(self.user)
+
+    def get_skills(self):
+        return "\n, ".join([s.title for s in self.skills.all()])
