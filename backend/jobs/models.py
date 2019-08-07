@@ -76,3 +76,5 @@ class AppliedJob(models.Model):
 
     def __str__(self):
         return "Job Applied by: {}".format(self.user)
+    
+    

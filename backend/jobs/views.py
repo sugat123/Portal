@@ -125,8 +125,8 @@ def add_skill(request):
 def job_list(request, slug):
     type = get_object_or_404(JobType, slug=slug)
 
-    posted_jobs = PostedJob.objects.all().order_by('created')
-    applied_jobs = AppliedJob.objects.all().order_by('created')
+    posted_jobs = PostedJob.objects.all().order_by('-created')
+    applied_jobs = AppliedJob.objects.all().order_by('-created')
 
     context = {'posted_jobs': posted_jobs,
                'applied_jobs': applied_jobs,
