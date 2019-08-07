@@ -151,7 +151,8 @@ def job_list(request, slug):
 @login_required
 def job_detail(request, slug, id):
     type = get_object_or_404(JobType, slug=slug)
-    posted_jobs = get_object_or_404(PostedJob.objects.order_by('-created'), id=id)
+    posted_jobs = get_object_or_404(
+        PostedJob.objects.order_by('-created'), id=id)
     # applied_jobs = AppliedJob.objects.get(id=id)
 
     context = {'posted_jobs': posted_jobs,
@@ -165,7 +166,8 @@ def job_detail(request, slug, id):
 def applied_job_detail(request, slug, id):
     type = get_object_or_404(JobType, slug=slug)
     # posted_jobs = PostedJob.objects.get(id=id)
-    applied_jobs = get_object_or_404(AppliedJob.objects.order_by('-created'), id=id)
+    applied_jobs = get_object_or_404(
+        AppliedJob.objects.order_by('-created'), id=id)
 
     context = {  # 'posted_jobs': posted_jobs,
         'applied_jobs': applied_jobs,

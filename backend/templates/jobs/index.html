@@ -53,7 +53,12 @@
 			<div class="row">
 				<div class="header-left">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<a href="{% url 'jobs:index' %}">logo</a>
+						{% for setting in settings%}
+						<a href="{% url 'jobs:index' %}">
+						<img src="/media/{{ setting.logo}}" alt="djgroup" style="height: 55px; width:70px;">
+						</a>
+
+						{% endfor %}
 					</div>
 				</div>
 				{% if user.is_authenticated %}
@@ -337,12 +342,11 @@
 	<section class="footer">
 		<div class="container">
 			<div class="footer-part">
+				{% for setting in settings%}
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="footer-term">
 						<h4 class="ft-title">Who we are</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet quam eu purus rutrum
-							suscipit eget ac lacus. Donec vel euismod odio. Suspendisse consectetur quis risus sit amet
-							aliquam.</p>
+						<p>{{setting.about_text}}</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -369,14 +373,15 @@
 					<div class="footer-term">
 						<h4 class="ft-title">Contact us</h4>
 						<ul class="link">
-							<li><i class="fas fa-home"></i>Bhatbhateni, Koteswor</li>
-							<li><i class="fas fa-envelope"></i>info@djgroup.com</li>
-							<li><i class="fas fa-phone"></i>+9840236521</li>
-							<li><i class="fas fa-globe"></i><a href="">http://www.djgroup.com</a></li>
+							<li><i class="fas fa-home"></i>{{ setting.address}}</li>
+							<li><i class="fas fa-envelope"></i>{{ setting.email}}</li>
+							<li><i class="fas fa-phone"></i>{{ setting.phone}}</li>
+							<li><i class="fas fa-globe"></i><a href="{{ setting.website}}">{{ setting.website}}</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
+			{% endfor %}
 		</div>
 	</section>
 </body>
