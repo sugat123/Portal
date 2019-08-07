@@ -27,9 +27,11 @@
 	</div>
 </div>
 
-<section class="login-banner">
-	<div class="login-title">Login</div>
+{% for banner in banners %}
+<section class="eskill-banner" style="background-image: url('/media/{{ banner.login_register }}');">
+    <div class="eskill-title">Login</div>
 </section>
+{% endfor %}
 
 <section class="login-form">
 	<div class="form-content">

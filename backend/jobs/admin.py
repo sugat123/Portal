@@ -43,3 +43,4 @@ class AppliedJobAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SiteSetting)
+admin.site.register(Banner)

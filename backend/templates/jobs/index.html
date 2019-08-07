@@ -119,7 +119,9 @@
 		</div>
 	</div> -->
 	{% block content %}
-	<div class="banner-image">
+	{% for banner in banners %}
+	<div class="banner-image" style="background-image: url('/media/{{ banner.index }}');">
+	{% endfor %}
 		<div class="banner-text">
 			<div class="container">
 				<h1>Join us & Explore Thousands of Jobs</h1>
