@@ -95,3 +95,15 @@ class SiteSetting(models.Model):
     phone = models.CharField(max_length=20)
     website = models.URLField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
+       
+    
+class Banner(models.Model):
+    index = models.ImageField(upload_to='banner',default='default.jpg')
+    login_register = models.ImageField(upload_to='banner',default='default.jpg')
+    dashboard = models.ImageField(upload_to='banner', default='default.jpg')
+    newsfeed = models.ImageField(upload_to="banner", default='default.jpg')
+    newsfeed_detail = models.ImageField(
+        upload_to="banner", default='default.jpg')
+    job = models.ImageField(upload_to="banner", default='default.jpg')
+    created = models.DateTimeField(auto_now_add=True)
+    

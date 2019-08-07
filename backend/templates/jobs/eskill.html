@@ -7,10 +7,11 @@
 
 {% if user.is_authenticated %}
 
-
-<section class="eskill-banner">
+{% for banner in banners %}
+<section class="eskill-banner" style="background-image: url('/media/{{ banner.job }}');">
 	<div class="eskill-title">Post your Job</div>
 </section>
+{% endfor %}
 
 <section class="skill-employer">
 	<div class="skill-content">

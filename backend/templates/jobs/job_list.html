@@ -7,9 +7,13 @@
 
 {% if user.is_authenticated %}
 
-<section class="news-banner">
-	<div class="news-title">Newsfeed</div>
+{% for banner in banners %}
+<section class="eskill-banner" style="background-image: url('/media/{{ banner.newsfeed }}');">
+	<div class="eskill-title">Newsfeed</div>
 </section>
+{% endfor %}
+
+
 
 <section class="newsfeed">
 	<div class="container">
