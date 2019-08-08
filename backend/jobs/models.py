@@ -102,8 +102,9 @@ class Banner(models.Model):
     login_register = models.ImageField(upload_to='banner',default='default.jpg')
     dashboard = models.ImageField(upload_to='banner', default='default.jpg')
     newsfeed = models.ImageField(upload_to="banner", default='default.jpg')
-    newsfeed_detail = models.ImageField(
-        upload_to="banner", default='default.jpg')
+    newsfeed_detail = models.ImageField(upload_to="banner", default='default.jpg')
     job = models.ImageField(upload_to="banner", default='default.jpg')
+    app = models.ImageField(upload_to="banner", default='default.jpg')
+    app_bg = models.ImageField(upload_to="banner", default='default.jpg')
     created = models.DateTimeField(auto_now_add=True)
     
