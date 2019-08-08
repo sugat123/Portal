@@ -149,7 +149,7 @@ def job_list(request, slug):
 
 
 @login_required
-def job_detail(request, slug, id):
+def posted_job_detail(request, slug, id):
     type = get_object_or_404(JobType, slug=slug)
     posted_jobs = get_object_or_404(
         PostedJob.objects.order_by('-created'), id=id)
@@ -159,7 +159,7 @@ def job_detail(request, slug, id):
                #   'applied_jobs': applied_jobs,
                'type': type}
 
-    return render(request, 'jobs/job_detail.html', context)
+    return render(request, 'jobs/posted_job_detail.html', context)
 
 
 @login_required
