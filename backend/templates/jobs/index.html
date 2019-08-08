@@ -55,7 +55,7 @@
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						{% for setting in settings%}
 						<a href="{% url 'jobs:index' %}">
-						<img src="/media/{{ setting.logo}}" alt="djgroup" style="height: 55px; width:70px;">
+							<img src="/media/{{ setting.logo}}" alt="djgroup" style="height: 55px; width:70px;">
 						</a>
 
 						{% endfor %}
@@ -121,7 +121,7 @@
 	{% block content %}
 	{% for banner in banners %}
 	<div class="banner-image" style="background-image: url('/media/{{ banner.index }}');">
-	{% endfor %}
+		{% endfor %}
 		<div class="banner-text">
 			<div class="container">
 				<h1>Join us & Explore Thousands of Jobs</h1>
@@ -315,19 +315,23 @@
 			<div class="more-btn"><a href="">View More</a></div>
 		</div>
 	</section>
-	<section class="app-field">
+	{% for banner in banners%}
+	<section class="app-field" style="background-image: url('/media/{{ banner.app_bg }}');">
 		<div class="container">
 			<div class="app-content">
 				<div class="row">
 					<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
 						<div class="app-left">
-							<img src="{% static '/img/app-view.png' %}">
+
+							<img src="/media/{{ banner.app }}">
+							{% endfor %}
 						</div>
 					</div>
 					<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 						<div class="app-right pull-right">
 							<div class="get-app">
 								<h1>Get app for your mobile</h1>
+
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce
 									at rhoncus diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non,
 									scelerisque justo. Nunc a vehicula augue.</p>
