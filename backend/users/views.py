@@ -48,7 +48,7 @@ def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
         messages.success(request, 'logged out successfully')
-        return redirect('jobs:index')
+        return redirect('jobs:dashboard')
 
 
 def register(request):

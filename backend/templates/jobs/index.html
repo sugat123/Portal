@@ -159,68 +159,29 @@
 			</div>
 			<div class="job-categories">
 				<div class="row">
+					{% for job in job_types %}
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
+						<a href="
+						{% if user.is_authenticated %}
+						{% url 'jobs:job_list' job.slug %}
+						{% else %}
+						{% url 'users:login_user' %}
+					   {% endif %}
+						">
 							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-laptop"></i></div>
-								<div class="job-title">IT Engineer</div>
+								<div class="job-icon"><i class="{{ job.icon }}"></i></div>
+								<div class="job-title">{{job.title}}</div>
 							</div>
 						</a>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-concierge-bell"></i></div>
-								<div class="job-title">Cook</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-stethoscope"></i></div>
-								<div class="job-title">Doctor</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-plane"></i></div>
-								<div class="job-title">Pilot</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fab fa-hire-a-helper"></i></div>
-								<div class="job-title">Helper</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-								<div class="job-title">Teacher</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+					{% endfor %}
+					<!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 						<div class="job-category">
-							<div class="job-icon"><i class="fas fa-book-reader"></i></div>
-							<div class="job-title">Accoutant</div>
+							<div class="job-icon"><i class="fas fa-concierge-bell"></i></div>
+							<div class="job-title">Cook</div>
 						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-user-plus"></i></div>
-								<div class="job-title">Plumber</div>
-							</div>
-						</a>
-					</div>
+					</div> -->
+
 				</div>
 			</div>
 			<div class="more-btn"><a href="">View More</a></div>

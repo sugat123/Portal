@@ -8,7 +8,8 @@ from .models import *
 
 def index(request):
     profile = Profile.objects.all()
-    return render(request, 'jobs/index.html', {'profile': profile})
+    job_types = JobType.objects.all()
+    return render(request, 'jobs/index.html', {'profile': profile, 'job_types': job_types})
 
 
 @login_required
@@ -174,3 +175,32 @@ def applied_job_detail(request, slug, id):
         'type': type}
 
     return render(request, 'jobs/applied_job_detail.html', context)
+
+
+def match(request):
+    posted = PostedJob.objects.get(id=5)
+    a = posted.skills.all()
+    list1 = []
+    for i in a:
+        list1.append(i.id)
+    print(list1)
+
+    applied = AppliedJob.objects.get(id=1)
+    b = applied.skills.all()
+    list2 = []
+    for j in b:
+        list2.append(j.id)
+    print(list2)
+
+    count = 0
+    for k in list1:
+        for l in list2:
+            if k == l:
+                count = count+1
+    print(count)
+    if count/len(list1) >= 0.7:
+        print("matched")
+    else:
+        print("not Matched")
+
+    return render(request, 'jobs/match.html', {})

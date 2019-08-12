@@ -64,10 +64,10 @@ class PostedJob(models.Model):
         return "Job Posted for: {}".format(self.job_type)
 
     def get_skills(self):
-        return "\n,".join([s.title for s in self.skills.all()])
+        return "\n, ".join([s.title for s in self.skills.all()])
 
     def get_facility(self):
-        return "\n".join([f.title for f in self.facility.all()])
+        return "\n, ".join([f.title for f in self.facility.all()])
 
 
 class AppliedJob(models.Model):
@@ -95,16 +95,17 @@ class SiteSetting(models.Model):
     phone = models.CharField(max_length=20)
     website = models.URLField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
-       
-    
+
+
 class Banner(models.Model):
-    index = models.ImageField(upload_to='banner',default='default.jpg')
-    login_register = models.ImageField(upload_to='banner',default='default.jpg')
+    index = models.ImageField(upload_to='banner', default='default.jpg')
+    login_register = models.ImageField(
+        upload_to='banner', default='default.jpg')
     dashboard = models.ImageField(upload_to='banner', default='default.jpg')
     newsfeed = models.ImageField(upload_to="banner", default='default.jpg')
-    newsfeed_detail = models.ImageField(upload_to="banner", default='default.jpg')
+    newsfeed_detail = models.ImageField(
+        upload_to="banner", default='default.jpg')
     job = models.ImageField(upload_to="banner", default='default.jpg')
     app = models.ImageField(upload_to="banner", default='default.jpg')
     app_bg = models.ImageField(upload_to="banner", default='default.jpg')
     created = models.DateTimeField(auto_now_add=True)
-    
