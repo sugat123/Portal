@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from .forms import *
 from .models import *
+from jobs.match import count
 
 
 def index(request):
@@ -178,29 +179,29 @@ def applied_job_detail(request, slug, id):
 
 
 def match(request):
-    posted = PostedJob.objects.get(id=5)
-    a = posted.skills.all()
-    list1 = []
-    for i in a:
-        list1.append(i.id)
-    print(list1)
 
-    applied = AppliedJob.objects.get(id=1)
-    b = applied.skills.all()
-    list2 = []
-    for j in b:
-        list2.append(j.id)
-    print(list2)
+    c = count()
 
-    count = 0
-    for k in list1:
-        for l in list2:
-            if k == l:
-                count = count+1
-    print(count)
-    if count/len(list1) >= 0.7:
-        print("matched")
-    else:
-        print("not Matched")
+    p = c[0]
+    a = c[1]
+    posted = []
+    applied = []
 
-    return render(request, 'jobs/match.html', {})
+    matches = []
+    for k in range(len(p)):
+        matches.append((p[k], a[k]))
+
+    print(matches)
+    
+    for i in p:
+        for post in PostedJob.objects.filter(id=i):
+            posted.append(post.user_id)
+    print(posted)
+
+    for j in a:
+        for apply in AppliedJob.objects.filter(id=j):
+            applied.append(apply.user_id)
+    print(applied)
+    
+    
+    return render(request, 'jobs/match.html', {'match': matches})
