@@ -18,6 +18,7 @@ urlpatterns = [
          views.applied_job_detail, name='applied_job_detail'),
     path('<slug>/list_job/', views.list_job, name='list_job'),
     path('add_skill/', views.add_skill, name='add_skill'),
-    path('match/', views.match, name='match')
+    path('match/', views.match, name='match'),
+    path('email/', views.email, name='email')
 
 ]

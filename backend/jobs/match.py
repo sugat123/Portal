@@ -37,7 +37,7 @@ def count():
                         count = count+1
             print(count)
 
-            if count/len(list1) >= 0.7:
+            if count/len(list1) >= 0.65:
                 p_matched.append(s.id)
                 a_matched.append(x.id)
 
