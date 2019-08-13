@@ -53,10 +53,10 @@ header {
     color: #ED1C24;
     padding-right: 9px;
 }
-ul.formclick li a {
+.formclick li a {
     color: #444;
 }
-ul.formclick li a:hover {
+.formclick li a:hover {
     color: #00AEEF;
 }
 
