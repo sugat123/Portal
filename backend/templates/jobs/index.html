@@ -55,7 +55,7 @@
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						{% for setting in settings%}
 						<a href="{% url 'jobs:index' %}">
-						<img src="/media/{{ setting.logo}}" alt="djgroup" style="height: 55px; width:70px;">
+							<img src="/media/{{ setting.logo}}" alt="djgroup" style="height: 55px; width:70px;">
 						</a>
 
 						{% endfor %}
@@ -121,7 +121,7 @@
 	{% block content %}
 	{% for banner in banners %}
 	<div class="banner-image" style="background-image: url('/media/{{ banner.index }}');">
-	{% endfor %}
+		{% endfor %}
 		<div class="banner-text">
 			<div class="container">
 				<h1>Join us & Explore Thousands of Jobs</h1>
@@ -159,68 +159,29 @@
 			</div>
 			<div class="job-categories">
 				<div class="row">
+					{% for job in job_types %}
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
+						<a href="
+						{% if user.is_authenticated %}
+						{% url 'jobs:job_list' job.slug %}
+						{% else %}
+						{% url 'users:login_user' %}
+					   {% endif %}
+						">
 							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-laptop"></i></div>
-								<div class="job-title">IT Engineer</div>
+								<div class="job-icon"><i class="{{ job.icon }}"></i></div>
+								<div class="job-title">{{job.title}}</div>
 							</div>
 						</a>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-concierge-bell"></i></div>
-								<div class="job-title">Cook</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-stethoscope"></i></div>
-								<div class="job-title">Doctor</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-plane"></i></div>
-								<div class="job-title">Pilot</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fab fa-hire-a-helper"></i></div>
-								<div class="job-title">Helper</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-								<div class="job-title">Teacher</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+					{% endfor %}
+					<!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 						<div class="job-category">
-							<div class="job-icon"><i class="fas fa-book-reader"></i></div>
-							<div class="job-title">Accoutant</div>
+							<div class="job-icon"><i class="fas fa-concierge-bell"></i></div>
+							<div class="job-title">Cook</div>
 						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="eskill.html">
-							<div class="job-category">
-								<div class="job-icon"><i class="fas fa-user-plus"></i></div>
-								<div class="job-title">Plumber</div>
-							</div>
-						</a>
-					</div>
+					</div> -->
+
 				</div>
 			</div>
 			<div class="more-btn"><a href="">View More</a></div>
@@ -322,8 +283,8 @@
 				<div class="row">
 					<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
 						<div class="app-left">
-							
-							<img src="/media/{{ banner.app}}">
+
+							<img src="/media/{{ banner.app }}">
 							{% endfor %}
 						</div>
 					</div>
@@ -332,7 +293,7 @@
 							<div class="get-app">
 								<h1>Get app for your mobile</h1>
 
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce
 									at rhoncus diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non,
 									scelerisque justo. Nunc a vehicula augue.</p>
 								<a href=""><button type="button" class="btn2"><i

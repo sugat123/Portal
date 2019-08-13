@@ -48,7 +48,7 @@ def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
         messages.success(request, 'logged out successfully')
-        return redirect('jobs:index')
+        return redirect('/')
 
 
 def register(request):
@@ -73,4 +73,4 @@ def register(request):
     else:
         user_form = AddUserForm()
         profile_form = ProfileForm()
-    return render(request, 'users/register_2.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'users/register.html', {'user_form': user_form, 'profile_form': profile_form})

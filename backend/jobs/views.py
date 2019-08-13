@@ -4,11 +4,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from .forms import *
 from .models import *
+from jobs.match import count
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def index(request):
     profile = Profile.objects.all()
-    return render(request, 'jobs/index.html', {'profile': profile})
+    job_types = JobType.objects.all()
+    return render(request, 'jobs/index.html', {'profile': profile, 'job_types': job_types})
 
 
 @login_required
@@ -149,7 +153,7 @@ def job_list(request, slug):
 
 
 @login_required
-def job_detail(request, slug, id):
+def posted_job_detail(request, slug, id):
     type = get_object_or_404(JobType, slug=slug)
     posted_jobs = get_object_or_404(
         PostedJob.objects.order_by('-created'), id=id)
@@ -159,7 +163,7 @@ def job_detail(request, slug, id):
                #   'applied_jobs': applied_jobs,
                'type': type}
 
-    return render(request, 'jobs/job_detail.html', context)
+    return render(request, 'jobs/posted_job_detail.html', context)
 
 
 @login_required
@@ -174,3 +178,58 @@ def applied_job_detail(request, slug, id):
         'type': type}
 
     return render(request, 'jobs/applied_job_detail.html', context)
+
+
+def match(request):
+
+    c = count()
+
+    p = c[0]
+    a = c[1]
+    posted = []
+    applied = []
+    matches = []
+    for k in range(len(p)):
+        matches.append((p[k], a[k]))
+
+    print(matches)
+
+    for i in p:
+        for post in PostedJob.objects.filter(id=i):
+            posted.append(post.user.email)
+    print(posted)
+
+    for j in a:
+        for apply in AppliedJob.objects.filter(id=j):
+            applied.append(apply.user.email)
+    print(applied)
+
+    subject_posted = 'Match Found'
+    message_posted = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
+    # email_from = settings.EMAIL_HOST_USER
+    recipient_list_posted = [posted]
+
+    send_mail(subject_posted, message_posted,
+              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list_posted)
+
+    subject_applied = 'Match Found'
+    message_applied = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
+    # email_from = settings.EMAIL_HOST_USER
+    recipient_list_applied = [applied]
+
+    send_mail(subject_applied, message_applied,
+              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list_applied)
+
+    return render(request, 'jobs/match.html', {'match': matches})
+
+
+def email(request):
+    subject = 'Match Found'
+    message = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
+    # email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['sugatp454@gmail.com', 'kshitishpokharel@gmail.com', ]
+
+    send_mail(subject, message,
+              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list)
+
+    return redirect('/')

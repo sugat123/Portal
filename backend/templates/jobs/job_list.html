@@ -34,7 +34,7 @@
 		<div class="jobseeker-list">
 			<div class="js-title">Job posted <span class="location-symbol">@</span> <span
 					class="list-name">{{ posted_job.location }}</span></div>
-			<div class="jsv-btn"><a href="{% url 'jobs:job_detail' type.slug posted_job.id %}">View</a></div>
+			<div class="jsv-btn"><a href="{% url 'jobs:posted_job_detail' type.slug posted_job.id %}">View</a></div>
 		</div>
 		{% endif %}
 		{% endfor %}
