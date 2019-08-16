@@ -10,13 +10,27 @@ a:hover{
 	text-decoration: none;
 }
 
+
+span.notify-nub {
+    background: #00AEEF;
+    color: #fff;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    font-size: 10px;
+    padding: 0px 4px;
+    position: absolute;
+    top: 6px;
+    right: 17px;
+}
 .formclick {
     float: right;
     margin-top: 10px;
 }    
 .formclick li {
     display: inline-block;
-    padding-left: 30px;
+    padding-left: 24px;
 }
 header {
     padding: 15px;
@@ -32,14 +46,17 @@ header {
 	color: #fff;
 	background: #00AEEF;
 }
+.formclick > :nth-child(4){
+    font-size: 18px;
+}
 .formclick li i {
     color: #ED1C24;
-    padding-right: 10px;
+    padding-right: 9px;
 }
-ul.formclick li a {
+.formclick li a {
     color: #444;
 }
-ul.formclick li a:hover {
+.formclick li a:hover {
     color: #00AEEF;
 }
 

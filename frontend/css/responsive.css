@@ -16,11 +16,13 @@
 	.cat-right {text-align: center;}
 	.detail-content{width: 100%;}
 	.news-content{width: 100%;}
+	span.badge {left: 19px;}
+	.dropdown-menu {left: -130px}
 }
-@media screen and (min-width : 320px) and (max-width:479px) {
+@media screen and (min-width : 340px) and (max-width:479px) {
 	.formclick > :first-child {display: none;}
 	.form-content {width: 100%}
-	.formclick li {padding-left: 1px;}
+	.formclick li {padding-left: 2px;font-size: 11px;}
 	.job-category {margin-bottom: 10px;}
 	.cat-right {text-align: center;}
 	.skill-content,.efacilities-content{width: 100%;}
@@ -29,4 +31,8 @@
 	.cat-right {text-align: center;}
 	.detail-content{width: 100%;}
 	.news-content{width: 100%;}
+	.formclick li i {padding-right: 3px;}
+	span.badge {left: 12px;}
+	.dropdown-menu {left: -128px}
+	li.notify-title {padding-left: 6px;}
 }
