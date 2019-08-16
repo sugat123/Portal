@@ -52,3 +52,33 @@
 .add-button a:hover{
     background: #ED1C24;
 }
+span.badge {
+    position: absolute;
+    top: 0px;
+    left: 39px;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background: #00AEEF;
+    padding: 2px 4px;
+}
+.dropdown-menu {
+    top: 47px;
+    left: -101px;
+    border-radius: 0;
+    border: none;
+}    
+li.notify-title {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+    border-bottom: 1px solid #F0F0F0;
+    padding-bottom: 5px;
+}
+.dropdown-menu.cart-list .notify-button a {
+    background: #ED1C24;
+    color: #fff;
+}
+.dropdown-menu.cart-list .notify-button a:hover {
+    background: #00AEEF;
+}
