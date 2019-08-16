@@ -101,3 +101,7 @@ input.place-btn {
     font-size: 15px;
     font-weight: bold;
     float: right;
+}
+.booking-field {
+    margin-bottom: 15px;
+}
