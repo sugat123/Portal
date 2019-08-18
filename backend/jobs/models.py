@@ -109,3 +109,11 @@ class Banner(models.Model):
     app = models.ImageField(upload_to="banner", default='default.jpg')
     app_bg = models.ImageField(upload_to="banner", default='default.jpg')
     created = models.DateTimeField(auto_now_add=True)
+
+
+class Match(models.Model):
+    posted_id = models.IntegerField()
+    applied_id = models.IntegerField()
+    score = models.FloatField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)

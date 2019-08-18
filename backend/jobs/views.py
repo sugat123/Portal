@@ -183,53 +183,63 @@ def applied_job_detail(request, slug, id):
 def match(request):
 
     c = count()
+    # match = Match()
 
     p = c[0]
     a = c[1]
+    s = c[2]
     posted = []
     applied = []
     matches = []
-    for k in range(len(p)):
-        matches.append((p[k], a[k]))
+    test = []
+    test_p = []
+    test_a = []
+    m = Match.objects.all()
+    for n in m:
+        test.append((n.posted_id, n.applied_id, n.score))
+        test_p.append((n.posted_id))
+        test_a.append((n.applied_id))
+    # print(test)
+    # print(test_p)
+    # print(test_a)
+    # print(p)
+    # print(a)
+    # print(s)
+    for i, j, l in zip(p, a, s):
+        if (i, j, l) not in test:
+            for post in PostedJob.objects.filter(id=i):
+                posted.append(post.user.email)
+                email_posted([post.user.email])
+            for apply in AppliedJob.objects.filter(id=j):
+                applied.append(apply.user.email)
+                email_applied([apply.user.email])
 
-    print(matches)
-
-    for i in p:
-        for post in PostedJob.objects.filter(id=i):
-            posted.append(post.user.email)
     print(posted)
-
-    for j in a:
-        for apply in AppliedJob.objects.filter(id=j):
-            applied.append(apply.user.email)
     print(applied)
 
-    subject_posted = 'Match Found'
-    message_posted = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
-    # email_from = settings.EMAIL_HOST_USER
-    recipient_list_posted = [posted]
+    for k in range(len(p)):
+        matches.append((p[k], a[k], s[k]))
+        if (p[k], a[k], s[k]) not in test:
+            match = Match()
+            match.posted_id = p[k]
+            match.applied_id = a[k]
+            match.score = s[k]
+            match.save()
 
-    send_mail(subject_posted, message_posted,
-              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list_posted)
-
-    subject_applied = 'Match Found'
-    message_applied = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
-    # email_from = settings.EMAIL_HOST_USER
-    recipient_list_applied = [applied]
-
-    send_mail(subject_applied, message_applied,
-              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list_applied)
+    print(matches)
 
     return render(request, 'jobs/match.html', {'match': matches})
 
 
-def email(request):
+def email_posted(recipient):
     subject = 'Match Found'
-    message = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
-    # email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['sugatp454@gmail.com', 'kshitishpokharel@gmail.com', ]
+    message_posted = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
+    send_mail(subject, message_posted,
+              'DJ Group <settings.EMAIL_HOST_USER>', recipient)
 
-    send_mail(subject, message,
-              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list)
 
-    return redirect('/')
+def email_applied(recipient):
+    subject = 'Match Found'
+    message_applied = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
+    send_mail(subject, message_applied,
+              'DJ Group <settings.EMAIL_HOST_USER>', recipient)

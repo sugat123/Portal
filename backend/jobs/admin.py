@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import * 
+from .models import *
 
 
 @admin.register(JobType)
@@ -44,3 +44,9 @@ class AppliedJobAdmin(admin.ModelAdmin):
 
 admin.site.register(SiteSetting)
 admin.site.register(Banner)
+
+
+@admin.register(Match)
+class MatchAdmin(admin.ModelAdmin):
+    list_display = ['id', 'posted_id', 'applied_id', 'score']
+    ordering = ('created', )
