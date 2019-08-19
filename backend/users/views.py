@@ -20,8 +20,9 @@ def login_user(request):
                 if not remember_me:
                     request.session.set_expiry(0)
                 # redirect_url = request.GET.get('next', 'users/base')
-                messages.success(request, 'You are logged in.')
-
+                # messages.info(request, 'You are logged in as an admin .')
+            
+                messages.success(request, '{} Logged in successfully'.format(user.username))
                 return redirect('jobs:dashboard')
 
             # elif user and user.is_staff:
@@ -71,9 +72,8 @@ def register(request):
             password = user_form.cleaned_data.get('password1')
             user = authenticate(request, username=username, password=password)
             login(request, user)
-            messages.success(
-                request, 'user created with username {}'.format(user.username))
-
+            messages.success(request, 'user created with username {}'.format(user.username))
+            # messages.success(request, 'Registered Successfully')
             return redirect('jobs:dashboard')
 
     else:

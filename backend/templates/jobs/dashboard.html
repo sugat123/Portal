@@ -12,13 +12,12 @@
 </section>
 {% endfor %}
 
-
-
-
 {% if user.is_authenticated %}
-
-
+<div class="container-fluid text-center">
+    {% bootstrap_messages %}
+</div>
 <section class="job-all">
+    
     <div class="container">
         {% bootstrap_messages %}
         <div class="job-title">

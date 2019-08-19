@@ -1,8 +1,14 @@
+{% load bootstrap3 %}
 {% extends 'jobs/base.html' %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
+
+<div class="container-fluid text-center">
+    {% bootstrap_messages %}
+</div>
+
 <h2>Add Job</h2>
 
 <form action="{% url 'jobs:add_job' %}" method="POST">

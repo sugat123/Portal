@@ -1,5 +1,6 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
+{% load bootstrap3 %}
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -9,20 +10,25 @@
     <div class="booking-title">Payment</div>
 </section>
 
-<section class="booking-form">
-    <div class="booking-content">
-        <div class="booking-field">
-            <div class="bill-icon">
-                <i class="fas fa-info"></i><b>Billing details</b>
-            </div>
+    <div class="container-fluid text-center">
+        {% bootstrap_messages %}
+    </div>
 
-            <form action="{% url 'jobs:payment' %}" method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="booking-field">
-                            <label>Firstname<span class="red">*</span></label>
-                            <input type="text" name="firstname" placeholder="First name" class="form-control">
+    <section class="booking-form">
+        <div class="booking-content">
+            <div class="booking-field">
+                <div class="bill-icon">
+                    <i class="fas fa-info"></i><b>Billing details</b>
+                </div>
+                
+                <form action="{% url 'jobs:payment' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="booking-field">
+                                <label>Firstname<span class="red">*</span></label>
+                                <input type="text" name="firstname" placeholder="First name" class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
