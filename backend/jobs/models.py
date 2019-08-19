@@ -2,6 +2,8 @@ from django.db import models
 from autoslug import AutoSlugField
 from users.models import *
 from django.contrib.auth.models import User
+from smart_selects.db_fields import ChainedForeignKey
+
 
 
 class JobType(models.Model):
@@ -11,6 +13,7 @@ class JobType(models.Model):
     icon = models.CharField(max_length=50, blank=True,
                             null=True, default='fas fa-briefcase')
     slug = AutoSlugField(unique_with='id', populate_from='title')
+    
 
     def __str__(self):
         return self.title
@@ -109,3 +112,38 @@ class Banner(models.Model):
     app = models.ImageField(upload_to="banner", default='default.jpg')
     app_bg = models.ImageField(upload_to="banner", default='default.jpg')
     created = models.DateTimeField(auto_now_add=True)
+    
+# class Amount(models.Model):
+#     jobtype = models.ForeignKey(JobType,on_delete=models.CASCADE)
+#     amount = models.IntegerField()
+    
+#     def __str__(self):
+#         return "Amount:{}".format(self.amount)
+    
+# class JobAmount(models.Model):
+#     jobtype = models.ForeignKey(JobType,on_delete=models.CASCADE)
+#     amount = ChainedForeignKey(
+#         Amount,
+#         chained_field="jobtype",
+#         chained_model_field="jobtype",
+#         show_all=False,
+#         auto_choose=True,
+#         sort=True
+#     )
+    
+#     def __str__(self):
+#         return "{0}'s {1}".format(self.jobtype, self.amount)
+
+    
+
+
+# class Payment(models.Model):
+#     jobtype = models.ForeignKey(JobType, on_delete=models.CASCADE)
+#     firstname = models.CharField(max_length=100)
+#     lastname = models.CharField(max_length=100)
+#     companyname = models.CharField(max_length=100, blank=True)
+#     mobilenumber = models.CharField(max_length=100, blank=False)
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
+    
+    

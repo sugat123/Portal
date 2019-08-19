@@ -30,3 +30,8 @@ class AddAppliedJobForm(forms.ModelForm):
     class Meta:
         model = AppliedJob
         fields = '__all__'
+
+# class JobAmountForm(forms.ModelForm):
+#     class Meta:
+#         model = JobAmount
+#         fields= ['jobtype','amount']

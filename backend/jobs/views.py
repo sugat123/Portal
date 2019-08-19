@@ -233,3 +233,15 @@ def email(request):
               'DJ Group <settings.EMAIL_HOST_USER>', recipient_list)
 
     return redirect('/')
+
+@login_required 
+def payment_details(request):
+    # amounts = JobAmount.objects.all()
+       
+    context={
+        'amounts' : amounts
+            }
+    
+    
+    return render(request, 'jobs/payment.html',context)
+    
