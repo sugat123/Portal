@@ -7,6 +7,7 @@ from .models import *
 from jobs.match import count
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import messages
 
 
 def index(request):
@@ -28,6 +29,7 @@ def add_job(request):
         form = AddJobTypeForm(request.POST or None)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Job Added')
 
             return redirect('jobs:add_job')
     else:
@@ -55,6 +57,7 @@ def post_job(request, slug):
         if form.is_valid():
 
             form.save()
+            messages.success(request, 'Job Posted')
 
             return redirect('jobs:dashboard')
     else:
@@ -78,6 +81,8 @@ def apply_job(request, slug):
         form = AddAppliedJobForm(request.POST or none)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Job Applied')
+
             return redirect('jobs:dashboard')
     else:
         form = AddAppliedJobForm()
@@ -102,7 +107,7 @@ def add_facility(request):
         form = AddFacilityForm(request.POST or None)
         if form.is_valid():
             form.save()
-
+            messages.success(request, 'Facility added')
             return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddFacilityForm()
@@ -117,11 +122,12 @@ def add_skill(request):
         if form.is_valid():
             form.save()
 
-            # return redirect(request.META['HTTP_REFERER'])
-            return redirect(request.META['HTTP_REFERER'])
+        
+        messages.success(request, 'Skill Added Successfully')
+        return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddSkillForm()
-
+                
     return render(request, 'jobs/add_skill.html', {'form': form})
 
 

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jobs',
     'users',
-    'smart_selects',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [

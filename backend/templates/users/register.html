@@ -1,5 +1,6 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
+{% load bootstrap3 %}
 {% block title %}Register{% endblock %}
 {% block content %}
 <div id="popup1" class="overlay">
@@ -33,8 +34,13 @@
 </section>
 {% endfor %}
 
+<div class="container-fluid text-center">
+	{% bootstrap_messages %}
+</div>
+
 <section class="register-form">
-	<div class="form-content">
+	
+		<div class="form-content">
 		<h3>Register Form</h3>
 		<form action="{% url 'users:register' %}" method="post">
 			{% csrf_token %}

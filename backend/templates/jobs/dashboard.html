@@ -1,5 +1,7 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
+{% load bootstrap3 %}
+
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -11,11 +13,12 @@
 </section>
 {% endfor %}
 
-
 {% if user.is_authenticated %}
-
-
+<div class="container-fluid text-center">
+    {% bootstrap_messages %}
+</div>
 <section class="job-all">
+    
     <div class="container">
         <div class="job-title">
             {% if user.profile.user_type == 'Job Seeker' %}

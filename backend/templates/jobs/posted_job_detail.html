@@ -1,5 +1,6 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
+{% load bootstrap3 %}
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -13,8 +14,12 @@
 </section>
 {% endfor %}
 
-<section class="detail">
+<div class="container-fluid text-center">
+	{% bootstrap_messages %}
+</div>
 
+<section class="detail">
+	
 	<div class="detail-content">
 		<h3>Posted Job details</h3>
 		<div class="table-responsive">

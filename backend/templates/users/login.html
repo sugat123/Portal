@@ -1,5 +1,7 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
+{% load bootstrap3 %}
+
 {% block title %}Login{% endblock %}
 {% block content %}
 <div id="popup1" class="overlay">
@@ -33,17 +35,24 @@
 </section>
 {% endfor %}
 
+<div class="container-fluid text-center">
+	{% bootstrap_messages %}
+</div>
+
 <section class="login-form">
+	
 	<div class="form-content">
 		<h3>Login form</h3>
 		<form action= "{% url 'users:login_user' %}" method="post">
 				{% csrf_token %}
 			<div class="form-field">
 				<label>Username</label>
+				{{ form.username.errors }}
 				<input name="username" placeholder="Username" class="form-control">
 			</div>
 			<div class="form-field">
 				<label>Password</label>
+				{{ form.password.errors }}
 				<input type="password" name="password" placeholder="Password" class="form-control">
 			</div>
 			<div class="remember">

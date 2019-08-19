@@ -1,5 +1,6 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
+{% load bootstrap3 %}
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -8,6 +9,10 @@
     <section class="booking-banner">
         <div class="booking-title">Payment</div>
     </section>
+
+    <div class="container-fluid text-center">
+        {% bootstrap_messages %}
+    </div>
 
     <section class="booking-form">
         <div class="booking-content">
