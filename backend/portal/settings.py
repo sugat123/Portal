@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jobs',
-    'users'
+    'users',
+    'bootstrap3',
+    
 ]
 
 MIDDLEWARE = [
@@ -142,3 +144,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'raktim.thapa9999@gmail.com'
 EMAIL_HOST_PASSWORD = 'Test@123'
+
+USE_DJANGO_JQUERY = True

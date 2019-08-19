@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib import messages
 from django.urls import reverse
 from .forms import *
 from .models import *
@@ -243,3 +244,23 @@ def email_applied(recipient):
     message_applied = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
     send_mail(subject, message_applied,
               'DJ Group <settings.EMAIL_HOST_USER>', recipient)
+    return redirect('/')
+
+
+@login_required
+def payment(request):
+    jobtypes = JobType.objects.all()
+    if request.method == 'POST':
+        form = PaymentForm(request.POST or None)
+        if form.is_valid():
+            payment = form.save(commit=False)
+            payment.save()
+            return redirect('jobs:index')
+    else:
+        form = PaymentForm()
+    context = {
+        'jobtypes': jobtypes,
+        'form': form
+    }
+
+    return render(request, 'jobs/payment.html', context)

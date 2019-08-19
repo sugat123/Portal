@@ -16,6 +16,7 @@
 	.cat-right {text-align: center;}
 	.detail-content{width: 100%;}
 	.news-content{width: 100%;}
+	.booking-content{width: 100%;}
 	span.badge {left: 19px;}
 	.dropdown-menu {left: -130px}
 }
@@ -31,6 +32,7 @@
 	.cat-right {text-align: center;}
 	.detail-content{width: 100%;}
 	.news-content{width: 100%;}
+	.booking-content{width: 100%;}
 	.formclick li i {padding-right: 3px;}
 	span.badge {left: 12px;}
 	.dropdown-menu {left: -128px}

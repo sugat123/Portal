@@ -1,5 +1,6 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
+{% load bootstrap3 %}
 {% block title %}Login{% endblock %}
 {% block content %}
 <div id="popup1" class="overlay">
@@ -29,15 +30,17 @@
 
 {% for banner in banners %}
 <section class="eskill-banner" style="background-image: url('/media/{{ banner.login_register }}');">
-    <div class="eskill-title">Login</div>
+	<div class="eskill-title">Login</div>
 </section>
 {% endfor %}
 
+
 <section class="login-form">
 	<div class="form-content">
+			{% bootstrap_messages %}
 		<h3>Login form</h3>
-		<form action= "{% url 'users:login_user' %}" method="post">
-				{% csrf_token %}
+		<form action="{% url 'users:login_user' %}" method="post">
+			{% csrf_token %}
 			<div class="form-field">
 				<label>Username</label>
 				<input name="username" placeholder="Username" class="form-control">
@@ -60,7 +63,8 @@
 			</div>
 			<div class="new-user">
 				<div class="u-icon">
-					<i class="fas fa-user"></i>New user ?<span><a href="{% url 'users:register' %}">Register here</a></span>
+					<i class="fas fa-user"></i>New user ?<span><a href="{% url 'users:register' %}">Register
+							here</a></span>
 				</div>
 			</div>
 		</form>

@@ -1,0 +1,104 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<section class="booking-banner">
+    <div class="booking-title">Payment</div>
+</section>
+
+<section class="booking-form">
+    <div class="booking-content">
+        <div class="booking-field">
+            <div class="bill-icon">
+                <i class="fas fa-info"></i><b>Billing details</b>
+            </div>
+
+            <form action="{% url 'jobs:payment' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="booking-field">
+                            <label>Firstname<span class="red">*</span></label>
+                            <input type="text" name="firstname" placeholder="First name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Lastname<span class="red">*</span></label>
+                        <div class="booking-field">
+                            <input type="text" name="lastname" placeholder="Last name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="booking-field">
+                            <label>Company name</label>
+                            <input type="text" name="company" placeholder="Company name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Mobile number<span class="red">*</span></label>
+                        <div class="booking-field">
+                            <input type="number" name="mobile" placeholder="Mobile Number" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        <div class="booking-list">
+            <div class="order-icon">
+                <i class="fas fa-shopping-cart"></i><b>Your order</b>
+            </div>
+            <div class="form-input">
+                <label>Select the Job type</label>
+
+                <select name="amount_paid" class="form-control" required>
+                    {% for jobtype in jobtypes %}
+                    <option value="{{ jobtype.commission }}">Job: {{ jobtype.title }}, Amount you need to pay:
+                        {{ jobtype.commission }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <br>
+                <!-- <label>Amount You Need to Pay</label>
+
+                <select name="job_type" class="form-control" required>
+
+                    <option value=""></option>
+
+                </select> -->
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="booking-type">
+            <div class="booking-icon">
+                <div class="e-icon">
+                    <div class="icon-img"><a href="https://esewa.com.np/"><img src="{% static '/img/esewa.png' %}"></a>
+                    </div>
+                    <div class="icon-name">Esewa</div>
+                </div>
+                <div class="k-icon">
+                    <div class="icon-img"><a href="https://khalti.com/"><img src="{% static '/img/khalti.png' %}"></a>
+                    </div>
+                    <div class="icon-name">Khalti</div>
+                </div>
+                <div class="i-icon">
+                    <div class="icon-img"><a href="http://www.imepay.com.np/"><img
+                                src="{% static '/img/ime.png' %}"></a></div>
+                    <div class="icon-name">Ime pay</div>
+                </div>
+            </div>
+        </div>
+        <div class="billing-btn">
+            <input type="submit" name="place" value="Place order" class="place-btn">
+        </div>
+        </form>
+    </div>
+</section>
+
+{% endif %}
+{% endblock %}
