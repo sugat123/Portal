@@ -15,12 +15,12 @@
 			<div class="container">
 				<div class="row">
 					<div class="header-left">
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-							<a href="" class="logo">logo</a>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-4">
+							<a href="" class="logo"><img src="img/logo.png"></a>
 						</div>
 					</div>
 					<div class="header-right">
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
 							<ul class="formclick">
 								<li><a href="">Post Job</a></li>
 								<li><i class="fas fa-lock"></i><a href="register.html">Register</a></li>
@@ -31,17 +31,27 @@
 				                        <span class="badge">2</span>
 				                    </a>
 				                    <ul class="dropdown-menu cart-list">
-				                        <li class="notify-title">
-			                            	<div class="n-title">Text</div>
-			                            	<div class="n-icon"><a href=""><i class="far fa-times-circle"></i></a></div>
-				                        </li>
-				                        <li class="notify-title">
-			                            	<div class="n-title">Text</div>
-			                            	<div class="n-icon"><a href=""><i class="far fa-times-circle"></i></a></div>
-				                        </li>
-				                        <li class="notify-button">
-				                            <a href="">View all</a>
-				                        </li>
+				                    	<div id="testDiv">
+					                        <li class="notify-title">
+				                            	<div class="n-title"><a href="">Neque porro quisquam est qui dolorem ipsum quia.</a></div>
+				                            	<div class="n-icon"><a href=""><i class="far fa-times-circle"></i></a></div>
+					                        </li>
+					                        <li class="notify-title">
+				                            	<div class="n-title"><a href="">Neque porro quisquam est qui dolorem ipsum quia.</a></div>
+				                            	<div class="n-icon"><a href=""><i class="far fa-times-circle"></i></a></div>
+					                        </li>
+					                        <li class="notify-title">
+				                            	<div class="n-title"><a href="">Neque porro quisquam est qui dolorem ipsum quia.</a></div>
+				                            	<div class="n-icon"><a href=""><i class="far fa-times-circle"></i></a></div>
+					                        </li>
+					                        <li class="notify-title">
+				                            	<div class="n-title"><a href="">Neque porro quisquam est qui dolorem ipsum quia.</a></div>
+				                            	<div class="n-icon"><a href=""><i class="far fa-times-circle"></i></a></div>
+					                        </li>
+					                        <li class="notify-button">
+					                            <a href="">View all</a>
+					                        </li>
+				                    	</div>
 				                    </ul>
 				                </li>
 							</ul>
@@ -133,8 +143,18 @@
 
 </body>
 <script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript">
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+
+      $('#testDiv').slimScroll({
+          alwaysVisible: true,
+          railVisible: true
+      });
+    });
+</script>
+<script type="text/javascript">
 	$(window).scroll(function(){
     if ($(window).scrollTop() >= 50) {
         $('.head').addClass('header-fixed');

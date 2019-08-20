@@ -18,12 +18,12 @@
 	.news-content{width: 100%;}
 	.booking-content{width: 100%;}
 	span.badge {left: 19px;}
-	.dropdown-menu {left: -130px}
+	.dropdown-menu {left: -215px;}
 }
 @media screen and (min-width : 340px) and (max-width:479px) {
 	.formclick > :first-child {display: none;}
 	.form-content {width: 100%}
-	.formclick li {padding-left: 2px;font-size: 11px;}
+	.formclick li {padding-left: 14px;}
 	.job-category {margin-bottom: 10px;}
 	.cat-right {text-align: center;}
 	.skill-content,.efacilities-content{width: 100%;}
@@ -34,7 +34,7 @@
 	.news-content{width: 100%;}
 	.booking-content{width: 100%;}
 	.formclick li i {padding-right: 3px;}
-	span.badge {left: 12px;}
-	.dropdown-menu {left: -128px}
+	span.badge {left: 24px;}
+	.dropdown-menu {left: -227px}
 	li.notify-title {padding-left: 6px;}
-}
+}	
