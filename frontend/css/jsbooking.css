@@ -27,7 +27,7 @@
     width: 27px;
     font-size: 17px;
     height: 27px;
-    color: #00AEEF;
+    color: #0981EF;
 }
 .bill-icon b {
     font-size: 20px;
@@ -54,7 +54,7 @@
     width: 27px;
     font-size: 15px;
     height: 27px;
-    color: #00AEEF;
+    color: #0981EF;
 }
 .red {
     color: #ED1C24;
@@ -92,7 +92,7 @@ input#esewa, input#khalti, input#ime {
     text-align: center;
 }
 input.place-btn {
-    background: #ED1C24;
+    background: #006034;
     color: #fff;
     padding: 8px 12px;
     border: none;
