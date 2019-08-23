@@ -123,8 +123,11 @@ def add_skill(request):
             form.save()
 
         
-        messages.success(request, 'Skill Added Successfully')
-        return redirect(request.META['HTTP_REFERER'])
+            messages.success(request, 'Skill Added Successfully')
+            return redirect(request.META['HTTP_REFERER'])
+        else:
+            messages.error(request, 'The skill you added was Invalid.Please try again.')
+            return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddSkillForm()
                 
@@ -250,4 +253,8 @@ def payment_details(request):
     
     
     return render(request, 'jobs/payment.html',context)
+
+@login_required
+def esewa(request):
     
+    return render(request, 'jobs/esewa.html',{})

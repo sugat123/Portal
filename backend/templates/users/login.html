@@ -35,9 +35,9 @@
 </section>
 {% endfor %}
 
-<div class="container-fluid text-center">
-	{% bootstrap_messages %}
-</div>
+<div class= "text-center" id="alert_message">
+			{% bootstrap_messages %}
+</div> 
 
 <section class="login-form">
 	
@@ -47,12 +47,24 @@
 				{% csrf_token %}
 			<div class="form-field">
 				<label>Username</label>
-				{{ form.username.errors }}
+
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.title.errors}}
+				</div>
+				{% endif %}
+
 				<input name="username" placeholder="Username" class="form-control">
 			</div>
 			<div class="form-field">
 				<label>Password</label>
-				{{ form.password.errors }}
+
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.title.errors}}
+				</div>
+				{% endif %}
+				
 				<input type="password" name="password" placeholder="Password" class="form-control">
 			</div>
 			<div class="remember">

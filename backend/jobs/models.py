@@ -22,10 +22,10 @@ class JobType(models.Model):
 class Skills(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    slug = AutoSlugField(unique_with='id', populate_from='title')
+    # slug = AutoSlugField(unique_with='id', populate_from='title')
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     title = models.CharField(
-        max_length=100, blank=True, null=True)
+        max_length=255)
 
     def __str__(self):
         return "{0}'s Skill: {1}".format(self.job_type, self.title)
@@ -37,11 +37,11 @@ class Skills(models.Model):
 class Facility(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    slug = AutoSlugField(unique_with='id', populate_from='title')
+    # slug = AutoSlugField(unique_with='id', populate_from='title')
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
 
     title = models.CharField(
-        max_length=100, blank=True, null=True)
+        max_length=255)
 
     def __str__(self):
         return "{0}'s Facility: {1}".format(self.job_type, self.title)
@@ -78,7 +78,7 @@ class AppliedJob(models.Model):
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     experience = models.IntegerField(null=True, blank=True)
     skills = models.ManyToManyField(Skills, blank=True)
-    location = models.CharField(max_length=100, null=True, blank=True)
+    location = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(unique_with='id', populate_from='user')
@@ -106,8 +106,7 @@ class Banner(models.Model):
         upload_to='banner', default='default.jpg')
     dashboard = models.ImageField(upload_to='banner', default='default.jpg')
     newsfeed = models.ImageField(upload_to="banner", default='default.jpg')
-    newsfeed_detail = models.ImageField(
-        upload_to="banner", default='default.jpg')
+    newsfeed_detail = models.ImageField(upload_to="banner", default='default.jpg')
     job = models.ImageField(upload_to="banner", default='default.jpg')
     app = models.ImageField(upload_to="banner", default='default.jpg')
     app_bg = models.ImageField(upload_to="banner", default='default.jpg')

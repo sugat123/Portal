@@ -21,4 +21,5 @@ urlpatterns = [
     path('match/', views.match, name='match'),
     path('email/', views.email, name='email'),
     path('payment/',views.payment_details, name = 'payment'),
+    path('esewa/', views.esewa, name = 'esewa'),
 ]
