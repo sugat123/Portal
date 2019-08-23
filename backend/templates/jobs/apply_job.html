@@ -15,7 +15,7 @@
 </section>
 {% endfor %}
 
-<div class="container-fluid text-center">
+<div class="container-fluid text-center" >
     {% bootstrap_messages %}
 </div>
 
@@ -78,6 +78,7 @@
 
                     <div class="form-input">
                         <label>Address</label>
+                        {{form.location.errors}}
                         <input type="text" name="location" class="form-control" required>
                     </div>
 

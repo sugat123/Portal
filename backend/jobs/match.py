@@ -39,8 +39,8 @@ def count():
             # print(count)
             score_temp = count/len(list1)
             if score_temp >= 0.65:
-                p_matched.append(s.id)
-                a_matched.append(x.id)
+                p_matched.append(s.user_id)
+                a_matched.append(x.user_id)
                 score.append(score_temp)
 
     return [p_matched, a_matched, score]

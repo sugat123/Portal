@@ -6,15 +6,21 @@ from django.urls import reverse
 from .forms import *
 from .models import *
 from jobs.match import count
+from jobs.khalti import *
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+import requests
+from django.http import JsonResponse
+from django.core import serializers
 
 
 def index(request):
     profile = Profile.objects.all()
     job_types = JobType.objects.all()
-    return render(request, 'jobs/index.html', {'profile': profile, 'job_types': job_types})
+
+    context = {'profile': profile, 'job_types': job_types}
+    return render(request, 'jobs/index.html', context)
 
 
 @login_required
@@ -123,12 +129,11 @@ def add_skill(request):
         if form.is_valid():
             form.save()
 
-        
         messages.success(request, 'Skill Added Successfully')
         return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddSkillForm()
-                
+
     return render(request, 'jobs/add_skill.html', {'form': form})
 
 
@@ -254,7 +259,8 @@ def email_applied(recipient):
 
 
 @login_required
-def payment(request):
+def payment(request, id):
+    person = get_object_or_404(User, id=id)
     jobtypes = JobType.objects.all()
     if request.method == 'POST':
         form = PaymentForm(request.POST or None)
@@ -266,7 +272,26 @@ def payment(request):
         form = PaymentForm()
     context = {
         'jobtypes': jobtypes,
-        'form': form
+        'form': form,
+        'person': person
     }
 
     return render(request, 'jobs/payment.html', context)
+
+
+def esewa(request, id):
+    person = get_object_or_404(User, id=id)
+    url1 = "https://khalti.com/api/v2/payment/verify/"
+    # token = "akpSfqg2wKwcN8dBo7ZbwY"
+    # v = verification(url1, token, 20000)
+    url2 = "https://khalti.com/api/v2/merchant-transaction/"
+    t = transaction_list(url2)
+
+    # print(v)
+    for i in t['records']:
+        print(i['amount'])
+        print(i['user']['name'])
+        print(i['user']['mobile'] + "\n")
+    # print(t[''])
+
+    return render(request, 'jobs/esewa.html', {'t': t, 'person': person})
