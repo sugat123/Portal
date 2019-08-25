@@ -13,6 +13,8 @@ from django.contrib import messages
 import requests
 from django.http import JsonResponse
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 def index(request):
@@ -279,19 +281,41 @@ def payment(request, id):
     return render(request, 'jobs/payment.html', context)
 
 
+@csrf_exempt
 def esewa(request, id):
     person = get_object_or_404(User, id=id)
-    url1 = "https://khalti.com/api/v2/payment/verify/"
-    # token = "akpSfqg2wKwcN8dBo7ZbwY"
-    # v = verification(url1, token, 20000)
-    url2 = "https://khalti.com/api/v2/merchant-transaction/"
-    t = transaction_list(url2)
+    applied = AppliedJob.objects.all()
+    posted = PostedJob.objects.all()
+
+    if request.method == "POST" and request.is_ajax():
+
+        token = request.POST['token']
+        amount = request.POST['amount']
+        user_id = request.POST['product_identity']
+        product = request.POST['product_name']
+
+        v = verification(token, amount)
+
+        if v['state']['name'] == "Completed":
+            print("Completed")
+            paid = Payment()
+            paid.profile_id = user_id
+            paid.name = v['user']['name']
+            paid.amount = v['amount']
+            paid.mobile = v['user']['mobile']
+            paid.created_on = v['created_on']
+            paid.product = product
+            paid.save()
+
+    # url2 = "https://khalti.com/api/v2/merchant-transaction/"
+    # t = transaction_list(url2)
 
     # print(v)
-    for i in t['records']:
-        print(i['amount'])
-        print(i['user']['name'])
-        print(i['user']['mobile'] + "\n")
+    # for i in t['records']:
+    #     print(i['amount'])
+    #     print(i['user']['name'])
+    #     print(i['user']['mobile'] + "\n")
     # print(t[''])
 
-    return render(request, 'jobs/esewa.html', {'t': t, 'person': person})
+    context = {'person': person, 'applied': applied, 'posted': posted}
+    return render(request, 'jobs/esewa.html', context)

@@ -121,8 +121,9 @@ class Match(models.Model):
 
 
 class Payment(models.Model):
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    company = models.CharField(max_length=100)
+    profile_id = models.IntegerField()
+    name = models.CharField(max_length=100)
+    amount = models.CharField(max_length=200)
+    product = models.CharField(max_length=100)
     mobile = models.CharField(max_length=20)
-    amount_paid = models.CharField(max_length=200)
+    created_on = models.DateTimeField()

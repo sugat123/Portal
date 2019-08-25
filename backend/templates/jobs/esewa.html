@@ -1,6 +1,7 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
 {% load bootstrap3 %}
+
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -10,49 +11,152 @@
     <div class="booking-title">Payment</div>
 </section>
 
+<div id="target"></div>
+
 <section>
     <!-- Place this where you need payment button -->
-    <button id="payment-button">Pay with Khalti</button>
-    <!-- Place this where you need payment button -->
-    <!-- Paste this code anywhere in you body tag -->
-    <hr>
+    <!-- <button id="payment-button">Pay with Khalti</button> -->
 
+    <div class="booking-type">
+        <div class="booking-icon">
+            <div class="e-icon">
+                <div class="icon-img"><a href="https://esewa.com.np/"><img src="{% static '/img/esewa.png' %}"></a>
+                </div>
+                <div class="icon-name">Esewa</div>
+            </div>
+            <div class="k-icon">
+                <div class="icon-img"><a href=""><img src="{% static '/img/khalti.png' %}"></a>
+                    <!-- <button id="payment-button">Pay with Khalti</button> -->
+                </div>
+                <button id="payment-button">Pay with Khalti</button>
+                <div class="text-center" id="alert_message">
+                    {% bootstrap_messages %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Place this where you need payment button -->
+
+    {% if user.profile.user_type == 'Job Seeker' %}
+    {% for apply in applied %}
+
+    <script>
+        {% if person.id == apply.user_id %}
+        var config = {
+            // replace the publicKey with yours
+
+            "publicKey": "test_public_key_dd62f6822b3e4ae7b1561839081e9e97",
+            "productIdentity": "{{person.id}}",
+            "productName": "{{apply.job_type.title}}",
+            "productUrl": "http://127.0.0.1:8000",
+            "eventHandler": {
+                onSuccess(payload) {
+                    // hit merchant api for initiating verfication
+                    console.log(payload);
+                    alert("Transaction Confirmed.");
+
+                    $.ajax({
+                        url: "{% url 'jobs:esewa' user.id %}",
+                        type: "post",
+                        data: payload,
+                        dataType: 'json'
+                    });
+                },
+                onError(error) {
+                    console.log(error);
+                },
+                onClose() {
+                    console.log('widget is closing');
+                }
+            }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            checkout.show({ amount: {{ apply.job_type.commission }} });
+            }
+        {% endif %}
+
+    </script>
+
+
+    {% endfor %}
+    {% else %}
+    {% for post in posted %}
+    <script>
+        {% if person.id == post.user_id %}
+        var config = {
+            // replace the publicKey with yours
+
+            "publicKey": "test_public_key_dd62f6822b3e4ae7b1561839081e9e97",
+            "productIdentity": "{{post.job_type.id}}",
+            "productName": "{{post.job_type.title}}",
+            "productUrl": "http://127.0.0.1:8000",
+            "eventHandler": {
+                onSuccess(payload) {
+                    // hit merchant api for initiating verfication
+                    console.log(payload);
+                    $.ajax({
+                        url: "{% url 'jobs:esewa' user.id %}",
+                        type: "post",
+                        data: payload,
+                        dataType: 'json'
+                    });
+                    //$.post("{% url 'jobs:esewa' user.id %}", payload)
+
+                    //const Url = 'https://khalti.com/api/v2/payment/verify/';
+                    //let Data = {
+                    //token: payload.token,
+                    //amount: payload.amount
+                    //};
+                    //let othePram = {
+                    //headers: {
+                    //'Authorization': 'Key test_secret_key_e12fdbb02fd94fe4ab7440da6af6ca87'
+                    //},
+                    //body: Data,
+                    //method: "POST"
+                    //};
+                    //fetch(Url, othePram)
+                    //.then(data => { return data.json() })
+                    //.then(res => { console.log(res) })
+                    //.catch(error => { console.log(error) })
+
+                },
+                onError(error) {
+                    console.log(error);
+                },
+                onClose() {
+                    console.log('widget is closing');
+                }
+            }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            checkout.show({ amount: {{ post.job_type.commission }} });
+                }
+        {% endif %}
+
+    </script>
+
+    {% endfor  %}
+
+    {% endif %}
+    <hr>
+    {{person.id}}
     <hr>
     {% for j in t %}
     {{j}}
     {% endfor %}
+
 </section>
 
 
 
-<script>
-    var config = {
-        // replace the publicKey with yours
-        "publicKey": "test_public_key_dd62f6822b3e4ae7b1561839081e9e97",
-        "productIdentity": "1234567890",
-        "productName": "Cook",
-        "productUrl": "http://127.0.0.1:8000",
-        "eventHandler": {
-            onSuccess(payload) {
-                // hit merchant api for initiating verfication
-                console.log(payload);
-            },
-            onError(error) {
-                console.log(error);
-            },
-            onClose() {
-                console.log('widget is closing');
-            }
-        }
-    };
 
-    var checkout = new KhaltiCheckout(config);
-    var btn = document.getElementById("payment-button");
-    btn.onclick = function () {
-        checkout.show({ amount: 20000 });
-    }
-
-</script>
 <!-- Paste this code anywhere in you body tag -->
 ...
 

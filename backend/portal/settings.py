@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'jobs',
     'users',
     'bootstrap3',
+
 ]
 
 MIDDLEWARE = [
