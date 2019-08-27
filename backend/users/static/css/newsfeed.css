@@ -32,7 +32,7 @@
     margin-bottom: 20px;
 }
 .jsv-btn a {
-    background: #ED1C24;
+    background: #006034;
     color: #fff;
     padding: 10px 20px;
 }
@@ -42,7 +42,7 @@
     margin-bottom: 30px;
 }
 .add-button a {
-    background: #00AEEF;
+    background: #0981EF;
     color: #fff;
     text-transform: uppercase;
     font-size: 20px;
@@ -50,12 +50,12 @@
     padding: 10px 32px;
 }
 .add-button a:hover{
-    background: #ED1C24;
+    background: #006034;
 }
 span.badge {
     position: absolute;
     top: 0px;
-    left: 39px;
+    left: 33px;
     border-radius: 50%;
     width: 15px;
     height: 15px;
@@ -64,7 +64,7 @@ span.badge {
 }
 .dropdown-menu {
     top: 47px;
-    left: -101px;
+    left: -195px;
     border-radius: 0;
     border: none;
 }    
@@ -74,11 +74,20 @@ li.notify-title {
     margin: 10px 0px;
     border-bottom: 1px solid #F0F0F0;
     padding-bottom: 5px;
+    padding: 10px;
 }
 .dropdown-menu.cart-list .notify-button a {
-    background: #ED1C24;
+    background: #006034;
     color: #fff;
+    padding: 5px 10px 5px 10px;
 }
 .dropdown-menu.cart-list .notify-button a:hover {
-    background: #00AEEF;
+    background: #0981EF;
+}
+.dropdown-menu{
+    min-width: 255px;
+    padding-bottom: 10px;
+}
+.notify-button {
+    padding-left: 14px;
 }

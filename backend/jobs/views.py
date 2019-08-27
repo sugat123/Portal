@@ -1,19 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib import messages
 from django.urls import reverse
 from .forms import *
 from .models import *
 from jobs.match import count
+from jobs.khalti import *
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+import requests
+from django.http import JsonResponse
+from django.core import serializers
 
 
 def index(request):
     profile = Profile.objects.all()
     job_types = JobType.objects.all()
-    return render(request, 'jobs/index.html', {'profile': profile, 'job_types': job_types})
+
+    context = {'profile': profile, 'job_types': job_types}
+    return render(request, 'jobs/index.html', context)
 
 
 @login_required
@@ -122,15 +129,11 @@ def add_skill(request):
         if form.is_valid():
             form.save()
 
-        
-            messages.success(request, 'Skill Added Successfully')
-            return redirect(request.META['HTTP_REFERER'])
-        else:
-            messages.error(request, 'The skill you added was Invalid.Please try again.')
-            return redirect(request.META['HTTP_REFERER'])
+        messages.success(request, 'Skill Added Successfully')
+        return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddSkillForm()
-                
+
     return render(request, 'jobs/add_skill.html', {'form': form})
 
 
@@ -192,69 +195,104 @@ def applied_job_detail(request, slug, id):
 def match(request):
 
     c = count()
+    # match = Match()
 
     p = c[0]
     a = c[1]
+    s = c[2]
     posted = []
     applied = []
     matches = []
-    for k in range(len(p)):
-        matches.append((p[k], a[k]))
+    test = []
+    test_p = []
+    test_a = []
+    m = Match.objects.all()
+    for n in m:
+        test.append((n.posted_id, n.applied_id, n.score))
+        test_p.append((n.posted_id))
+        test_a.append((n.applied_id))
+    # print(test)
+    # print(test_p)
+    # print(test_a)
+    # print(p)
+    # print(a)
+    # print(s)
+    for i, j, l in zip(p, a, s):
+        if (i, j, l) not in test:
+            for post in PostedJob.objects.filter(id=i):
+                posted.append(post.user.email)
+                email_posted([post.user.email])
+            for apply in AppliedJob.objects.filter(id=j):
+                applied.append(apply.user.email)
+                email_applied([apply.user.email])
 
-    print(matches)
-
-    for i in p:
-        for post in PostedJob.objects.filter(id=i):
-            posted.append(post.user.email)
     print(posted)
-
-    for j in a:
-        for apply in AppliedJob.objects.filter(id=j):
-            applied.append(apply.user.email)
     print(applied)
 
-    subject_posted = 'Match Found'
-    message_posted = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
-    # email_from = settings.EMAIL_HOST_USER
-    recipient_list_posted = [posted]
+    for k in range(len(p)):
+        matches.append((p[k], a[k], s[k]))
+        if (p[k], a[k], s[k]) not in test:
+            match = Match()
+            match.posted_id = p[k]
+            match.applied_id = a[k]
+            match.score = s[k]
+            match.save()
 
-    send_mail(subject_posted, message_posted,
-              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list_posted)
-
-    subject_applied = 'Match Found'
-    message_applied = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
-    # email_from = settings.EMAIL_HOST_USER
-    recipient_list_applied = [applied]
-
-    send_mail(subject_applied, message_applied,
-              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list_applied)
+    print(matches)
 
     return render(request, 'jobs/match.html', {'match': matches})
 
 
-def email(request):
+def email_posted(recipient):
     subject = 'Match Found'
-    message = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
-    # email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['sugatp454@gmail.com', 'kshitishpokharel@gmail.com', ]
+    message_posted = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
+    send_mail(subject, message_posted,
+              'DJ Group <settings.EMAIL_HOST_USER>', recipient)
 
-    send_mail(subject, message,
-              'DJ Group <settings.EMAIL_HOST_USER>', recipient_list)
 
+def email_applied(recipient):
+    subject = 'Match Found'
+    message_applied = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
+    send_mail(subject, message_applied,
+              'DJ Group <settings.EMAIL_HOST_USER>', recipient)
     return redirect('/')
 
-@login_required 
-def payment_details(request):
-    # amounts = JobAmount.objects.all()
-       
-    context={
-        'amounts' : amounts
-            }
-    
-    
-    return render(request, 'jobs/payment.html',context)
 
 @login_required
-def esewa(request):
-    
-    return render(request, 'jobs/esewa.html',{})
+def payment(request, id):
+    person = get_object_or_404(User, id=id)
+    jobtypes = JobType.objects.all()
+    if request.method == 'POST':
+        form = PaymentForm(request.POST or None)
+        if form.is_valid():
+            payment = form.save(commit=False)
+            payment.save()
+            return redirect('jobs:index')
+    else:
+        form = PaymentForm()
+    context = {
+        'jobtypes': jobtypes,
+        'form': form,
+        'person': person
+    }
+
+    return render(request, 'jobs/payment.html', context)
+
+
+def esewa(request, id):
+    person = get_object_or_404(User, id=id)
+    url1 = "https://khalti.com/api/v2/payment/verify/"
+    # token = "akpSfqg2wKwcN8dBo7ZbwY"
+    # v = verification(url1, token, 20000)
+    url2 = "https://khalti.com/api/v2/merchant-transaction/"
+    t = transaction_list(url2)
+
+    # print(v)
+    for i in t['records']:
+        print(i['amount'])
+        print(i['user']['name'])
+        print(i['user']['mobile'] + "\n")
+    # print(t[''])
+
+    return render(request, 'jobs/esewa.html', {'t': t, 'person': person})
+

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import * 
+from .models import *
+from django.core.mail import send_mail
 
 
 @admin.register(JobType)
@@ -44,6 +45,14 @@ class AppliedJobAdmin(admin.ModelAdmin):
 
 admin.site.register(SiteSetting)
 admin.site.register(Banner)
-# admin.site.register(Payment)
-# admin.site.register(Amount)
-# admin.site.register(JobAmount)
+admin.site.register(Payment)
+
+
+@admin.register(Match)
+class MatchAdmin(admin.ModelAdmin):
+    list_display = ['id', 'posted_id', 'applied_id', 'score']
+    ordering = ('created', )
+
+
+    
+

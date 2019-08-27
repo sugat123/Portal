@@ -35,12 +35,17 @@ def login_user(request):
             elif user and not user.is_active:
                 messages.info(request, 'Your account is not active now.')
             else:
+                
                 messages.error(request, 'Invalid Username and Password')
+            
         else:
+           
             messages.error(request, 'Invalid Form')
 
     else:
+        
         form = LoginForm()
+    
     return render(request, 'users/login.html', {'form': form})
 
 

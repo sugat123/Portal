@@ -1,14 +1,60 @@
-<body>
-    <form action="https://uat.esewa.com.np/epay/main" method="POST">
-        <input value="100" name="tAmt" type="hidden">
-        <input value="90" name="amt" type="hidden">
-        <input value="5" name="txAmt" type="hidden">
-        <input value="2" name="psc" type="hidden">
-        <input value="3" name="pdc" type="hidden">
-        <input value="epay_payment" name="scd" type="hidden">
-        <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
-        <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
-        <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
-        <input value="Pay with Esewa" type="submit">
-    </form>
-</body>
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<script src="https://khalti.com/static/khalti-checkout.js"></script>
+<section class="booking-banner">
+    <div class="booking-title">Payment</div>
+</section>
+
+<section>
+    <!-- Place this where you need payment button -->
+    <button id="payment-button">Pay with Khalti</button>
+    <!-- Place this where you need payment button -->
+    <!-- Paste this code anywhere in you body tag -->
+    <hr>
+
+    <hr>
+    {% for j in t %}
+    {{j}}
+    {% endfor %}
+</section>
+
+
+
+<script>
+    var config = {
+        // replace the publicKey with yours
+        "publicKey": "test_public_key_dd62f6822b3e4ae7b1561839081e9e97",
+        "productIdentity": "1234567890",
+        "productName": "Cook",
+        "productUrl": "http://127.0.0.1:8000",
+        "eventHandler": {
+            onSuccess(payload) {
+                // hit merchant api for initiating verfication
+                console.log(payload);
+            },
+            onError(error) {
+                console.log(error);
+            },
+            onClose() {
+                console.log('widget is closing');
+            }
+        }
+    };
+
+    var checkout = new KhaltiCheckout(config);
+    var btn = document.getElementById("payment-button");
+    btn.onclick = function () {
+        checkout.show({ amount: 20000 });
+    }
+
+</script>
+<!-- Paste this code anywhere in you body tag -->
+...
+
+
+{% endblock %}

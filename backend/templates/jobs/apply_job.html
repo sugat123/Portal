@@ -248,8 +248,7 @@
                 <div class="popup-content">
                     <form action="{% url 'jobs:add_facility' %}" method="POST">
                         {% csrf_token %}
-                        <select name="job_type" class="form-control" style="display: none;">
-                            <option value="{{type.id}}">{{type.title}}</option>
+                                 <option value="{{type.id}}">{{type.title}}</option>
                         </select>
 
                         {% if form.errors %}

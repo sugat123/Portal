@@ -25,13 +25,13 @@ class AddPostedJobForm(forms.ModelForm):
         model = PostedJob
         fields = '__all__'
 
-
 class AddAppliedJobForm(forms.ModelForm):
     class Meta:
         model = AppliedJob
         fields = '__all__'
 
-# class JobAmountForm(forms.ModelForm):
-#     class Meta:
-#         model = JobAmount
-#         fields= ['jobtype','amount']
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = '__all__'

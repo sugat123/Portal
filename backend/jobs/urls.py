@@ -19,7 +19,7 @@ urlpatterns = [
     path('<slug>/list_job/', views.list_job, name='list_job'),
     path('add_skill/', views.add_skill, name='add_skill'),
     path('match/', views.match, name='match'),
-    path('email/', views.email, name='email'),
-    path('payment/',views.payment_details, name = 'payment'),
-    path('esewa/', views.esewa, name = 'esewa'),
+    path('esewa/<int:id>', views.esewa, name='esewa'),
+
+    path('payment/<int:id>', views.payment, name='payment'),
 ]

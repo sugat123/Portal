@@ -1,7 +1,6 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
 {% load bootstrap3 %}
-
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -20,8 +19,9 @@
 </div>
 
 <section class="job-all">
-    
+
     <div class="container">
+
         <div class="job-title">
             {% if user.profile.user_type == 'Job Seeker' %}
             <h1>What job do you need?</h1>
