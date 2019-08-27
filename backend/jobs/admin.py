@@ -45,6 +45,7 @@ class AppliedJobAdmin(admin.ModelAdmin):
 admin.site.register(SiteSetting)
 admin.site.register(Banner)
 admin.site.register(Payment)
+admin.site.register(Verification)
 
 
 @admin.register(Match)

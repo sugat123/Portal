@@ -19,21 +19,30 @@
 
     <div class="booking-type">
         <div class="booking-icon">
+
             <div class="e-icon">
                 <div class="icon-img"><a href="https://esewa.com.np/"><img src="{% static '/img/esewa.png' %}"></a>
                 </div>
-                <div class="icon-name">Esewa</div>
+                <button class="payment-button1">Pay with Esewa</button>
             </div>
             <div class="k-icon">
                 <div class="icon-img"><a href=""><img src="{% static '/img/khalti.png' %}"></a>
                     <!-- <button id="payment-button">Pay with Khalti</button> -->
                 </div>
-                <button id="payment-button">Pay with Khalti</button>
+                <button id="payment-button" class="payment-button2">Pay with Khalti</button>
                 <div class="text-center" id="alert_message">
                     {% bootstrap_messages %}
                 </div>
             </div>
-
+            <div class="i-icon">
+                <div class="icon-img"><a href=""><img src="{% static '/img/ime.png' %}"></a>
+                    <!-- <button id="payment-button">Pay with Khalti</button> -->
+                </div>
+                <button class="payment-button3">Pay with IME</button>
+                <div class="text-center" id="alert_message">
+                    {% bootstrap_messages %}
+                </div>
+            </div>
         </div>
     </div>
     <!-- Place this where you need payment button -->
@@ -145,12 +154,7 @@
     {% endfor  %}
 
     {% endif %}
-    <hr>
-    {{person.id}}
-    <hr>
-    {% for j in t %}
-    {{j}}
-    {% endfor %}
+
 
 </section>
 
@@ -158,7 +162,7 @@
 
 
 <!-- Paste this code anywhere in you body tag -->
-...
+
 
 
 {% endblock %}

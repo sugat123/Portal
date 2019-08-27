@@ -10,6 +10,7 @@ def count():
     a_matched = []
     p_matched = []
     score = []
+    job_type = []
     for s in p:
         # print(s.id)
         posted = PostedJob.objects.get(id=s.id)
@@ -42,5 +43,6 @@ def count():
                 p_matched.append(s.user_id)
                 a_matched.append(x.user_id)
                 score.append(score_temp)
+                job_type.append(x.job_type.title)
 
-    return [p_matched, a_matched, score]
+    return [p_matched, a_matched, score, job_type]
