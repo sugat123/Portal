@@ -11,3 +11,41 @@
     font-size: 50px;
     text-transform: uppercase;
 }
+.cook{
+	background-image: url(../img/cook.png);
+}
+.it{
+	background-image: url(../img/it.png);
+}
+.doctor{
+	background-image: url(../img/doctor.png);
+}
+.pilot{
+	background-image: url(../img/pilot.png);
+}
+.helper{
+	background-image: url(../img/helper.png);
+}
+.teacher{
+	background-image: url(../img/teacher.png);
+}
+.accountant{
+	background-image: url(../img/accountant.png);
+}
+.plumber{
+	background-image: url(../img/plumber.png);
+}
+.job-main {
+    padding: 40px 0px;
+    background: rgba(41, 37, 37, 0.51);
+}
+.job-category {
+    padding: 20px 30px;
+    margin-top: 50px;
+}    
+.job-category{
+	text-shadow: none;
+}     
+.job-categories{
+	margin: 0px;
+}

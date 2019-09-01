@@ -67,7 +67,7 @@ header {
 	background-image: url(../img/banner.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
-  background-size: cover;
+    background-size: cover;
 }
 .input-field .location {
     height: 46px;
@@ -103,7 +103,7 @@ input.search-btn {
     font-weight: bold;
 }
 .banner-text {
-    padding: 60px;
+    padding: 60px 0px;
     text-align: center;
 }
 .banner-text h1 {
@@ -119,29 +119,59 @@ input.search-btn {
     margin-top: 50px;
     color: #444;
 }
+.job-cross{
+    width: 250px;
+    padding: 60px;
+    position: absolute;
+    top: -10px;
+    right: -100px;
+    background-color: rgba(255,255,255,0.1);
+    transform: rotate(55deg);
+}
+.job-crosses{
+    width: 250px;
+    padding: 60px;
+    position: absolute;
+    bottom: -10px;
+    left: -100px;
+    background-color: rgba(255,255,255,0.1);
+    transform: rotate(55deg);
+}
 .job-categories {
     margin: 20px 0px;
 }
 .job-category {
     text-align: center;
-    border: 1px solid #ddd;
-    padding: 50px;
+    /*border: 1px solid #ddd;*/
+    padding: 70px 30px;
     margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 2px 2px #006034;
+}
+.red{
+    background: #e74c3c;
+}
+.green{
+    background: #1abc9c;
+}
+.blue{
+    background: #3498db;
 }
 .job-category:hover {
     box-shadow: 0 5px 25px rgba(0, 0, 0, .3);
 }
 .job-icon {
-    color: #006034;
+    color: #fff;
     font-size: 40px;
 }
 .job-title {
-    color: #444;
+    color: #fff;
     font-size: 20px;
 }
 .more-btn{
 	text-align: center;
-	margin-top: 40px;
+	margin-top: 60px;
 }
 .more-btn a {
     background: #006034;
