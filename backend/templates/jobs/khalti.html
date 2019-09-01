@@ -1,5 +1,6 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
+{% load filters %}
 {% load bootstrap3 %}
 
 {% block title %}{% endblock %}
@@ -23,7 +24,52 @@
             <div class="e-icon">
                 <div class="icon-img"><a href="https://esewa.com.np/"><img src="{% static '/img/esewa.png' %}"></a>
                 </div>
-                <button class="payment-button1">Pay with Esewa</button>
+                {% if user.profile.user_type == 'Job Seeker' %}
+                {% for apply in applied %}
+                {% if person.id == apply.user_id %}
+                <form action="https://rc.esewa.com.np/epay/main" method="POST">
+
+                    <input value="{{ apply.job_type.commission }}" name="tAmt" type="hidden">
+                    <input value="{{ apply.job_type.commission }}" name="amt" type="hidden">
+                    <input value="0" name="txAmt" type="hidden">
+                    <input value="0" name="psc" type="hidden">
+                    <input value="0" name="pdc" type="hidden">
+                    <input value="epay_payment" name="scd" type="hidden">
+                    <input value="{{ apply.job_type.id }}" name="pid" type="hidden">
+                    <input value="http://127.0.0.1:8000" type="hidden" name="su">
+                    <input value="http://127.0.0.1:8000" type="hidden" name="fu">
+
+
+
+                    <button class="payment-button1" type="submit">Pay with Esewa</button>
+                </form>
+                {% endif %}
+                {% endfor %}
+
+                {% else %}
+
+                {% for post in posted %}
+                {% if person.id == post.user_id %}
+                <form action="https://rc.esewa.com.np/epay/main" method="POST">
+
+                    <input value="{{ post.job_type.commission }}" name="tAmt" type="hidden">
+                    <input value="{{ post.job_type.commission }}" name="amt" type="hidden">
+                    <input value="0" name="txAmt" type="hidden">
+                    <input value="0" name="psc" type="hidden">
+                    <input value="0" name="pdc" type="hidden">
+                    <input value="epay_payment" name="scd" type="hidden">
+                    <input value="{{ post.job_type.id }}" name="pid" type="hidden">
+                    <input value="http://127.0.0.1:8000" type="hidden" name="su">
+                    <input value="http://127.0.0.1:8000" type="hidden" name="fu">
+
+
+
+                    <button class="payment-button1" type="submit">Pay with Esewa</button>
+                </form>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+
             </div>
             <div class="k-icon">
                 <div class="icon-img"><a href=""><img src="{% static '/img/khalti.png' %}"></a>
@@ -66,7 +112,7 @@
                     alert("Transaction Confirmed.");
 
                     $.ajax({
-                        url: "{% url 'jobs:esewa' user.id %}",
+                        url: "{% url 'jobs:khalti' user.id %}",
                         type: "post",
                         data: payload,
                         dataType: 'json'
@@ -84,7 +130,7 @@
         var checkout = new KhaltiCheckout(config);
         var btn = document.getElementById("payment-button");
         btn.onclick = function () {
-            checkout.show({ amount: {{ apply.job_type.commission }} });
+            checkout.show({ amount: {{ apply.job_type.commission | multiply:100 }} });
             }
         {% endif %}
 
@@ -108,12 +154,12 @@
                     // hit merchant api for initiating verfication
                     console.log(payload);
                     $.ajax({
-                        url: "{% url 'jobs:esewa' user.id %}",
+                        url: "{% url 'jobs:khalti' user.id %}",
                         type: "post",
                         data: payload,
                         dataType: 'json'
                     });
-                    //$.post("{% url 'jobs:esewa' user.id %}", payload)
+                    //$.post("{% url 'jobs:khalti' user.id %}", payload)
 
                     //const Url = 'https://khalti.com/api/v2/payment/verify/';
                     //let Data = {
@@ -145,7 +191,7 @@
         var checkout = new KhaltiCheckout(config);
         var btn = document.getElementById("payment-button");
         btn.onclick = function () {
-            checkout.show({ amount: {{ post.job_type.commission }} });
+            checkout.show({ amount: {{ post.job_type.commission | multiply:100 }} });
                 }
         {% endif %}
 
@@ -157,6 +203,8 @@
 
 
 </section>
+<hr>
+
 
 
 

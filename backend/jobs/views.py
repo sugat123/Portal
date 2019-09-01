@@ -15,11 +15,40 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 import json
+import re
+import datetime
 
 
 def index(request):
     profile = Profile.objects.all()
     job_types = JobType.objects.all()
+    path = request.get_full_path()[2:]
+    
+    if 'oid' in path:
+        data = re.split('oid=+|&amt=+|\&refId=', path)
+        del data[0]
+        url ="https://uat.esewa.com.np/epay/transrec"
+        d = {
+            'amt': data[1],
+            'scd': 'epay_payment',
+            'rid': data[2],
+            'pid': data[0],
+        }
+        resp = requests.post(url, d)
+        print(resp.text)
+        test = []
+        for i in Payment.objects.all():
+            test.append((i.profile_id, i.name, i.amount,  i.mobile))
+        if (request.user.id, request.user.username, data[1], request.user.profile.number) not in test:
+            paid = Payment()
+            paid.profile_id = request.user.id
+            paid.name = request.user.username
+            paid.amount = data[1]
+            for temp in JobType.objects.filter(id = data[0]):
+                paid.product = temp.title
+            paid.mobile = request.user.profile.number
+            paid.created_on = datetime.datetime.now()
+            paid.save()
 
     context = {'profile': profile, 'job_types': job_types}
     return render(request, 'jobs/index.html', context)
@@ -56,13 +85,13 @@ def dashboard(request):
                 text1 = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
                 email_match([post.user.email], text1)
                 
-                sms(post.user.profile.number, text1)
+                # sms(post.user.profile.number, text1)
             for apply in AppliedJob.objects.filter(id=j):
                 applied.append(apply.user.email)
                 text2 = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
                 email_match([apply.user.email], text2)
                 
-                sms(apply.user.profile.number, text2)
+                # sms(apply.user.profile.number, text2)
 
     for k in range(len(p)):
 
@@ -352,15 +381,36 @@ def payment(request):
                             
                             
                             text1 = "Your payment has been completed and this is the contact number: " + m.profile.number +  " of employeer: "+ m.username + " for job you applied."
-                            sms(k.profile.number, text1 ) #sms to seeker
-                            text2 = "Your payment has been completed and this is the contact number: " + k.profile.number +  " of job seeker: "+ k.username + " for the job you posted."
-                            sms(m.profile.number, text2 ) #sms to giver
+                            # sms(k.profile.number, text1 ) #sms to seeker
+                            # text2 = "Your payment has been completed and this is the contact number: " + k.profile.number +  " of job seeker: "+ k.username + " for the job you posted."
+                            # sms(m.profile.number, text2 ) #sms to giver
                             
                             email([k.email], text1)
+                            # email([m.email], text2)
+                            v = Verification()
+                            v.payment_id = j.id
+                            v.user_id = j.profile_id
+                            v.paid_status = True
+                            v.match_id = i.id
+                            v.save()
+                elif i.posted_id == j.profile_id and i.job_type == j.product:
+                    for k in User.objects.filter(id=i.applied_id):
+                        for m in User.objects.filter(id=i.posted_id):
+
+                            
+                            
+                            # text1 = "Your payment has been completed and this is the contact number: " + m.profile.number +  " of employeer: "+ m.username + " for job you applied."
+                            # sms(k.profile.number, text1 ) #sms to seeker
+                            text2 = "Your payment has been completed and this is the contact number: " + k.profile.number +  " of job seeker: "+ k.username + " for the job you posted."
+                            # sms(m.profile.number, text2 ) #sms to giver
+                            
+                            # email([k.email], text1)
                             email([m.email], text2)
                             v = Verification()
                             v.payment_id = j.id
                             v.user_id = j.profile_id
+                            v.paid_status = True
+                            v.match_id = i.id
                             v.save()
 
     context = {
@@ -371,7 +421,7 @@ def payment(request):
 
 
 @csrf_exempt
-def esewa(request, id):
+def khalti(request, id):
     person = get_object_or_404(User, id=id)
     applied = AppliedJob.objects.all()
     posted = PostedJob.objects.all()
@@ -410,4 +460,5 @@ def esewa(request, id):
                         # print(t[''])
 
     context = {'person': person, 'applied': applied, 'posted': posted}
-    return render(request, 'jobs/esewa.html', context)
+    return render(request, 'jobs/khalti.html', context)
+

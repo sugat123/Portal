@@ -122,14 +122,16 @@ class Match(models.Model):
 
 
 class Payment(models.Model):
-    profile_id = models.IntegerField()
-    name = models.CharField(max_length=100)
-    amount = models.CharField(max_length=200)
-    product = models.CharField(max_length=100)
-    mobile = models.CharField(max_length=20)
-    created_on = models.DateTimeField()
+    profile_id = models.IntegerField(null=True)
+    name = models.CharField(max_length=100, null=True)
+    amount = models.CharField(max_length=200, null=True)
+    product = models.CharField(max_length=100, null=True)
+    mobile = models.CharField(max_length=20, null=True)
+    created_on = models.DateTimeField(null=True)
 
 
 class Verification(models.Model):
     payment_id = models.IntegerField()
     user_id = models.IntegerField(null=True)
+    paid_status = models.BooleanField(default=False, null=True)
+    match_id = models.IntegerField(null=True)

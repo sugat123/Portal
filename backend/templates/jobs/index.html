@@ -85,6 +85,15 @@
 									{% for match in matches %}
 									{% if  user.id == match.applied_id or user.id == match.posted_id%}
 									<span class="badge">{{forloop.counter}}</span>
+
+
+									{% for verify in verified %}
+									{% if user.id == verify.user_id and verify.paid_status is True %}
+									<span class="badge">0</span>
+									{% endif %}
+
+									{% endfor %}
+
 									{% endif %}
 									{% endfor %}
 								</a>
@@ -94,7 +103,7 @@
 										{% for match in matches %}
 										{% if  user.id == match.applied_id%}
 										<li class="notify-title">
-											<div class="n-title"><a href="{% url 'jobs:esewa' user.id %}">We
+											<div class="n-title"><a href="{% url 'jobs:khalti' user.id %}">We
 													have
 													found a match for the job you
 													applied with user {{ match.posted_id }}</a></div>
@@ -108,7 +117,7 @@
 										{% for match in matches %}
 										{% if user.id == match.posted_id %}
 										<li class="notify-title">
-											<div class="n-title"><a href="{% url 'jobs:esewa' user.id %}">We have found
+											<div class="n-title"><a href="{% url 'jobs:khalti' user.id %}">We have found
 													a match for the job you
 													posted with user {{ match.applied_id }}</a></div>
 
@@ -208,9 +217,10 @@
 	<section class="job-all">
 
 		<div class="container">
-
+			{{resp}}
 			<div class="job-title">
 				<h1>Browse Jobs</h1>
+
 			</div>
 			<div class="job-categories">
 				<div class="row">

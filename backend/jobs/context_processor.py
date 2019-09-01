@@ -1,4 +1,4 @@
-from jobs.models import SiteSetting, Banner, Match, PostedJob, AppliedJob
+from jobs.models import SiteSetting, Banner, Match, PostedJob, AppliedJob, Verification
 from django.shortcuts import render, redirect
 
 
@@ -18,5 +18,6 @@ def notification(request):
     matches = Match.objects.all()
     posted = PostedJob.objects.all()
     applied = AppliedJob.objects.all()
+    verified = Verification.objects.all()
 
-    return {'matches': matches, 'posted': posted, 'applied': applied}
+    return {'matches': matches, 'posted': posted, 'applied': applied, 'verified': verified}
