@@ -102,7 +102,6 @@ header {
 .input-field .form-control {
     height: 46px;
     width: 100%;
-    border: none;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
@@ -112,8 +111,8 @@ header {
 }
 
 input.search-btn {
-    width: 100%;
-    height: 46px;
+   
+    height: 44px;
     background-color: #006034;
     color: #fff;
     border: none;
@@ -501,4 +500,8 @@ ul.ft-list .ft-item a:hover {
     margin-top: 40px;
     border: 1px solid #ddd;
     padding: 0px 10px 10px 10px;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 076cb0f3597b8137a7a3c8c32605231edbc28969

@@ -15,9 +15,9 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 import json
-import re
-import datetime
 from django.db.models import Q
+
+
 from itertools import chain
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -26,64 +26,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
     profile = Profile.objects.all()
     job_types = JobType.objects.all()
-    path = request.get_full_path()[2:]
     
-    if 'oid' in path:
-        data = re.split('oid=+|&amt=+|\&refId=', path)
-        del data[0]
-        url ="https://uat.esewa.com.np/epay/transrec"
-        d = {
-            'amt': data[1],
-            'scd': 'NP-ES-EPAY',
-            'rid': data[2],
-            'pid': data[0],
-        }
-        resp = requests.post(url, d)
-        print(resp.text)
-        test = []
-        for i in Payment.objects.all():
-            test.append((i.profile_id, i.name, i.amount,  i.mobile))
-        if (request.user.id, request.user.username, data[1], request.user.profile.number) not in test:
-            paid = Payment()
-            paid.profile_id = request.user.id
-            paid.name = request.user.username
-            paid.amount = data[1]
-            for temp in JobType.objects.filter(id = data[0]):
-                paid.product = temp.title
-            paid.mobile = request.user.profile.number
-            paid.created_on = datetime.datetime.now()
-            paid.save()
-    test = []
-    count = 0
-    for q in Exchange.objects.all():
-        test.append((q.match_id, q.user_id))
-
-    for match in Match.objects.all():
-        for j in Verification.objects.filter(match_id=match.id):
-            if (j.match_id, j.user_id)  not in test:
-                count = count + 1
-                print(count)
-                if count == 2:
-                    # for n in User.objects.filter(id=j.user_id):
-                    #     if n.profile.user_type == 'Job Seeker':
-                    for k in User.objects.filter(id=match.applied_id):
-                        for m in User.objects.filter(id=match.posted_id):
-                            text1 = "Your payment has been completed and this is the contact number: " + m.profile.number +  " of employeer: "+ m.username + " for job you applied." 
-                            # sms(m.profile.number, text2 ) #sms to giver  
-                            # sms(k.profile.number, text1 ) #sms to seeker
-                            email([k.email], text1) #email to seeker 
-                            e1 = Exchange()
-                            e1.user_id = k.id
-                            e1.match_id = match.id
-                            e1.save()            
-                           
-                            text2 = "Your payment has been completed and this is the contact number: " + k.profile.number +  " of job seeker: "+ k.username + " for the job you posted."
-                            email([m.email], text2) #email to giver
-                            e2 = Exchange()
-                            e2.user_id = m.id
-                            e2.match_id = match.id
-                            e2.save() 
-
     context = {'profile': profile, 'job_types': job_types}
     return render(request, 'jobs/index.html', context)
 
@@ -424,31 +367,30 @@ def payment(request):
                 if i.applied_id == j.profile_id and i.job_type == j.product:
                     for k in User.objects.filter(id=i.applied_id):
                         for m in User.objects.filter(id=i.posted_id):
+
+                            
+                            
+                            text1 = "Your payment has been completed and this is the contact number: " + m.profile.number +  " of employeer: "+ m.username + " for job you applied."
+                            # sms(k.profile.number, text1 ) #sms to seeker
+                            text2 = "Your payment has been completed and this is the contact number: " + k.profile.number +  " of job seeker: "+ k.username + " for the job you posted."
+                            # sms(m.profile.number, text2 ) #sms to giver
+                            
+                            email([k.email], text1)
+                            email([m.email], text2)
                             v = Verification()
                             v.payment_id = j.id
                             v.user_id = j.profile_id
-                            v.paid_status = True
-                            v.match_id = i.id
-                            v.save()
-                elif i.posted_id == j.profile_id and i.job_type == j.product:
-                    for k in User.objects.filter(id=i.applied_id):
-                        for m in User.objects.filter(id=i.posted_id):
-                            v = Verification()
-                            v.payment_id = j.id
-                            v.user_id = j.profile_id
-                            v.paid_status = True
-                            v.match_id = i.id
                             v.save()
 
     context = {
-        # 'jobtypes': jobtypes
+        # 'jobtypes': jobtypes,
     }
 
     return render(request, 'jobs/payment.html', context)
 
 
 @csrf_exempt
-def khalti(request, id):
+def esewa(request, id):
     person = get_object_or_404(User, id=id)
     applied = AppliedJob.objects.all()
     posted = PostedJob.objects.all()
@@ -487,7 +429,7 @@ def khalti(request, id):
                         # print(t[''])
 
     context = {'person': person, 'applied': applied, 'posted': posted}
-    return render(request, 'jobs/khalti.html', context)
+    return render(request, 'jobs/esewa.html', context)
 
 
 
@@ -500,10 +442,10 @@ def khalti(request, id):
 #     return render(request, 'jobs/search_results.html',context)
 
 class SearchView(ListView):
-    model = JobType
     template_name = 'jobs/search_results.html'
     count = 0
-    paginate_by = 2
+    paginate_by = 3
+    page = request.GET.get('page')
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+{% load class_name %}
 {% load bootstrap3 %}
 
 <head>
@@ -54,7 +55,7 @@
 			</nav> -->
 			<div class="row">
 				<div class="header-left">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 						{% for setting in settings%}
 						<a href="{% url 'jobs:index' %}">
 							<img src="/media/{{ setting.logo}}" alt="djgroup" style="height: 55px; width:70px;">
@@ -63,9 +64,31 @@
 						{% endfor %}
 					</div>
 				</div>
+				<div class="header-mid">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="search-form">
+							<div class="row">
+								<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+									<div class="input-field">
+										<form action="{% url 'jobs:search' %}" method="get">
+											<input type="text" name="q" placeholder="Jobs,skills,company" class="form-control">
+						
+									</div>
+								</div>
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+									<div class="input-field">
+										<input type="submit" name="search" value="Search" class="search-btn">
+									</div>
+								</div>
+						
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
 				{% if user.is_authenticated %}
 				<div class="header-right">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 						<ul class="formclick">
 
 
@@ -216,12 +239,14 @@
 				<h1>Join us & Explore Thousands of Jobs</h1>
 				<div class="search-form">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-10">
 							<div class="input-field">
-								<input type="text" name="text" placeholder="Jobs,skills,company" class="form-control">
+								<form action="{% url 'jobs:search' %}" method="get">
+									<input type="text" name="q" placeholder="Jobs,skills,company" class="form-control">
+								
 							</div>
 						</div>
-						<div class="col-md-4">
+						<!-- <div class="col-md-4">
 
 							<div class="input-field">
 								<select id="location" name="location" class="location">
@@ -231,31 +256,65 @@
 									<option>Doctor</option>
 								</select>
 							</div>
-						</div>
+						</div> -->
 						<div class="col-md-2">
 							<div class="input-field">
 								<input type="submit" name="search" value="Search" class="search-btn">
 							</div>
 						</div>
+						
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid text-center">
+	<div class="text-center" id="alert_message">
 		{% bootstrap_messages %}
 	</div>
-	<section class="job-all">
 
+	<section class="job-all">
+	
 		<div class="container">
 			{{resp}}
 			<div class="job-title">
 				<h1>Browse Jobs</h1>
 
 			</div>
+			
 			<div class="job-categories">
 				<div class="row">
+					{% if object_list %}
+					<h3>{{ count }} results for <b>{{ query }}</b></h3>
+					{% for object in object_list %}
+					{% with object|class_name as klass %}
+					{% if klass == 'JobType' %}
+					
+							
 
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+						<a href="
+						{% if user.is_authenticated %}
+						{% url 'jobs:job_list' object.slug %}
+						{% else %}
+						{% url 'users:login_user' %}
+					   {% endif %}
+						">
+							<div class="job-category">
+								<div class="job-icon"><i class="{{ object.icon }}"></i></div>
+								<div class="job-title">{{object.title}}</div>
+							</div>
+						</a>
+					</div>	
+					
+					
+					
+					{% endif %}
+					
+					{% endwith %}
+					{% endfor %}
+
+					{% else %}
 					{% for job in job_types %}
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 						<a href="
@@ -272,17 +331,12 @@
 						</a>
 					</div>
 					{% endfor %}
-					<!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<div class="job-category">
-							<div class="job-icon"><i class="fas fa-concierge-bell"></i></div>
-							<div class="job-title">Cook</div>
-						</div>
-					</div> -->
-
-				</div>
+				{% endif %}
+						
+			</div>	
 			</div>
-			<div class="more-btn"><a href="">View More</a></div>
 		</div>
+	
 	</section>
 	<section class="featured-job">
 		<div class="container">
@@ -471,14 +525,13 @@
 		output.innerHTML = this.value;
 	}
 </script>
-<script>
 
-	$(document).ready(function () {
-		setTimeout(function () {
-			$('#successMessage').fadeOut('fast');
-		}, 3000);
-	});
-
+<script type="text/javascript">
+		window.setTimeout(function () {
+			$("#alert_message").fadeTo(500, 0).slideUp(500, function () {
+				$(this).remove();
+			});
+		},3500);
 </script>
 
 </html>

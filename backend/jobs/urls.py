@@ -21,4 +21,5 @@ urlpatterns = [
     #     path('match/', views.match, name='match'),
     path('khalti/<int:id>', views.khalti, name='khalti'),
     path('payment/', views.payment, name='payment'),
+    path('search/', views.SearchView.as_view(), name='search'),
 ]

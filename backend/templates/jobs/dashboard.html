@@ -1,6 +1,7 @@
 {% extends 'jobs/index.html' %}
 {% load static %}
 {% load bootstrap3 %}
+{% load class_name %}
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -13,9 +14,11 @@
 {% endfor %}
 
 {% if user.is_authenticated %}
-<div class="container-fluid text-center">
+
+<div class="text-center" id="alert_message">
     {% bootstrap_messages %}
 </div>
+
 <section class="job-all">
 
     <div class="container">
@@ -30,12 +33,38 @@
         </div>
         <div class="job-categories">
             <div class="row">
+                {% if object_list %}
+                <h3>{{ count }} results for <b>{{ query }}</b></h3>
+                {% for object in object_list %}
+                {% with object|class_name as klass %}
+                {% if klass == 'JobType' %}               
+                                
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <a href="
+                            {% if user.is_authenticated %}
+                            {% url 'jobs:job_list' object.slug %}
+                            {% else %}
+                            {% url 'users:login_user' %}
+                            {% endif %}
+                            ">
+                        <div class="job-category">
+                            <div class="job-icon"><i class="{{ object.icon }}"></i></div>
+                            <div class="job-title">{{object.title}}</div>
+                        </div>
+                    </a>
+                </div>
+                
+                {% endif %}
+                
+                {% endwith %}
+                {% endfor %}
+                
+                {% else %}
                 {% for job in job_types %}
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                     <a href="
                     
-                    
-                    {% url 'jobs:job_list' job.slug %}
+                        {% url 'jobs:job_list' job.slug %}
                    
                     ">
                         <div class="job-category">
@@ -44,18 +73,37 @@
                         </div>
                     </a>
                 </div>
+
                 {% endfor %}
-                <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                    <div class="job-category">
-                        <div class="job-icon"><i class="fas fa-concierge-bell"></i></div>
-                        <div class="job-title">Cook</div>
-                    </div>
-                </div> -->
-
+                
+                {% endif %}
+                
             </div>
+            {% if users.has_other_pages %}
+            <ul class="pagination">
+                {% if users.has_previous %}
+                <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in users.paginator.page_range %}
+                {% if users.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if users.has_next %}
+                <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+            {% endif %}
         </div>
-
+        
     </div>
+    
 </section>
 
 {% endif %}

@@ -2,6 +2,20 @@ from django.db import models
 from autoslug import AutoSlugField
 from users.models import *
 from django.contrib.auth.models import User
+from django.conf import settings
+from django.db.models import Q
+
+
+class JobTypeManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(title__icontains=query) |
+                         Q(slug__icontains=query)
+                        )
+            # distinct() is often necessary with Q lookups
+            qs = qs.filter(or_lookup).distinct()
+        return qs
 
 
 class JobType(models.Model):
@@ -12,40 +26,46 @@ class JobType(models.Model):
                             null=True, default='fas fa-briefcase')
     slug = AutoSlugField(unique_with='id', populate_from='title')
     commission = models.IntegerField(null=True, blank=True)
+    
+    objects = JobTypeManager()
 
     def __str__(self):
         return self.title
+    
 
 
+    
 class Skills(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    slug = AutoSlugField(unique_with='id', populate_from='title')
+    # slug = AutoSlugField(unique_with='id', populate_from='title')
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     title = models.CharField(
-        max_length=100, blank=True, null=True)
+        max_length=255)
 
     def __str__(self):
         return "{0}'s Skill: {1}".format(self.job_type, self.title)
 
     class Meta:
         verbose_name_plural = 'Skill'
-
+        
+    
 
 class Facility(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    slug = AutoSlugField(unique_with='id', populate_from='title')
+    # slug = AutoSlugField(unique_with='id', populate_from='title')
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
 
     title = models.CharField(
-        max_length=100, blank=True, null=True)
+        max_length=255)
 
     def __str__(self):
         return "{0}'s Facility: {1}".format(self.job_type, self.title)
 
     class Meta:
         verbose_name_plural = 'Facility'
+    
 
 
 class PostedJob(models.Model):
@@ -57,6 +77,7 @@ class PostedJob(models.Model):
     salary = models.IntegerField(blank=True, null=True)
     working_time = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=100, null=True, blank=True)
+    number_of_employee = models.IntegerField(blank= True , null= True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(unique_with='id', populate_from='user')
@@ -76,7 +97,7 @@ class AppliedJob(models.Model):
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     experience = models.IntegerField(null=True, blank=True)
     skills = models.ManyToManyField(Skills, blank=True)
-    location = models.CharField(max_length=100, null=True, blank=True)
+    location = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(unique_with='id', populate_from='user')
@@ -104,8 +125,7 @@ class Banner(models.Model):
         upload_to='banner', default='default.jpg')
     dashboard = models.ImageField(upload_to='banner', default='default.jpg')
     newsfeed = models.ImageField(upload_to="banner", default='default.jpg')
-    newsfeed_detail = models.ImageField(
-        upload_to="banner", default='default.jpg')
+    newsfeed_detail = models.ImageField(upload_to="banner", default='default.jpg')
     job = models.ImageField(upload_to="banner", default='default.jpg')
     app = models.ImageField(upload_to="banner", default='default.jpg')
     app_bg = models.ImageField(upload_to="banner", default='default.jpg')

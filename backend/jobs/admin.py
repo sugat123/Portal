@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from django.core.mail import send_mail
 
 
 @admin.register(JobType)
@@ -53,3 +54,7 @@ admin.site.register(Exchange)
 class MatchAdmin(admin.ModelAdmin):
     list_display = ['id', 'posted_id', 'applied_id', 'score']
     ordering = ('created', )
+
+
+    
+

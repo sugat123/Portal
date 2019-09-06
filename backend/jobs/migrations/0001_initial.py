@@ -36,8 +36,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('slug', autoslug.fields.AutoSlugField(editable=False, populate_from='title', unique_with=('id',))),
-                ('title', models.CharField(blank=True, max_length=100, null=True)),
+                ('title', models.CharField(max_length=255)),
             ],
             options={
                 'verbose_name_plural': 'Facility',
@@ -97,8 +96,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('slug', autoslug.fields.AutoSlugField(editable=False, populate_from='title', unique_with=('id',))),
-                ('title', models.CharField(blank=True, max_length=100, null=True)),
+                ('title', models.CharField(max_length=255)),
                 ('job_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='jobs.JobType')),
             ],
             options={
@@ -132,7 +130,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('experience', models.IntegerField(blank=True, null=True)),
-                ('location', models.CharField(blank=True, max_length=100, null=True)),
+                ('location', models.CharField(max_length=100)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('slug', autoslug.fields.AutoSlugField(editable=False, populate_from='user', unique_with=('id',))),

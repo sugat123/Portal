@@ -18,7 +18,7 @@
 	
 	<body>
 
-<div class="container-fluid text-center">
+<div class="text-center" id="alert_message">
 	{% bootstrap_messages %}
 </div>
 
@@ -31,30 +31,79 @@
 		<form action="{% url 'users:register' %}" method="post">
 			{% csrf_token %}
 			<div class="form-field">
+				
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.first_name.errors}}
+				</div>
+				{% endif %}
+
 				<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
 				<input type="name" name="first_name" placeholder="First name" class="form-control">
 			</div>
 			<div class="form-field">
+				
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.last_name.errors}}
+				</div>
+				{% endif %}
+
 				<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
 				<input type="name" name="last_name" placeholder="Last name" class="form-control">
 			</div>
 			<div class="form-field">
+				
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.username.errors}}
+				</div>
+				{% endif %}
+
 				<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
 				<input type="name" name="username" placeholder="User name" class="form-control">
 			</div>
 			<div class="form-field">
+				
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.email.errors}}
+				</div>
+				{% endif %}
+
 				<span class="form-field-icon"><i class="fas fa-envelope"></i></span>
 				<input type="email" name="email" placeholder="Email" class="form-control">
 			</div>
 			<div class="form-field">
+				
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.password1.errors}}
+				</div>
+				{% endif %}
+
 				<span class="form-field-icon"><i class="fas fa-star"></i></span>
 				<input type="password" name="password1" placeholder="Password" class="form-control">
 			</div>
 			<div class="form-field">
+
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.password2.errors}}
+				</div>
+				{% endif %}
+
 				<span class="form-field-icon"><i class="fas fa-star"></i></span>
 				<input type="password" name="password2" placeholder="Confirm Password" class="form-control">
 			</div>
 			<div class="form-field">
+				
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.number.errors}}
+				</div>
+				{% endif %}
+
 				<span class="form-field-icon"><i class="fas fa-phone"></i></span>
 				<input type="number" name="number" placeholder="Number" class="form-control">
 			</div>
@@ -68,6 +117,7 @@
 				<input type="submit" name="register" value="Register" class="r-btn">
 			</div>
 		</form>
+
 	</div>
 </div>
 </section>

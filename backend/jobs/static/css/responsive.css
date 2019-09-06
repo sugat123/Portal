@@ -19,6 +19,7 @@
 	.booking-content{width: 100%;}
 	span.badge {left: 19px !important;}
 	.dropdown-menu {left: -215px;}
+	input.search-btn{margin-top: 5px;}
 }
 @media screen and (min-width : 340px) and (max-width:479px) {
 	.formclick > :first-child {display: none;}
@@ -37,4 +38,5 @@
 	span.badge {left: 19px;}
 	.dropdown-menu {left: -227px}
 	li.notify-title {padding-left: 6px;}
+	input.search-btn{margin-top: 5px;}
 }	

@@ -25,7 +25,6 @@ class AddPostedJobForm(forms.ModelForm):
         model = PostedJob
         fields = '__all__'
 
-
 class AddAppliedJobForm(forms.ModelForm):
     class Meta:
         model = AppliedJob
