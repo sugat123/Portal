@@ -46,6 +46,7 @@ admin.site.register(SiteSetting)
 admin.site.register(Banner)
 admin.site.register(Payment)
 admin.site.register(Verification)
+admin.site.register(Exchange)
 
 
 @admin.register(Match)

@@ -34,7 +34,7 @@
                     <input value="0" name="txAmt" type="hidden">
                     <input value="0" name="psc" type="hidden">
                     <input value="0" name="pdc" type="hidden">
-                    <input value="epay_payment" name="scd" type="hidden">
+                    <input value="NP-ES-EPAY" name="scd" type="hidden">
                     <input value="{{ apply.job_type.id }}" name="pid" type="hidden">
                     <input value="http://127.0.0.1:8000" type="hidden" name="su">
                     <input value="http://127.0.0.1:8000" type="hidden" name="fu">
@@ -57,8 +57,8 @@
                     <input value="0" name="txAmt" type="hidden">
                     <input value="0" name="psc" type="hidden">
                     <input value="0" name="pdc" type="hidden">
-                    <input value="epay_payment" name="scd" type="hidden">
-                    <input value="{{ post.job_type.id }}" name="pid" type="hidden">
+                    <input value="NP-ES-EPAY" name="scd" type="hidden">
+                    <input value="112233223" name="pid" type="hidden">
                     <input value="http://127.0.0.1:8000" type="hidden" name="su">
                     <input value="http://127.0.0.1:8000" type="hidden" name="fu">
 
@@ -146,13 +146,14 @@
             // replace the publicKey with yours
 
             "publicKey": "test_public_key_dd62f6822b3e4ae7b1561839081e9e97",
-            "productIdentity": "{{post.job_type.id}}",
+            "productIdentity": "{{person.id}}",
             "productName": "{{post.job_type.title}}",
             "productUrl": "http://127.0.0.1:8000",
             "eventHandler": {
                 onSuccess(payload) {
                     // hit merchant api for initiating verfication
                     console.log(payload);
+                    alert("Transaction Confirmed.");
                     $.ajax({
                         url: "{% url 'jobs:khalti' user.id %}",
                         type: "post",

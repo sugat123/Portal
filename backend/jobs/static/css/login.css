@@ -1,8 +1,16 @@
-.login-banner{
-	background-image: url(../img/banner.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+.login-banner::after{
+	background-image: url(../img/background2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    content: "";
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -1;
 }
 .login-title {
     color: #fff;
@@ -12,20 +20,34 @@
     text-transform: uppercase;
 }
 .form-content {
-    background: #EFEFEF;
+    background: #fff;
     margin: 0 auto;
-    width: 40%;
+    width: 50%;
     padding: 30px;
+    border-radius: 7px;
 }
-.login-form {
+.login-form{
+    padding: 183px;
+}
+.form-logo {
+    text-align: center;
+    padding-top: 40px;
+}
+.form-logo img {
+    width: 100px;
+}
+/*.login-form {
     margin-top: 50px;
-}
+}*/
 .form-content h3 {
     margin-top: 0;
     padding-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
 }
 .form-field {
     margin-bottom: 15px;
+    margin-top: 15px;
 }
 .login-btn .l-btn {
     background: #006034;

@@ -1,44 +1,30 @@
-{% extends 'jobs/index.html' %}
+
 {% load static %}
 {% load bootstrap3 %}
-{% block title %}Register{% endblock %}
-{% block content %}
-<div id="popup1" class="overlay">
-	<div class="popup">
-		<h2>Signup</h2>
-		<a class="close" href="#">&times;</a>
-		<div class="popup-content">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="popup-left">
-						<div class="p-icon"><img src="img/user.png"></div>
-						<div class="p-title">For employer</div>
-						<div class="p-button"><a href="">Signup</a></div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="popup-right">
-						<div class="p-icon"><img src="img/jobseeker.png"></div>
-						<div class="p-title">For jobseeker</div>
-						<div class="p-button"><a href="">Signup</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
-{% for banner in banners %}
-<section class="eskill-banner" style="background-image: url('/media/{{ banner.login_register }}');">
-	<div class="eskill-title">Register</div>
-</section>
-{% endfor %}
+<!DOCTYPE html>
+<html>
+
+{% block content %}
+
+	<head>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static '/css/responsive.css' %}">
+	</head>
+	
+	<body>
 
 <div class="container-fluid text-center">
 	{% bootstrap_messages %}
 </div>
 
-<section class="register-form">
+
+<section class="register-banner">
+<div class="register-form">
 	
 		<div class="form-content">
 		<h3>Register Form</h3>
@@ -83,6 +69,7 @@
 			</div>
 		</form>
 	</div>
+</div>
 </section>
 
 {% endblock %}

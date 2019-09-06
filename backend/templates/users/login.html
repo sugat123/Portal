@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html>
 {% load static %}
 {% load bootstrap3 %}
 
-{% block title %}Login{% endblock %}
+<!DOCTYPE html>
+<html>
+
+
+
 {% block content %}
+
 <head>
 	<link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
@@ -16,55 +19,53 @@
 
 
 
-<div class="container-fluid text-center">
-	{% bootstrap_messages %}
-</div>
-
-<section class="login-banner">
-	<div class="form-form">
-		<img src="img/logo.png">
+	<div class="container-fluid text-center">
+		{% bootstrap_messages %}
 	</div>
-<div class="login-form">
 
-	<div class="form-content">
+	<section class="login-banner">
 
-		<h3>Login form</h3>
-		<form action="{% url 'users:login_user' %}" method="post">
-			{% csrf_token %}
-			<div class="form-field">
-				<!-- <label class="test" >Username</label> -->
-				{{ form.username.errors }}
-				<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
-				<input name="username" placeholder="Username" class="form-control">
+		<div class="login-form">
+
+			<div class="form-content">
+
+				<h3>DreamFocus</h3>
+				<form action="{% url 'users:login_user' %}" method="post">
+					{% csrf_token %}
+					<div class="form-field">
+						<!-- <label class="test" >Username</label> -->
+						{{ form.username.errors }}
+						<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
+						<input name="username" placeholder="Username" class="form-control">
+					</div>
+					<div class="form-field">
+						<!-- <label>Password</label> -->
+						{{ form.password.errors }}
+						<span class="form-field-icon"><i class="fas fa-star"></i></span>
+						<input type="password" name="password" placeholder="Password" class="form-control">
+					</div>
+					<div class="remember">
+						<div class="rem-left">
+							<input type="checkbox" name="checkbox">
+							<span>Remember me</span>
+						</div>
+						<div class="rem-right">
+							<a href="">Forgot Password?</a>
+						</div>
+					</div>
+					<div class="login-btn">
+						<input type="submit" value="Submit" class="l-btn">
+					</div>
+					<div class="new-user">
+						<div class="u-icon">
+							<i class="fas fa-user"></i>New user ?<span><a href="{% url 'users:register' %}">Register
+									here</a></span>
+						</div>
+					</div>
+				</form>
 			</div>
-			<div class="form-field">
-				<!-- <label>Password</label> -->
-				{{ form.password.errors }}
-				<span class="form-field-icon"><i class="fas fa-star"></i></span>
-				<input type="password" name="password" placeholder="Password" class="form-control">
-			</div>
-			<div class="remember">
-				<div class="rem-left">
-					<input type="checkbox" name="checkbox">
-					<span>Remember me</span>
-				</div>
-				<div class="rem-right">
-					<a href="">Forgot Password?</a>
-				</div>
-			</div>
-			<div class="login-btn">
-				<input type="submit" value="Submit" class="l-btn">
-			</div>
-			<div class="new-user">
-				<div class="u-icon">
-					<i class="fas fa-user"></i>New user ?<span><a href="{% url 'users:register' %}">Register
-							here</a></span>
-				</div>
-			</div>
-		</form>
-	</div>
-</div>
-</section>
+		</div>
+	</section>
 </body>
 
 {% endblock %}

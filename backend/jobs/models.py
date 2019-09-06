@@ -135,3 +135,8 @@ class Verification(models.Model):
     user_id = models.IntegerField(null=True)
     paid_status = models.BooleanField(default=False, null=True)
     match_id = models.IntegerField(null=True)
+
+
+class Exchange(models.Model):
+    user_id = models.IntegerField()
+    match_id = models.IntegerField()

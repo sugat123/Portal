@@ -10,6 +10,8 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
     remember_me = forms.BooleanField(required=False)
 
+    
+
 
 class AddUserForm(UserCreationForm):
 

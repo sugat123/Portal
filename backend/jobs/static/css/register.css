@@ -1,8 +1,16 @@
-.register-banner{
-	background-image: url(../img/banner.jpg);
+.register-banner::after{
+	background-image: url(../img/background1.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: cover;
+    background-size: cover;
+    content: "";
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -1;
 }
 .register-title {
     color: #fff;
@@ -12,21 +20,33 @@
     text-transform: uppercase;
 }
 .form-content {
-    background: #EFEFEF;
+    background: #fff;
     margin: 0 auto;
-    width: 40%;
+    width: 50%;
     padding: 30px;
+    border-radius: 7px;
 }
-.register-form {
-    margin-top: 50px;
+.register-form{
+    padding: 80px;
+}
+.form-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.form-logo img {
+    width: 100px;
 }
 .form-content h3 {
     margin-top: 0;
     padding-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
 }
 .form-field {
     margin-bottom: 15px;
     display: flex;
+    margin-top: 15px;
+    justify-content: space-between;
 }
 span.form-field-icon {
     padding: 8px 12px;
