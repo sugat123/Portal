@@ -1,0 +1,66 @@
+{% extends "jobs/index.html" %}
+{% load class_name %}
+
+{% block content %}
+
+<div>
+    <div>
+        <h3>{{ count }} results for <b>{{ query }}</b></h3>
+    </div>
+</div>
+
+<div class="job-categories">
+    <div class="row">
+
+    {% for object in object_list %}
+        {% with object|class_name as klass %}
+            {% if klass == 'JobType' %}
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <a href="
+                                            {% if user.is_authenticated %}
+                                            {% url 'jobs:job_list' object.slug %}
+                                            {% else %}
+                                            {% url 'users:login_user' %}
+                                            {% endif %}
+                                            ">
+                        <div class="job-category">
+                            <div class="job-icon"><i class="{{ object.icon }}"></i></div>
+                            <div class="job-title">{{object.title}}</div>
+                        </div>
+                    </a>
+                </div>
+            
+            {% endif %}
+        
+        {% endwith %}
+    {% endfor %}
+    </div>
+    </div>
+    {% if is_paginated %}
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li><a href="?q={{ request.GET.q }}&page={{ page_obj.previous_page_number }}">&laquo;
+            <span>Previous</span>
+        </a></li>
+        {% else %}
+        <li class="disabled"><span>&laquo; Previous</span></li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+        <li><a href="?q={{ request.GET.q }}&page={{ i }}">
+            {{ i }}
+        </a></li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li><a href="?q={{ request.GET.q }}&page={{ page_obj.next_page_number }}">
+            <span>Next &raquo;</span>
+        </a></li>
+        {% else %}
+        <li class="disabled"><span>Next &raquo;</span></li>
+        {% endif %}
+    </ul>
+{% endif %}
+{% endblock content %}

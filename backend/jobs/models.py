@@ -3,7 +3,19 @@ from autoslug import AutoSlugField
 from users.models import *
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.db.models import Q
 
+
+class JobTypeManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(title__icontains=query) |
+                         Q(slug__icontains=query)
+                        )
+            # distinct() is often necessary with Q lookups
+            qs = qs.filter(or_lookup).distinct()
+        return qs
 
 
 class JobType(models.Model):
@@ -14,11 +26,15 @@ class JobType(models.Model):
                             null=True, default='fas fa-briefcase')
     slug = AutoSlugField(unique_with='id', populate_from='title')
     commission = models.IntegerField(null=True, blank=True)
+    
+    objects = JobTypeManager()
 
     def __str__(self):
         return self.title
+    
 
 
+    
 class Skills(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -32,7 +48,8 @@ class Skills(models.Model):
 
     class Meta:
         verbose_name_plural = 'Skill'
-
+        
+    
 
 class Facility(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -48,6 +65,7 @@ class Facility(models.Model):
 
     class Meta:
         verbose_name_plural = 'Facility'
+    
 
 
 class PostedJob(models.Model):
@@ -59,6 +77,7 @@ class PostedJob(models.Model):
     salary = models.IntegerField(blank=True, null=True)
     working_time = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=100, null=True, blank=True)
+    number_of_employee = models.IntegerField(blank= True , null= True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(unique_with='id', populate_from='user')
@@ -119,12 +138,18 @@ class Match(models.Model):
     score = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    job_type = models.CharField(max_length=55, null=True)
 
 
 class Payment(models.Model):
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    company = models.CharField(max_length=100)
+    profile_id = models.IntegerField()
+    name = models.CharField(max_length=100)
+    amount = models.CharField(max_length=200)
+    product = models.CharField(max_length=100)
     mobile = models.CharField(max_length=20)
-    amount_paid = models.CharField(max_length=200)
-           
+    created_on = models.DateTimeField()
+
+
+class Verification(models.Model):
+    payment_id = models.IntegerField()
+    user_id = models.IntegerField(null=True)

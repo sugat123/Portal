@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'jobs',
     'users',
     'bootstrap3',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,10 @@ EMAIL_HOST_USER = 'raktim.thapa9999@gmail.com'
 EMAIL_HOST_PASSWORD = 'Test@123'
 
 USE_DJANGO_JQUERY = True
+
+AUTHENTICATION_BACKENDS = (
+    'users.backend.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    )
+
+PHONENUMBER_DEFAULT_REGION = 'NP'

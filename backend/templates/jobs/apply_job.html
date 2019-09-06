@@ -20,7 +20,7 @@
 </div>
 
 <section class="skill-employer">
-    
+
 
     <div class="skill-content">
         <div class="skill-list">
@@ -171,15 +171,15 @@
 
                     <div class="row facilities">
                         <div class="form-input">
-                            <label>Posted by</label>
-                            <select name="user" required class="form-control">
+
+                            <select name="user" required class="form-control" style="display:none;">
                                 <option value="{{user.id}}">{{user.username}}</option>
                             </select>
 
                         </div>
                         <div class="form-input">
-                            <label>Job type</label>
-                            <select name="job_type" class="form-control" required>
+
+                            <select name="job_type" class="form-control" required style="display:none;">
                                 <option value="{{type.id}}">{{type.title}}</option>
                             </select>
 
@@ -197,6 +197,17 @@
 
                             </div>
                         </div>
+
+                        <div class="form-input">
+                            <label>Number of Employees Required</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="number" min="1" name="number_of_employee" class="form-control">
+                                </div>
+                        
+                            </div>
+                        </div>
+
                         <div class="form-input">
                             <label>Location</label>
                             <input type="text" name="location" class="form-control">
@@ -224,8 +235,7 @@
                 <div class="popup-content">
                     <form action="{% url 'jobs:add_skill' %}" method="POST">
                         {% csrf_token %}
-
-                        <select name="job_type" class="form-control" style="display: none;">
+                        <select name="job_type" class="form-control" required style="display:none;">
                             <option value="{{type.id}}">{{type.title}}</option>
                         </select>
 
@@ -248,7 +258,8 @@
                 <div class="popup-content">
                     <form action="{% url 'jobs:add_facility' %}" method="POST">
                         {% csrf_token %}
-                                 <option value="{{type.id}}">{{type.title}}</option>
+                        <select name="job_type" class="form-control" required style="display:none;">
+                            <option value="{{type.id}}">{{type.title}}</option>
                         </select>
 
                         {% if form.errors %}

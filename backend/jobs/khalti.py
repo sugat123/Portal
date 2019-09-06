@@ -4,7 +4,7 @@ from django.core import serializers
 import json
 
 
-def verification(url, token, amount):
+def verification(token, amount):
     url = "https://khalti.com/api/v2/payment/verify/"
     payload = {
         "token": token,
@@ -25,6 +25,5 @@ def transaction_list(url):
         "Authorization": "Key test_secret_key_e12fdbb02fd94fe4ab7440da6af6ca87"
     }
     response = requests.get(url, {}, headers=headers).json()
-    
 
     return response

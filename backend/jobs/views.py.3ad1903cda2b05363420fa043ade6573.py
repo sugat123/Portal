@@ -442,10 +442,10 @@ def esewa(request, id):
 #     return render(request, 'jobs/search_results.html',context)
 
 class SearchView(ListView):
-    model = JobType
     template_name = 'jobs/search_results.html'
     count = 0
-    paginate_by = 2
+    paginate_by = 3
+    page = request.GET.get('page')
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

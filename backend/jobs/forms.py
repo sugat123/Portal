@@ -31,7 +31,7 @@ class AddAppliedJobForm(forms.ModelForm):
         fields = '__all__'
 
 
-class PaymentForm(forms.ModelForm):
-    class Meta:
-        model = Payment
-        fields = '__all__'
+# class PaymentForm(forms.ModelForm):
+#     class Meta:
+#         model = Payment
+#         fields = '__all__'

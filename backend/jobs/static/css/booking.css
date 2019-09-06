@@ -1,9 +1,10 @@
-.booking-banner{
-	background-image: url(../img/banner.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+.booking-banner {
+    background-image: url(../img/banner.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
+
 .booking-title {
     color: #fff;
     text-align: center;
@@ -11,15 +12,18 @@
     font-size: 50px;
     text-transform: uppercase;
 }
+
 .booking-form {
     margin-top: 40px;
 }
+
 .booking-content {
     background: #EFEFEF;
     margin: 0 auto;
     width: 50%;
     padding: 30px 30px 60px 30px;
 }
+
 .bill-icon i {
     border-radius: 50%;
     border: 1px solid;
@@ -29,24 +33,30 @@
     height: 27px;
     color: #0981EF;
 }
+
 .bill-icon b {
     font-size: 20px;
     margin-left: 10px;
 }
+
 .bill-icon, .order-icon {
     margin-bottom: 15px;
     display: flex;
 }
+
 .order-icon i {
     color: #00AEEF;
 }
+
 .booking-list {
     margin-top: 20px;
 }
+
 .order-icon b {
     font-size: 20px;
     margin-left: 10px;
 }
+
 .order-icon i {
     border-radius: 50%;
     border: 1px solid;
@@ -56,43 +66,54 @@
     height: 27px;
     color: #0981EF;
 }
+
 .red {
     color: #ED1C24;
     margin-left: 4px;
 }
-.table>tbody>tr>th, .table>tbody>tr>td{
-	border: 1px solid #ddd;
+
+.table>tbody>tr>th, .table>tbody>tr>td {
+    border: 1px solid #ddd;
     padding: 13px;
 }
+
 .table-responsive {
     margin-top: 15px;
 }
+
 th.jname {
     text-transform: uppercase;
     font-size: 16px;
 }
+
 .e-icon img {
     width: 5%;
     margin-left: 20px;
 }
-.k-icon img{
-	width: 5%;
-	margin-left: 20px;
+
+.k-icon img {
+    width: 5%;
+    margin-left: 20px;
 }
-.i-icon img{
-	width: 5%;
-	margin-left: 20px;
+
+.i-icon img {
+    width: 5%;
+    margin-left: 20px;
 }
+
 .e-icon, .k-icon, .i-icon {
     display: flex;
     margin-bottom: 15px;
 }
+
 input#esewa, input#khalti, input#ime {
     margin-right: 10px;
 }
+
 .booking-field {
     margin-bottom: 20px;
 }
+
 input.place-btn {
     background: #006034;
     color: #fff;
@@ -102,6 +123,7 @@ input.place-btn {
     font-weight: bold;
     float: right;
 }
+
 .booking-field {
     margin-bottom: 15px;
 }
