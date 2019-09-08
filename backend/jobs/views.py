@@ -6,6 +6,7 @@ from django.urls import reverse
 from .forms import *
 from .models import *
 from jobs.match import count
+from jobs.exchange import exchange, verify
 from jobs.khalti import *
 from django.core.mail import send_mail
 from django.conf import settings
@@ -53,36 +54,8 @@ def index(request):
             paid.mobile = request.user.profile.number
             paid.created_on = datetime.datetime.now()
             paid.save()
-    test = []
-    count = 0
-    for q in Exchange.objects.all():
-        test.append((q.match_id, q.user_id))
-
-    for match in Match.objects.all():
-        for j in Verification.objects.filter(match_id=match.id):
-            if (j.match_id, j.user_id)  not in test:
-                count = count + 1
-                print(count)
-                if count == 2:
-                    # for n in User.objects.filter(id=j.user_id):
-                    #     if n.profile.user_type == 'Job Seeker':
-                    for k in User.objects.filter(id=match.applied_id):
-                        for m in User.objects.filter(id=match.posted_id):
-                            text1 = "Your payment has been completed and this is the contact number: " + m.profile.number +  " of employeer: "+ m.username + " for job you applied." 
-                            # sms(m.profile.number, text2 ) #sms to giver  
-                            # sms(k.profile.number, text1 ) #sms to seeker
-                            email([k.email], text1) #email to seeker 
-                            e1 = Exchange()
-                            e1.user_id = k.id
-                            e1.match_id = match.id
-                            e1.save()            
-                           
-                            text2 = "Your payment has been completed and this is the contact number: " + k.profile.number +  " of job seeker: "+ k.username + " for the job you posted."
-                            email([m.email], text2) #email to giver
-                            e2 = Exchange()
-                            e2.user_id = m.id
-                            e2.match_id = match.id
-                            e2.save() 
+    verify()
+    exchange()
 
     context = {'profile': profile, 'job_types': job_types}
     return render(request, 'jobs/index.html', context)
@@ -277,19 +250,6 @@ def job_list(request, slug):
 
     return render(request, 'jobs/job_list.html', context)
 
-# @login_required
-# def job_list_giver(request, slug):
-#     type = get_object_or_404(JobType, slug=slug)
-
-
-#     applied_jobs = AppliedJob.objects.all().order_by('created')
-
-#     context = {
-#                'applied_jobs': applied_jobs,
-#                'type': type}
-
-#     return render(request, 'jobs/job_list.html', context)
-
 
 @login_required
 def posted_job_detail(request, slug, id):
@@ -317,61 +277,6 @@ def applied_job_detail(request, slug, id):
         'type': type}
 
     return render(request, 'jobs/applied_job_detail.html', context)
-
-
-# def match(request):
-
-#     c = count()
-#     # match = Match()
-
-#     p = c[0]
-#     a = c[1]
-#     s = c[2]
-#     job = c[3]
-
-#     posted = []
-#     applied = []
-#     matches = []
-#     test = []
-#     test_p = []
-#     test_a = []
-#     m = Match.objects.all()
-#     for n in m:
-#         test.append((n.posted_id, n.applied_id, n.score))
-#         test_p.append((n.posted_id))
-#         test_a.append((n.applied_id))
-#     # print(test)
-#     # print(test_p)
-#     # print(test_a)
-#     # print(p)
-#     # print(a)
-#     # print(s)
-#     for i, j, l in zip(p, a, s):
-#         if (i, j, l) not in test:
-#             for post in PostedJob.objects.filter(id=i):
-#                 posted.append(post.user.email)
-#                 email_posted([post.user.email])
-#             for apply in AppliedJob.objects.filter(id=j):
-#                 applied.append(apply.user.email)
-#                 email_applied([apply.user.email])
-
-#     # print(posted)
-#     # print(applied)
-
-#     for k in range(len(p)):
-
-#         matches.append((p[k], a[k], s[k]))
-#         if (p[k], a[k], s[k]) not in test:
-#             match = Match()
-#             match.posted_id = p[k]
-#             match.applied_id = a[k]
-#             match.score = s[k]
-#             match.job_type = job[k]
-#             match.save()
-
-#     print(matches)
-
-#     return render(request, 'jobs/match.html', {'match': matches})
 
 
 def email_match(recipient, text):
@@ -404,47 +309,6 @@ def sms(number, text):
     # print(response)
     print(response_json)
     return r
-
-
-
-@login_required
-def payment(request):
-    paid = Payment.objects.all()
-    match = Match.objects.all()
-    user = User.objects.all()
-    verify = Verification.objects.all()
-    test = []
-    for l in verify:
-        test.append(l.payment_id)
-    print(test)
-
-    for i in match:
-        for j in paid:
-            if j.id not in test:
-                if i.applied_id == j.profile_id and i.job_type == j.product:
-                    for k in User.objects.filter(id=i.applied_id):
-                        for m in User.objects.filter(id=i.posted_id):
-                            v = Verification()
-                            v.payment_id = j.id
-                            v.user_id = j.profile_id
-                            v.paid_status = True
-                            v.match_id = i.id
-                            v.save()
-                elif i.posted_id == j.profile_id and i.job_type == j.product:
-                    for k in User.objects.filter(id=i.applied_id):
-                        for m in User.objects.filter(id=i.posted_id):
-                            v = Verification()
-                            v.payment_id = j.id
-                            v.user_id = j.profile_id
-                            v.paid_status = True
-                            v.match_id = i.id
-                            v.save()
-
-    context = {
-        # 'jobtypes': jobtypes
-    }
-
-    return render(request, 'jobs/payment.html', context)
 
 
 @csrf_exempt
@@ -489,15 +353,6 @@ def khalti(request, id):
     context = {'person': person, 'applied': applied, 'posted': posted}
     return render(request, 'jobs/khalti.html', context)
 
-
-
-# def search(request):  # new
-#     query = request.GET.get('q')
-#     object_list = JobType.objects.filter(
-#         Q(title__icontains=query)
-#     )
-#     context = {'object_list' : object_list}
-#     return render(request, 'jobs/search_results.html',context)
 
 class SearchView(ListView):
     model = JobType

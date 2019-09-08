@@ -1,10 +1,6 @@
 from .models import *
 
 
-# p = PostedJob.objects.all()
-# a = AppliedJob.objects.all()
-
-
 def count():
     p = PostedJob.objects.all()
     a_matched = []
@@ -46,3 +42,6 @@ def count():
                 job_type.append(x.job_type.title)
 
     return [p_matched, a_matched, score, job_type]
+
+def match():
+    pass

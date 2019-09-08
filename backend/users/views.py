@@ -21,8 +21,9 @@ def login_user(request):
                     request.session.set_expiry(0)
                 # redirect_url = request.GET.get('next', 'users/base')
                 # messages.info(request, 'You are logged in as an admin .')
-            
-                messages.success(request, '{} Logged in successfully'.format(user.username))
+
+                messages.success(
+                    request, '{} Logged in successfully'.format(user.username))
                 return redirect('jobs:dashboard')
 
             # elif user and user.is_staff:
@@ -35,17 +36,17 @@ def login_user(request):
             elif user and not user.is_active:
                 messages.info(request, 'Your account is not active now.')
             else:
-                
+
                 messages.error(request, 'Invalid Username and Password')
-            
+
         else:
-           
+
             messages.error(request, 'Invalid Form')
 
     else:
-        
+
         form = LoginForm()
-    
+
     return render(request, 'users/login.html', {'form': form})
 
 
@@ -63,7 +64,9 @@ def register(request):
         profile_form = ProfileForm(request.POST or None)
         if user_form.is_valid() and profile_form.is_valid():
 
-            user = user_form.save()
+            user = user_form.save(commit=False)
+            user.is_active = False
+            user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
@@ -72,7 +75,8 @@ def register(request):
             password = user_form.cleaned_data.get('password1')
             user = authenticate(request, username=username, password=password)
             login(request, user)
-            messages.success(request, 'user created with username {}'.format(user.username))
+            messages.success(
+                request, 'user created with username {}'.format(user.username))
             # messages.success(request, 'Registered Successfully')
             return redirect('jobs:dashboard')
 
