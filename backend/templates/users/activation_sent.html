@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Activation</title>
+</head>
+
+<body>
+    <div class="activation">
+        <form action="{% url 'users:activation' %}" method="POST">
+            {% csrf_token %}
+            <label class="label">Please enter activation code to continue:</label><br>
+            <input type="text" name="activation_code" />
+            <button type="submit" class="button">Activate</button>
+    </div>
+</body>
+
+</html>

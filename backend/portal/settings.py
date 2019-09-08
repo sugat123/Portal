@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'jobs',
     'users',
     'bootstrap3',
-    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -153,4 +152,3 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     )
 
-PHONENUMBER_DEFAULT_REGION = 'NP'

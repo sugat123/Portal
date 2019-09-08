@@ -1,11 +1,12 @@
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from jobs import urls
-
+from .models import ActivationCode
+from django.core.mail import send_mail
 from .forms import *
-
+from django.http import Http404
 
 def login_user(request):
     if request.method == 'POST':
@@ -63,11 +64,26 @@ def register(request):
         profile_form = ProfileForm(request.POST or None)
         if user_form.is_valid() and profile_form.is_valid():
 
-            user = user_form.save()
+            
+            user = user_form.save(commit=False)
+            user.is_active = False
+            user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
+            
+            code = ActivationCode.objects.create(user=user)
+            send_mail(
+                'Activate Your Account',
+                'Here is the activation code: %s' % code.code,
+                'from@example.com',
+                [user.email]
+            )
+           
+        
+            return render(request, 'users/activation_sent.html')
 
+            
             username = user_form.cleaned_data.get('username')
             password = user_form.cleaned_data.get('password1')
             user = authenticate(request, username=username, password=password)
@@ -80,3 +96,26 @@ def register(request):
         user_form = AddUserForm()
         profile_form = ProfileForm()
     return render(request, 'users/register.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+def check_activation_code(request):
+    try:
+        for i in ActivationCode.objects.all():
+            if request.method == 'POST':
+                if i.code == request.POST['activation_code']:
+                    print(i.user)
+                    print(i.user.is_active)
+                    i.user.is_active = True
+                    i.user.save()
+                    print(i.user.is_active)
+                    i.delete()
+                    
+                    messages.success(request,'Your account has been successfully activated. Please login to continue')
+                    return redirect('users:login_user')
+                    
+    except ActivationCode.DoesNotExist:
+        raise Http404
+    
+    return render(request, 'users/activation_sent.html', {})
+
+   
