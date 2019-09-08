@@ -53,7 +53,7 @@ span.form-field-icon {
 .form-control{
 	border-radius: 0;
 }
-.register-btn .r-btn {
+.reg-btn{
     background: #006034;
     color: #fff;
     padding: 8px 12px;
@@ -65,7 +65,7 @@ span.form-field-icon {
     letter-spacing: 2px;
 }
 
-.register-btn .r-btn:hover{
+.reg-btn:hover{
     color: #fff;
     font-weight: 700;
     letter-spacing: 3px;
@@ -90,9 +90,37 @@ span.form-field-icon {
 }
 
 
-.form-field .emplo {
-    margin-right: 10px;
+.modal-header {
+    text-align: center;
 }
-input#employer,input#jobseeker {
-    margin-right: 5px;
+.modal-footer{
+    border-top: none;
+    text-align: center;
+}
+.modal-header{
+    border-bottom: none;
+    padding: 20px 20px 0px 20px;
+}
+.modal-body {
+    text-align: center;
+    padding: 15px 15px 0px 15px;
+}
+.modal-header .close {
+    margin-top: -53px;
+    margin-left: 67px;
+}        
+input.fill {
+    height: 35px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 50%;
+}
+button.btn1-primary {
+    background: #005F34;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 18%;
+    margin-bottom: 5px;
+    border-radius: 3px;
 }
