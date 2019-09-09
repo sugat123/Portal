@@ -130,11 +130,7 @@
         var checkout = new KhaltiCheckout(config);
         var btn = document.getElementById("payment-button");
         btn.onclick = function () {
-<<<<<<< HEAD:backend/templates/jobs/khalti.html
             checkout.show({ amount: {{ apply.job_type.commission | multiply:100 }} });
-=======
-            checkout.show({ amount: {{ apply.job_type.commission}} });
->>>>>>> 076cb0f3597b8137a7a3c8c32605231edbc28969:backend/templates/jobs/esewa.html
             }
         {% endif %}
 

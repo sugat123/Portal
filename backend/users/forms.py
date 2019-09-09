@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from users.models import *
 
+TYPES = [
+    ('Employeer', 'Employeer'),
+    ('Job Seeker', 'Job Seeker')
+]
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100)
@@ -28,7 +32,8 @@ class AddUserForm(UserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
-    # user_type=forms.ChoiceField(choices = TYPES,widget=forms.RadioSelect())
+    user_type = forms.ChoiceField(choices = TYPES, widget=forms.RadioSelect)
+
     class Meta:
         model = Profile
         fields = ('number','user_type')

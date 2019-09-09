@@ -1,10 +1,10 @@
-.register-banner::after{
-	background-image: url(../img/background1.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
+.register-banner::after {
+    background-image: url(../img/background1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     content: "";
-    opacity: 0.7;
+    opacity: 0.9;
     top: 0;
     left: 0;
     right: 0;
@@ -12,6 +12,7 @@
     position: absolute;
     z-index: -1;
 }
+
 .register-title {
     color: #fff;
     text-align: center;
@@ -19,35 +20,42 @@
     font-size: 50px;
     text-transform: uppercase;
 }
+
 .form-content {
-    background: #fff;
+    background: #749dbd;
     margin: 0 auto;
     width: 50%;
     padding: 30px;
     border-radius: 7px;
 }
-.register-form{
+
+.register-form {
     padding: 80px;
 }
+
 .form-logo {
     text-align: center;
     margin-bottom: 25px;
 }
+
 .form-logo img {
     width: 100px;
 }
+
 .form-content h3 {
     margin-top: 0;
     padding-bottom: 20px;
     font-weight: 600;
     text-align: center;
 }
+
 .form-field {
     margin-bottom: 15px;
     display: flex;
     margin-top: 15px;
     justify-content: space-between;
 }
+
 span.form-field-icon {
     padding: 8px 12px;
     font-size: 14px;
@@ -59,9 +67,12 @@ span.form-field-icon {
     border: 1px solid #ccc;
     border-right: 0;
 }
-.form-control{
-	border-radius: 0;
+
+.form-control {
+    border-radius: 0;
+    background: #eae9e9;
 }
+
 .register-btn .r-btn {
     background: #006034;
     color: #fff;
@@ -72,6 +83,7 @@ span.form-field-icon {
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .new-user {
     margin-top: 20px;
     text-align: center;
@@ -79,19 +91,25 @@ span.form-field-icon {
     text-transform: uppercase;
     color: #000;
 }
+
 .r-icon i {
     font-size: 13px;
     padding-right: 5px;
 }
+
 .r-icon span a {
     color: #00AEEF;
     padding-left: 7px;
 }
 
+#id_user_type {
+    padding: 6px;
+}
 
 .form-field .emplo {
     margin-right: 10px;
 }
-input#employer,input#jobseeker {
+
+input#employer, input#jobseeker {
     margin-right: 5px;
 }

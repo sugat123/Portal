@@ -50,20 +50,18 @@ def verify():
         for j in Payment.objects.all():
             if j.id not in test:
                 if i.applied_id == j.profile_id and i.job_type == j.product:
-                    for k in User.objects.filter(id=i.applied_id):
-                        for m in User.objects.filter(id=i.posted_id):
-                            v = Verification()
-                            v.payment_id = j.id
-                            v.user_id = j.profile_id
-                            v.paid_status = True
-                            v.match_id = i.id
-                            v.save()
+
+                    v = Verification()
+                    v.payment_id = j.id
+                    v.user_id = j.profile_id
+                    v.paid_status = True
+                    v.match_id = i.id
+                    v.save()
                 elif i.posted_id == j.profile_id and i.job_type == j.product:
-                    for k in User.objects.filter(id=i.applied_id):
-                        for m in User.objects.filter(id=i.posted_id):
-                            v = Verification()
-                            v.payment_id = j.id
-                            v.user_id = j.profile_id
-                            v.paid_status = True
-                            v.match_id = i.id
-                            v.save()
+
+                    v = Verification()
+                    v.payment_id = j.id
+                    v.user_id = j.profile_id
+                    v.paid_status = True
+                    v.match_id = i.id
+                    v.save()

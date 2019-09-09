@@ -152,4 +152,3 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     )
 
-PHONENUMBER_DEFAULT_REGION = 'NP'
