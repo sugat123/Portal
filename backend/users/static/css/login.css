@@ -92,3 +92,15 @@
     color: #00AEEF;
     padding-left: 7px;
 }
+
+.activation {
+    text-align: center;
+}
+.active-button {
+    background: #005f34;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 6px;
+}
