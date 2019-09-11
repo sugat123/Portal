@@ -1,14 +1,14 @@
 .login-banner::after{
 	background-image: url(../img/background2.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
     content: "";
-    opacity: 0.7;
+    opacity: 0.6;
     top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
+    right: 0;
+    left: 0;
     position: absolute;
     z-index: -1;
 }
@@ -27,7 +27,7 @@
     border-radius: 7px;
 }
 .login-form{
-    padding: 183px;
+    padding-top: 110px;
 }
 .form-logo {
     text-align: center;
@@ -58,11 +58,21 @@
     font-size: 19px;
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 2px;
 }
+.login-btn .l-btn:hover{
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: #0981EF;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+    }
+
 .remember {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 .rem-right a {
     color: #00AEEF;

@@ -18,14 +18,16 @@ from django.conf.urls.static import static
 from portal import settings
 from django.urls import path, include
 import jobs
+import users
 from jobs import views
+from users import views
 
 urlpatterns = [
     # path('chaining/', include('smart_selects.urls')),
     path('admin/', admin.site.urls),
     path('jobs/', include('jobs.urls')),
     path('users/', include('users.urls')),
-    path('', jobs.views.index)
-  
+    path('', users.views.login_user)
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

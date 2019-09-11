@@ -11,3 +11,177 @@
     font-size: 50px;
     text-transform: uppercase;
 }
+.cook{
+	background-image: url(../img/chef.jpg);
+}
+.overseer{
+	background-image: url(../img/overseer.jpg);
+}
+.reception{
+	background-image: url(../img/reception.jpg);
+}
+.security{
+	background-image: url(../img/security.jpg);
+}
+.helper{
+	background-image: url(../img/helper.png);
+}
+.teacher{
+	background-image: url(../img/teacher.jpg);
+}
+.accountant{
+	background-image: url(../img/accountant.jpg);
+}
+.plumber{
+	background-image: url(../img/plumber.jpg);
+}
+.sales{
+	background-image: url(../img/sales.jpg);
+}
+.waiter{
+	background-image: url(../img/waiter.jpg);
+}
+.delivery{
+	background-image: url(../img/delivery.jpg);
+}
+.marketing{
+	background-image: url(../img/marketing.jpg);
+}
+.store{
+	background-image: url(../img/store.jpg);
+}
+.driver{
+	background-image: url(../img/driver.jpg);
+}
+.typist{
+	background-image: url(../img/typist.jpg);
+}
+.operator{
+	background-image: url(../img/operator.jpg);
+}
+.hostel{
+	background-image: url(../img/hostel.jpg);
+}
+.washer{
+	background-image: url(../img/washer.jpg);
+}
+.electrician{
+	background-image: url(../img/electrician.jpg);
+}
+.technician{
+	background-image: url(../img/technician.jpg);
+}
+.beauty{
+	background-image: url(../img/beauty.jpg);
+}
+.contractor{
+	background-image: url(../img/contractor.jpg);
+}
+.sweeper{
+	background-image: url(../img/sweeper.jpg);
+}
+.baby{
+	background-image: url(../img/baby.jpg);
+}
+.job-main {
+    padding: 40px 0px;
+    background: rgba(41, 37, 37, 0.51);
+}
+.job-category {
+    padding: 20px 30px;
+    margin-top: 50px;
+}    
+.job-category{
+	text-shadow: none;
+}     
+.job-categories{
+	margin: 0px;
+}
+.job-title {
+    height: 40px;
+}
+
+
+/**/
+.banner-parallax{
+	background-image: url(../images/banner1.jpg);
+	height: 450px; 
+  	background-position: center;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+  	background-attachment: fixed;
+}
+.banner-content{
+	text-align: center;
+}
+.banner-content h1 {
+    color: #313b48;
+    padding-top: 150px;
+    margin-bottom: 20px;
+}
+
+.frame {
+	text-align: center;	
+	position: relative;
+	cursor: pointer;	
+	perspective: 500px; 
+}
+.frame .description {
+	width: 80%;
+	height: 90%;
+	position: absolute;
+	top: 50%;
+	left: 51%;
+	transform: translate(-50%, -50%) rotateY(90deg);
+	transform-origin: 50%;
+	background: rgba(49, 59, 73, 0.51);	
+	opacity: 0;
+	transition: all 0.4s ease-in;
+	
+}
+.frame:hover .description {
+	transform: translate(-50%, -50%) rotateY(0deg);
+	opacity: 4;
+}
+
+.description h4 {
+    text-align: center;
+    color: #fff;
+    font-family: 'Montserrat Alternates', sans-serif;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.title{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.frame{
+	margin-top: 40px;
+}
+
+.form-control {
+    border: none;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 200;
+}
+.btn-u {
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+    padding: 14px 13px;
+    position: relative;
+    background: #006034;
+    display: inline-block;
+    text-decoration: none;
+}
+span.color-green {
+    color: #006034;
+}    

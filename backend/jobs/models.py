@@ -12,7 +12,7 @@ class JobTypeManager(models.Manager):
         if query is not None:
             or_lookup = (Q(title__icontains=query) |
                          Q(slug__icontains=query)
-                        )
+                         )
             # distinct() is often necessary with Q lookups
             qs = qs.filter(or_lookup).distinct()
         return qs
@@ -22,19 +22,17 @@ class JobType(models.Model):
     title = models.CharField(max_length=25, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    icon = models.CharField(max_length=50, blank=True,
-                            null=True, default='fas fa-briefcase')
+    image = models.ImageField(blank=True,
+                              null=True, upload_to='jobtypes')
     slug = AutoSlugField(unique_with='id', populate_from='title')
     commission = models.IntegerField(null=True, blank=True)
-    
+
     objects = JobTypeManager()
 
     def __str__(self):
         return self.title
-    
 
 
-    
 class Skills(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -48,8 +46,7 @@ class Skills(models.Model):
 
     class Meta:
         verbose_name_plural = 'Skill'
-        
-    
+
 
 class Facility(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -65,7 +62,6 @@ class Facility(models.Model):
 
     class Meta:
         verbose_name_plural = 'Facility'
-    
 
 
 class PostedJob(models.Model):
@@ -77,7 +73,7 @@ class PostedJob(models.Model):
     salary = models.IntegerField(blank=True, null=True)
     working_time = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=100, null=True, blank=True)
-    number_of_employee = models.IntegerField(blank= True , null= True)
+    number_of_employee = models.IntegerField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(unique_with='id', populate_from='user')
@@ -125,7 +121,8 @@ class Banner(models.Model):
         upload_to='banner', default='default.jpg')
     dashboard = models.ImageField(upload_to='banner', default='default.jpg')
     newsfeed = models.ImageField(upload_to="banner", default='default.jpg')
-    newsfeed_detail = models.ImageField(upload_to="banner", default='default.jpg')
+    newsfeed_detail = models.ImageField(
+        upload_to="banner", default='default.jpg')
     job = models.ImageField(upload_to="banner", default='default.jpg')
     app = models.ImageField(upload_to="banner", default='default.jpg')
     app_bg = models.ImageField(upload_to="banner", default='default.jpg')

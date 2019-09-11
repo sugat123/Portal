@@ -1,18 +1,9 @@
-.register-banner::after {
-    background-image: url(../img/background1.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    content: "";
-    opacity: 0.9;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    z-index: -1;
+.register-banner{
+	background-image: url(../img/background1.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
-
 .register-title {
     color: #fff;
     text-align: center;
@@ -20,42 +11,34 @@
     font-size: 50px;
     text-transform: uppercase;
 }
-
 .form-content {
-    background: #749dbd;
+    background: #fff;
     margin: 0 auto;
     width: 50%;
     padding: 30px;
     border-radius: 7px;
 }
-
-.register-form {
-    padding: 80px;
+.register-form{
+    padding: 51px;
 }
-
 .form-logo {
     text-align: center;
     margin-bottom: 25px;
 }
-
 .form-logo img {
     width: 100px;
 }
-
 .form-content h3 {
     margin-top: 0;
     padding-bottom: 20px;
     font-weight: 600;
     text-align: center;
 }
-
 .form-field {
     margin-bottom: 15px;
     display: flex;
     margin-top: 15px;
-    justify-content: space-between;
 }
-
 span.form-field-icon {
     padding: 8px 12px;
     font-size: 14px;
@@ -67,13 +50,10 @@ span.form-field-icon {
     border: 1px solid #ccc;
     border-right: 0;
 }
-
-.form-control {
-    border-radius: 0;
-    background: #eae9e9;
+.form-control{
+	border-radius: 0;
 }
-
-.register-btn .r-btn {
+.reg-btn{
     background: #006034;
     color: #fff;
     padding: 8px 12px;
@@ -82,8 +62,17 @@ span.form-field-icon {
     font-size: 19px;
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
+.reg-btn:hover{
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: #0981EF;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+}
 .new-user {
     margin-top: 20px;
     text-align: center;
@@ -91,25 +80,47 @@ span.form-field-icon {
     text-transform: uppercase;
     color: #000;
 }
-
 .r-icon i {
     font-size: 13px;
     padding-right: 5px;
 }
-
 .r-icon span a {
     color: #00AEEF;
     padding-left: 7px;
 }
 
-#id_user_type {
-    padding: 6px;
-}
 
-.form-field .emplo {
-    margin-right: 10px;
+.modal-header {
+    text-align: center;
 }
-
-input#employer, input#jobseeker {
-    margin-right: 5px;
+.modal-footer{
+    border-top: none;
+    text-align: center;
+}
+.modal-header{
+    border-bottom: none;
+    padding: 20px 20px 0px 20px;
+}
+.modal-body {
+    text-align: center;
+    padding: 15px 15px 0px 15px;
+}
+.modal-header .close {
+    margin-top: -53px;
+    margin-left: 67px;
+}        
+input.fill {
+    height: 35px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 50%;
+}
+button.btn1-primary {
+    background: #005F34;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 18%;
+    margin-bottom: 5px;
+    border-radius: 3px;
 }

@@ -1,4 +1,3 @@
-
 {% load static %}
 {% load bootstrap3 %}
 
@@ -7,119 +6,150 @@
 
 {% block content %}
 
-	<head>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+<head>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static '/css/responsive.css' %}">
-	</head>
-	
-	<body>
+	<link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/responsive.css' %}">
+</head>
 
-<div class="text-center" id="alert_message">
-	{% bootstrap_messages %}
-</div>
+<body>
 
-
-<section class="register-banner">
-<div class="register-form">
-	
-		<div class="form-content">
-		<h3>Register Form</h3>
-		<form action="{% url 'users:register' %}" method="post">
-			{% csrf_token %}
-			<div class="form-field">
-				
-				{% if form.errors %}
-				<div class="alert alert-danger">
-					{{form.first_name.errors}}
-				</div>
-				{% endif %}
-
-				<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
-				<input type="name" name="first_name" placeholder="First name" class="form-control">
-			</div>
-			<div class="form-field">
-				
-				{% if form.errors %}
-				<div class="alert alert-danger">
-					{{form.last_name.errors}}
-				</div>
-				{% endif %}
-
-				<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
-				<input type="name" name="last_name" placeholder="Last name" class="form-control">
-			</div>
-			<div class="form-field">
-				
-				{% if form.errors %}
-				<div class="alert alert-danger">
-					{{form.username.errors}}
-				</div>
-				{% endif %}
-
-				<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
-				<input type="name" name="username" placeholder="User name" class="form-control">
-			</div>
-			<div class="form-field">
-				
-				{% if form.errors %}
-				<div class="alert alert-danger">
-					{{form.email.errors}}
-				</div>
-				{% endif %}
-
-				<span class="form-field-icon"><i class="fas fa-envelope"></i></span>
-				<input type="email" name="email" placeholder="Email" class="form-control">
-			</div>
-			<div class="form-field">
-				
-				{% if form.errors %}
-				<div class="alert alert-danger">
-					{{form.password1.errors}}
-				</div>
-				{% endif %}
-
-				<span class="form-field-icon"><i class="fas fa-star"></i></span>
-				<input type="password" name="password1" placeholder="Password" class="form-control">
-			</div>
-			<div class="form-field">
-
-				{% if form.errors %}
-				<div class="alert alert-danger">
-					{{form.password2.errors}}
-				</div>
-				{% endif %}
-
-				<span class="form-field-icon"><i class="fas fa-star"></i></span>
-				<input type="password" name="password2" placeholder="Confirm Password" class="form-control">
-			</div>
-			<div class="form-field">
-				
-				{% if form.errors %}
-				<div class="alert alert-danger">
-					{{form.number.errors}}
-				</div>
-				{% endif %}
-
-				<span class="form-field-icon"><i class="fas fa-phone"></i></span>
-				<input type="number" name="number" placeholder="Number" class="form-control">
-			</div>
-			<div class="form-field">
-				<span>Are you an Employeer or a Job Seeker?</span>&nbsp;&nbsp;
-				<label class="job">
-					{{profile_form.user_type}}</label>
-
-			</div>
-			<div class="register-btn">
-				<input type="submit" name="register" value="Register" class="r-btn">
-			</div>
-		</form>
-
+	<div class="text-center" id="alert_message">
+		{% bootstrap_messages %}
 	</div>
-</div>
-</section>
 
-{% endblock %}
+
+	<section class="register-banner">
+		<div class="register-form">
+
+			<div class="form-content">
+				<h3>Register Form</h3>
+				<form action="{% url 'users:register' %}" method="post">
+					{% csrf_token %}
+					<div class="form-field">
+
+						{% if form.errors %}
+						<div class="alert alert-danger">
+							{{form.first_name.errors}}
+						</div>
+						{% endif %}
+
+						<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
+						<input type="name" name="first_name" placeholder="First name" class="form-control">
+					</div>
+					<div class="form-field">
+
+						{% if form.errors %}
+						<div class="alert alert-danger">
+							{{form.last_name.errors}}
+						</div>
+						{% endif %}
+
+						<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
+						<input type="name" name="last_name" placeholder="Last name" class="form-control">
+					</div>
+					<div class="form-field">
+
+						{% if form.errors %}
+						<div class="alert alert-danger">
+							{{form.username.errors}}
+						</div>
+						{% endif %}
+
+						<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
+						<input type="name" name="username" placeholder="User name" class="form-control">
+					</div>
+					<div class="form-field">
+
+						{% if form.errors %}
+						<div class="alert alert-danger">
+							{{form.email.errors}}
+						</div>
+						{% endif %}
+
+						<span class="form-field-icon"><i class="fas fa-envelope"></i></span>
+						<input type="email" name="email" placeholder="Email" class="form-control">
+					</div>
+					<div class="form-field">
+
+						{% if form.errors %}
+						<div class="alert alert-danger">
+							{{form.password1.errors}}
+						</div>
+						{% endif %}
+
+						<span class="form-field-icon"><i class="fas fa-star"></i></span>
+						<input type="password" name="password1" placeholder="Password" class="form-control">
+					</div>
+					<div class="form-field">
+
+						{% if form.errors %}
+						<div class="alert alert-danger">
+							{{form.password2.errors}}
+						</div>
+						{% endif %}
+
+						<span class="form-field-icon"><i class="fas fa-star"></i></span>
+						<input type="password" name="password2" placeholder="Confirm Password" class="form-control">
+					</div>
+					<div class="form-field">
+
+						{% if form.errors %}
+						<div class="alert alert-danger">
+							{{form.number.errors}}
+						</div>
+						{% endif %}
+
+						<span class="form-field-icon"><i class="fas fa-phone"></i></span>
+						<input type="number" name="number" placeholder="Number" class="form-control">
+					</div>
+					<div class="form-field">
+						<span>Are you an Employeer or a Job Seeker?</span>&nbsp;&nbsp;
+						<label class="job">
+							{{profile_form.user_type}}</label>
+
+					</div>
+					<div class="register-btn">
+
+						<button type="submit" class="reg-btn" data-toggle="modal"
+							data-target="#exampleModal">Submit</button>
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<form action="{% url 'users:activation' %}" method="POST">
+										<div class="modal-header">
+											<div class="model-text">
+												<h4 class="modal-title" id="exampleModalLabel">Please enter the one-time
+													password to verify your account</h4>
+												<p>A one time password has been sent to your email and phone number</p>
+											</div>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<input type="text" name="activation_code" class="fill">
+										</div>
+										<div class="modal-footer">
+											<button type="submit" class="btn1-primary">Submit</button>
+											<div class="resend">
+												<p>(Resend one time password)</p>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</section>
+
+	{% endblock %}

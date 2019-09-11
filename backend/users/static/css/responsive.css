@@ -2,9 +2,12 @@
 @media screen and (min-width : 1201px) and (max-width:1400px) {}
 @media screen and (min-width : 992px) and (max-width:1200px) {}
 @media screen and (min-width : 768px) and (max-width:991px) {
-	.skill-content,.efacilities-content{width: 100%;}
+	.form-content{width: 77%;}
+	.skill-content,.efacilities-content{width: 77%;}
 	.list-img img {display: none;}
-	.get-app {margin-bottom: 20px;}
+	.detail-content {width: 77%;}
+	.booking-content {width: 77%;}
+	.news-content{width: 77%;}
 }
 @media screen and (min-width : 480px) and (max-width:767px) {
 	.formclick > :first-child {display: none;}
@@ -19,11 +22,14 @@
 	.booking-content{width: 100%;}
 	span.badge {left: 19px;}
 	.dropdown-menu {left: -215px;}
+	.input-field {margin-bottom: 5px;}
+	.login-form {padding: 70px;}
+	.register-form {padding: 70px;}
 }
 @media screen and (min-width : 340px) and (max-width:479px) {
 	.formclick > :first-child {display: none;}
 	.form-content {width: 100%}
-	.formclick li {padding-left: 14px;}
+	.formclick li {padding-left: 10px;}
 	.job-category {margin-bottom: 10px;}
 	.cat-right {text-align: center;}
 	.skill-content,.efacilities-content{width: 100%;}
@@ -37,4 +43,9 @@
 	span.badge {left: 24px;}
 	.dropdown-menu {left: -227px}
 	li.notify-title {padding-left: 6px;}
+	.banner-text h1 {font-size: 25px;}
+	.job-category {padding: 34px;}
+	.input-field {margin-bottom: 5px;}
+	.login-form{padding: 32px;}
+	.register-form{padding: 32px;}
 }	

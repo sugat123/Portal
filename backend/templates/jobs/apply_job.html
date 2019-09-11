@@ -25,68 +25,64 @@
     <div class="skill-content">
         <div class="skill-list">
 
-            <div class="row skills">
-                <div class="col-md-4 list-img">
-                    <img src="{% static 'img/skill.jpg' %}">
-                </div>
-                <div class="col-md-8 lists-list">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce at rhoncus
-                        diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non, scelerisque justo.</p>
-                </div>
-            </div>
+
 
             <form action="{% url 'jobs:apply_job' type.slug %}" method="post">
                 {% csrf_token %}
-                <div class="row skills">
-                    <div class="col-md-6 col-sm-6 col-xs-6 list-img">
-                        <h3>Choose the below skills:</h3>
-            
-                        {% for skill in skills %}
-                        {% if skill.job_type_id == type.id %}
-                        <div class="form-check">
-                            <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
-                            <label for="skill-{{ skill.id }}">{{skill.title}}</label>
+                <div class="choose-skill green">
+                    <h3>Choose the below skills:</h3>
+                    <div class="row skills">
+                        <div class="col-md-6 col-sm-6 col-xs-6 list-img">
+
+
+                            {% for skill in skills %}
+                            {% if skill.job_type_id == type.id %}
+                            <div class="form-check">
+                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
+                                <label for="skill-{{ skill.id }}">{{skill.title}}</label>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
+
                         </div>
-                        {% endif %}
-                        {% endfor %}
-                        <span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
 
                     </div>
-
                 </div>
 
+                <div class="facility-all blue">
+                    <div class="row facilities">
+                        <div class="form-input">
 
-                <div class="row facilities">
-                    <div class="form-input">
-                        
-                        <select name="user" required class="form-control" style="display: none;">
-                            <option value="{{user.id}}">{{user.username}}</option>
-                        </select>
+                            <select name="user" required class="form-control" style="display: none;">
+                                <option value="{{user.id}}">{{user.username}}</option>
+                            </select>
 
-                    </div>
-                    <div class="form-input">
-                       
-                        <select name="job_type" class="form-control" required style="display: none;">
-                            <option value="{{type.id}}">{{type.title}}</option>
-                        </select>
+                        </div>
+                        <div class="form-input">
 
-                    </div>
+                            <select name="job_type" class="form-control" required style="display: none;">
+                                <option value="{{type.id}}">{{type.title}}</option>
+                            </select>
+
+                        </div>
 
 
-                    <div class="form-input">
-                        <label>Address</label>
+                        <div class="form-input">
+                            <label>Address</label>
 
-                        {% if form.errors %}
-                        <div class="alert alert-danger">
+                            {% if form.errors %}
+                            <div class="alert alert-danger">
                                 {{form.location.errors}}
+                            </div>
+                            {% endif %}
+
+                            <input type="text" name="location" class="form-control">
                         </div>
-                        {% endif %}
 
-                        <input type="text" name="location" class="form-control">
                     </div>
-
                 </div>
-                <div class="experiance">
+                <div class="experiance red">
                     <h3>Your experience in this field</h3>
 
                     {% if form.errors %}
@@ -101,7 +97,7 @@
                     </div>
                 </div>
                 <div class="submit-btn">
-                    <div class="more-btn"><button type="submit">Submit</button></div>
+                    <button type="submit" class="btn-submit">Submit</button>
                 </div>
             </form>
         </div>
@@ -122,52 +118,46 @@
         <div class="skill-content">
             <div class="skill-list">
 
-                <div class="row skills">
-                    <div class="col-md-4 list-img">
-                        <img src="{% static 'img/skill.jpg' %}">
-                    </div>
-                    <div class="col-md-8 lists-list">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce at
-                            rhoncus
-                            diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non, scelerisque justo.
-                        </p>
-                    </div>
-                </div>
-
                 {% if form.errors %}
                 {{form.errors}}
                 {% endif %}
-                <form action="{% url 'jobs:post_job' type.slug %}" method="post">
-                    {% csrf_token %}
+
+                <div class="choose-skill green">
+                    <h3>Choose the below skills:</h3>
                     <div class="row skills">
                         <div class="col-md-6 col-sm-6 col-xs-6 list-img">
-                            <h3>Choose the below skills:</h3>
+                            <form action="{% url 'jobs:post_job' type.slug %}" method="post">
+                                {% csrf_token %}
 
-                            {% for skill in skills %}
-                            {% if skill.job_type_id == type.id %}
-                            <div class="form-check">
-                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
-                                <label for="skill-{{ skill.id }}">{{skill.title}}</label>
-                            </div>
-                            {% endif %}
-                            {% endfor %}
-                            <span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
-                            <h3>Choose the facilities below:</h3>
-                            {% for facility in facilities %}
-                            {% if facility.job_type_id == type.id %}
-                            <div class="form-check">
-                                <input type="checkbox" name="facility" id="facility-{{facility.id}}"
-                                    value="{{ facility.id }}">
-                                <label for="facility-{{facility.id}}">{{ facility.title }}</label>
-                            </div>
-                            {% endif %}
-                            {% endfor %}
-                            <span class="other"><i class="fas fa-angle-right"></i><a href="#popup2">Others</a></span>
+                                {% for skill in skills %}
+                                {% if skill.job_type_id == type.id %}
+                                <div class="form-check">
+                                    <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
+                                    <label for="skill-{{ skill.id }}">{{skill.title}}</label>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                                <span class="other"><i class="fas fa-angle-right"></i><a
+                                        href="#popup1">Others</a></span>
 
                         </div>
-
                     </div>
 
+                </div>
+                <div class="facility-all blue">
+                    <div class="facility">
+                        <h3>Choose the facilities below:</h3>
+                        {% for facility in facilities %}
+                        {% if facility.job_type_id == type.id %}
+                        <div class="form-check">
+                            <input type="checkbox" name="facility" id="facility-{{facility.id}}"
+                                value="{{ facility.id }}">
+                            <label for="facility-{{facility.id}}">{{ facility.title }}</label>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        <span class="other"><i class="fas fa-angle-right"></i><a href="#popup2">Others</a></span>
+                    </div>
 
                     <div class="row facilities">
                         <div class="form-input">
@@ -204,7 +194,7 @@
                                 <div class="col-md-6">
                                     <input type="number" min="1" name="number_of_employee" class="form-control">
                                 </div>
-                        
+
                             </div>
                         </div>
 
@@ -214,20 +204,25 @@
                         </div>
 
                     </div>
-                    <div class="experiance">
-                        <h3>Your experience in this field</h3>
-                        <div class="slidecontainer">
-                            <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
-                            <p>Experiance in year: <span id="demo"></span></p>
-                        </div>
+                </div>
+
+                <div class="experiance red">
+                    <h3>Your experience in this field</h3>
+                    <div class="slidecontainer">
+                        <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
+                        <p>Experiance in year: <span id="demo"></span></p>
                     </div>
-                    <div class="submit-btn">
-                        <div class="more-btn"><button type="submit">Submit</button></div>
-                    </div>
+                </div>
+                <div class="submit-btn">
+                    <button type="submit" class="btn-submit">Submit</button>
+                </div>
                 </form>
             </div>
         </div>
         {% endif %}
+
+
+
         <div id="popup1" class="overlay">
             <div class="popup">
                 <h4>Please enter the prefer skills</h4>

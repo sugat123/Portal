@@ -8,7 +8,10 @@ from django.core.mail import send_mail
 from .forms import *
 from django.http import Http404
 
+
 def login_user(request):
+    if request.user.is_authenticated:
+        redirect('jobs:dashboard')
     if request.method == 'POST':
         form = LoginForm(request.POST or None)
         if form.is_valid():
@@ -55,7 +58,7 @@ def logout_user(request):
 
     if request.user.is_authenticated:
         logout(request)
-        messages.success(request, 'logged out successfully')
+       
         return redirect('/')
 
 
@@ -65,14 +68,13 @@ def register(request):
         profile_form = ProfileForm(request.POST or None)
         if user_form.is_valid() and profile_form.is_valid():
 
-            
             user = user_form.save(commit=False)
             user.is_active = False
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
-            
+
             code = ActivationCode.objects.create(user=user)
             send_mail(
                 'Activate Your Account',
@@ -80,10 +82,8 @@ def register(request):
                 'from@example.com',
                 [user.email]
             )
-           
-        
-            return render(request, 'users/activation_sent.html')
 
+            return render(request, 'users/activation_sent.html')
 
     else:
         user_form = AddUserForm()
@@ -99,13 +99,12 @@ def check_activation_code(request):
                     i.user.is_active = True
                     i.user.save()
                     i.delete()
-                    
-                    messages.success(request,'Your account has been successfully activated. Please login to continue')
+
+                    messages.success(
+                        request, 'Your account has been successfully activated. Please login to continue')
                     return redirect('users:login_user')
-                    
+
     except ActivationCode.DoesNotExist:
         raise Http404
-    
-    return render(request, 'users/activation_sent.html', {})
 
-   
+    return render(request, 'users/activation_sent.html', {})

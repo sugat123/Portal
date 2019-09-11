@@ -7,11 +7,25 @@
 {% block content %}
 
 
-{% for banner in banners %}
-<section class="eskill-banner" style="background-image: url('/media/{{ banner.dashboard }}');">
-    <div class="eskill-title">WELCOME {{ user.profile.user_type }} {{ user.username }}</div>
+
+<section class="banner-parallax">
+    <div class="banner-content">
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>We bring <span class="color-green">dreams</span> into reality</h1>
+                <form action="{% url 'jobs:search' %}" method='get'>
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Browse job ...">
+                        <span class="input-group-btn">
+                            <button class="btn-u btn-u-lg" name="search" type="submit">Search</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
-{% endfor %}
+
 
 {% if user.is_authenticated %}
 
@@ -20,9 +34,7 @@
 </div>
 
 <section class="job-all">
-
     <div class="container">
-
         <div class="job-title">
             {% if user.profile.user_type == 'Job Seeker' %}
             <h1>What job do you need?</h1>
@@ -33,78 +45,31 @@
         </div>
         <div class="job-categories">
             <div class="row">
-                {% if object_list %}
-                <h3>{{ count }} results for <b>{{ query }}</b></h3>
-                {% for object in object_list %}
-                {% with object|class_name as klass %}
-                {% if klass == 'JobType' %}               
-                                
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                    <a href="
-                            {% if user.is_authenticated %}
-                            {% url 'jobs:job_list' object.slug %}
-                            {% else %}
-                            {% url 'users:login_user' %}
-                            {% endif %}
-                            ">
-                        <div class="job-category">
-                            <div class="job-icon"><i class="{{ object.icon }}"></i></div>
-                            <div class="job-title">{{object.title}}</div>
-                        </div>
-                    </a>
-                </div>
-                
-                {% endif %}
-                
-                {% endwith %}
-                {% endfor %}
-                
-                {% else %}
                 {% for job in job_types %}
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                    <a href="
-                    
-                        {% url 'jobs:job_list' job.slug %}
-                   
-                    ">
-                        <div class="job-category">
-                            <div class="job-icon"><i class="{{ job.icon }}"></i></div>
-                            <div class="job-title">{{job.title}}</div>
+                <div class="frame col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="/media/{{ job.image }}">
+                    <a href="  {% if user.is_authenticated %}
+                {% url 'jobs:job_list' job.slug %}
+                {% else %}
+                {% url 'users:login_user' %}
+                {% endif %}">
+                        <div class="description">
+                            <div class="title">
+                                <h4>{{job.title}}</h4>
+                            </div>
                         </div>
                     </a>
                 </div>
+                {% endfor %}
 
-                {% endfor %}
-                
-                {% endif %}
-                
             </div>
-            {% if users.has_other_pages %}
-            <ul class="pagination">
-                {% if users.has_previous %}
-                <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
-                {% else %}
-                <li class="disabled"><span>&laquo;</span></li>
-                {% endif %}
-                {% for i in users.paginator.page_range %}
-                {% if users.number == i %}
-                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
-                {% endif %}
-                {% endfor %}
-                {% if users.has_next %}
-                <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
-                {% else %}
-                <li class="disabled"><span>&raquo;</span></li>
-                {% endif %}
-            </ul>
-            {% endif %}
+
         </div>
-        
+
+
     </div>
-    
 </section>
+
 
 {% endif %}
 {% endblock %}

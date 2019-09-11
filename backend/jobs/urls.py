@@ -4,9 +4,7 @@ from jobs import views
 app_name = 'jobs'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('', views.dashboard, name='dashboard'),
     path('add_job/', views.add_job, name='add_job'),
     path('add_facility/', views.add_facility, name='add_facility'),
     path('<slug>/post_job/', views.post_job, name='post_job'),

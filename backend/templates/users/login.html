@@ -18,17 +18,17 @@
 
 
 
-	<div class="container-fluid text-center">
-		{% bootstrap_messages %}
-	</div>
-	
+
+
 	<section class="login-banner">
 
 		<div class="login-form">
 
 			<div class="form-content">
-					{% block content %}
-
+				{% block content %}
+				<div class="text-center" id="alert_message">
+					{% bootstrap_messages %}
+				</div>
 				<h3>DreamFocus</h3>
 				<form action="{% url 'users:login_user' %}" method="post">
 					{% csrf_token %}
@@ -65,9 +65,17 @@
 				</form>
 
 			</div>
+
 			{% endblock %}
 		</div>
 
 	</section>
-	
+
+	<script type="text/javascript">
+		window.setTimeout(function () {
+			$("#alert_message").fadeTo(500, 0).slideUp(500, function () {
+				$(this).remove();
+			});
+		}, 3500);
+	</script>
 </body>

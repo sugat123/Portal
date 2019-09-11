@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.urls import reverse
 from .forms import *
 from .models import *
-from jobs.match import count
+from jobs.match import count, match
 from jobs.exchange import exchange, verify
 from jobs.khalti import *
 from django.core.mail import send_mail
@@ -26,6 +26,42 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
     profile = Profile.objects.all()
+    job_types = JobType.objects.all()
+    # path = request.get_full_path()[2:]
+    
+    # if 'oid' in path:
+    #     data = re.split('oid=+|&amt=+|\&refId=', path)
+    #     del data[0]
+    #     url ="https://uat.esewa.com.np/epay/transrec"
+    #     d = {
+    #         'amt': data[1],
+    #         'scd': 'NP-ES-EPAY',
+    #         'rid': data[2],
+    #         'pid': data[0],
+    #     }
+    #     resp = requests.post(url, d)
+    #     print(resp.text)
+    #     test = []
+    #     for i in Payment.objects.all():
+    #         test.append((i.profile_id, i.name, i.amount,  i.mobile))
+    #     if (request.user.id, request.user.username, data[1], request.user.profile.number) not in test:
+    #         paid = Payment()
+    #         paid.profile_id = request.user.id
+    #         paid.name = request.user.username
+    #         paid.amount = data[1]
+    #         for temp in JobType.objects.filter(id = data[0]):
+    #             paid.product = temp.title
+    #         paid.mobile = request.user.profile.number
+    #         paid.created_on = datetime.datetime.now()
+    #         paid.save()
+    
+
+    context = {'profile': profile, 'job_types': job_types}
+    return render(request, 'jobs/index.html', context)
+
+
+@login_required
+def dashboard(request):
     job_types = JobType.objects.all()
     path = request.get_full_path()[2:]
     
@@ -54,79 +90,61 @@ def index(request):
             paid.mobile = request.user.profile.number
             paid.created_on = datetime.datetime.now()
             paid.save()
+
     verify()
     exchange()
 
-    context = {'profile': profile, 'job_types': job_types}
-    return render(request, 'jobs/index.html', context)
-
-
-@login_required
-def dashboard(request):
-    job_types = JobType.objects.all()
-
     c = count()
+    match(c)
     # match = Match()
 
-    p = c[0]
-    a = c[1]
-    s = c[2]
-    job = c[3]
+    # p = c[0]
+    # a = c[1]
+    # s = c[2]
+    # job = c[3]
 
-    posted = []
-    applied = []
-    matches = []
-    test = []
-    test_p = []
-    test_a = []
+    # posted = []
+    # applied = []
+    # matches = []
+    # test = []
+    # test_p = []
+    # test_a = []
 
-    for n in Match.objects.all():
-        test.append((n.posted_id, n.applied_id, n.score))
-        test_p.append((n.posted_id))
-        test_a.append((n.applied_id))
+    # for n in Match.objects.all():
+    #     test.append((n.posted_id, n.applied_id, n.score))
+    #     test_p.append((n.posted_id))
+    #     test_a.append((n.applied_id))
 
-    for i, j, l in zip(p, a, s):
-        if (i, j, l) not in test:
-            for post in PostedJob.objects.filter(id=i):
-                posted.append(post.user.email)
-                text1 = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
-                email_match([post.user.email], text1)
+    # for i, j, l in zip(p, a, s):
+    #     if (i, j, l) not in test:
+    #         for post in PostedJob.objects.filter(id=i):
+    #             posted.append(post.user.email)
+    #             text1 = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
+    #             email_match([post.user.email], text1)
                 
-                # sms(post.user.profile.number, text1)
-            for apply in AppliedJob.objects.filter(id=j):
-                applied.append(apply.user.email)
-                text2 = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
-                email_match([apply.user.email], text2)
+    #             # sms(post.user.profile.number, text1)
+    #         for apply in AppliedJob.objects.filter(id=j):
+    #             applied.append(apply.user.email)
+    #             text2 = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
+    #             email_match([apply.user.email], text2)
                 
-                # sms(apply.user.profile.number, text2)
+    #             # sms(apply.user.profile.number, text2)
 
-    for k in range(len(p)):
+    # for k in range(len(p)):
 
-        matches.append((p[k], a[k], s[k]))
-        if (p[k], a[k], s[k]) not in test:
-            match = Match()
-            match.posted_id = p[k]
-            match.applied_id = a[k]
-            match.score = s[k]
-            match.job_type = job[k]
-            match.save()
+    #     matches.append((p[k], a[k], s[k]))
+    #     if (p[k], a[k], s[k]) not in test:
+    #         match = Match()
+    #         match.posted_id = p[k]
+    #         match.applied_id = a[k]
+    #         match.score = s[k]
+    #         match.job_type = job[k]
+    #         match.save()
 
-    print(matches)
-    
-    
-    page = request.GET.get('page')
-    paginator = Paginator(job_types, 3)
-    job_types = paginator.get_page(page)
-    
-    try:
-        users = paginator.page(page)
-    except PageNotAnInteger:
-        users = paginator.page(1)
-    except EmptyPage:
-        users = paginator.page(paginator.num_pages)
+    # print(matches)
 
 
-    context = {'job_types': job_types, 'users': users}
+    context = {'job_types': job_types}
     return render(request, 'jobs/dashboard.html', context)
 
 
@@ -358,7 +376,7 @@ class SearchView(ListView):
     model = JobType
     template_name = 'jobs/search_results.html'
     count = 0
-    paginate_by = 2
+    paginate_by = 1
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
