@@ -7,10 +7,10 @@ register = template.Library()
 def check(verifiedid):
     print(verifiedid)
     verify = Verification.objects.get(id=verifiedid)
-    for i in verify:
-        if i.paid_status is True:
-            return True
-        else:
-            return False
+    # for i in verify:
+    #     if i.paid_status is True:
+    #         return True
+    #     else:
+    #         return False
    
     
