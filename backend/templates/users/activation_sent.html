@@ -2,6 +2,7 @@
 {% extends "users/login.html" %}
 {% block content %}
 {% load static %}
+{% load bootstrap3 %}
 
 
 <style>
@@ -28,7 +29,11 @@
     margin-top: 100px;
 }
 </style>
+        <div class="text-center" id="alert_message">
+            {% bootstrap_messages %}
+        </div>
     <div class="activation">
+
         <form action="{% url 'users:activation' %}" method="POST">
             {% csrf_token %}
             <label class="mtitle">Please enter activation code to continue:</label><br>

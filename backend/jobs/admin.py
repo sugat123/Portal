@@ -45,15 +45,34 @@ class AppliedJobAdmin(admin.ModelAdmin):
 
 admin.site.register(SiteSetting)
 admin.site.register(Banner)
-admin.site.register(Payment)
-admin.site.register(Verification)
-admin.site.register(Exchange)
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'amount', 'product')
+    ordering = ('name',)
+    search_fields = ('name','amount')
+    list_filter = ('name', 'amount', )
+
+@admin.register(Verification)
+class VerificationAdmin(admin.ModelAdmin):
+    list_display = ('user_id', 'paid_status')
+    ordering = ('user_id',)
+    search_fields = ('paid_status',)
+    list_filter = ('paid_status',)
+    
+@admin.register(Exchange)
+class ExchangeAdmin(admin.ModelAdmin):
+    list_display = ('user_id', 'match_id')
+    ordering = ('user_id',)
+    search_fields = ('user_id',)
+    list_filter = ('match_id',)
 
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
     list_display = ['id', 'posted_id', 'applied_id', 'score']
     ordering = ('created', )
+
 
 
     

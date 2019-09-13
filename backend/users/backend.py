@@ -13,7 +13,7 @@ class AuthenticationBackend(backends.ModelBackend):
                 email__iexact=username) | Q(profile__number__iexact=username))
             if user.check_password(password):
                 return user
-        except user.DoesNotExist:
+        except :
             pass
 
 

@@ -32,22 +32,23 @@
 	left: 51%;
 	transform: translate(-50%, -50%) rotateY(90deg);
 	transform-origin: 50%;
-	background: rgba(49, 59, 73, 0.51);
+	background: rgba(49, 59, 73, 0.2);
 	opacity: 0;
 	transition: all 0.4s ease-in;
 }
 
-.frame:hover .description {
+.frame .description {
 	transform: translate(-50%, -50%) rotateY(0deg);
-	opacity: 4;
+	opacity: 1;
 }
 
 .description h4 {
 	text-align: center;
-	color: #fff;
+	color: #ffffff;
 	font-family: 'Montserrat Alternates', sans-serif;
 	margin-top: 0px;
 	margin-bottom: 0px;
+	font-size: 24px;
 }
 
 .title {

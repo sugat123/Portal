@@ -91,11 +91,13 @@ def dashboard(request):
             paid.created_on = datetime.datetime.now()
             paid.save()
 
+    c = count()
+    match(c)
+    
     verify()
     exchange()
 
-    c = count()
-    match(c)
+   
     # match = Match()
 
     # p = c[0]
@@ -376,7 +378,7 @@ class SearchView(ListView):
     model = JobType
     template_name = 'jobs/search_results.html'
     count = 0
-    paginate_by = 1
+    paginate_by = 12
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -386,7 +388,7 @@ class SearchView(ListView):
 
     def get_queryset(self):
         request = self.request
-        query = request.GET.get('q', None)
+        query = request.GET.get('q', None).replace(" ", "")
 
         if query is not None:
             job_results = JobType.objects.search(query)
