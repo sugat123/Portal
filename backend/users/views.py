@@ -66,6 +66,7 @@ def register(request):
     if request.method == "POST":
         user_form = AddUserForm(request.POST or None)
         profile_form = ProfileForm(request.POST or None)
+        
         if user_form.is_valid() and profile_form.is_valid():
 
             user = user_form.save(commit=False)

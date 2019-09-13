@@ -110,26 +110,28 @@
 
 										{% for match in matches %}
 										{% if user.id == match.applied_id%}
+
 										
-										{% for verify in verified %}
-										{% check verify.id %}
-										{% endfor %}
-										
-										
-										<li class="notify-title">
+										<!-- <li class="notify-title">
 											<div class="n-title">None
 											</div>
 
-										</li>
+										</li> -->
 										
 										<li class="notify-title">
 											<div class="n-title"><a href="{% url 'jobs:khalti' user.id %}">We
 													have
 													found a match for the job you
-													applied with user {{ match.applied_id }}</a></div>
+													applied with user {{ match.posted_id }}</a></div>
 
 										</li>
+
 										
+
+
+
+
+
 
 
 										{% endif %}
@@ -147,13 +149,14 @@
 										{% for match in matches %}
 										{% if user.id == match.posted_id %}
 
-										{% if  user.id in check %}
-										<li class="notify-title">
+										
+										<!-- <li class="notify-title">
 											<div class="n-title">None
 											</div>
 
-										</li>
-										{%  else %}
+										</li> -->
+										
+										
 										<li class="notify-title">
 											<div class="n-title"><a href="{% url 'jobs:khalti' user.id %}">We
 													have
@@ -161,7 +164,7 @@
 													applied with user {{ match.applied_id }}</a></div>
 
 										</li>
-										{% endif %}
+									
 
 										{% endif %}
 										{% endfor %}

@@ -1,4 +1,5 @@
 from .models import *
+import jobs.views
 
 
 def count():
@@ -64,13 +65,13 @@ def match(c):
 
     for i, j, l in zip(p, a, s):
         if (i, j, l) not in test:
-            for post in PostedJob.objects.filter(id=i):
+            for post in PostedJob.objects.filter(user_id=i):
                 posted.append(post.user.email)
                 text1 = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
                 jobs.views.email_match([post.user.email], text1)
 
                 # sms(post.user.profile.number, text1)
-            for apply in AppliedJob.objects.filter(id=j):
+            for apply in AppliedJob.objects.filter(user_id=j):
                 applied.append(apply.user.email)
                 text2 = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
                 jobs.views.email_match([apply.user.email], text2)
