@@ -39,13 +39,13 @@
 					<div class="form-field">
 
 						<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
-						<input type="name" name="first_name" placeholder="First name" class="form-control" required>
+						<input type="name" name="first_name" placeholder="First name" class="form-control" {% if user_form.first_name.value %} value="{{user_form.first_name.value}}" {% endif %} required>
 					</div>
 					<div class="form-field">
 
 
 						<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
-						<input type="name" name="last_name" placeholder="Last name" class="form-control" required>
+						<input type="name" name="last_name" placeholder="Last name" class="form-control" {% if user_form.last_name.value %} value="{{user_form.last_name.value}}" {% endif %} required>
 					</div>
 					{% if user_form.errors %}
 					
@@ -56,7 +56,7 @@
 
 
 						<span class="form-field-icon"><i class="fas fa-user-alt"></i></span>
-						<input type="name" name="username" placeholder="User name" class="form-control">
+						<input type="name" name="username" placeholder="User name" class="form-control" {% if user_form.username.value %} value="{{user_form.username.value}}" {% endif %}>
 					</div>
 					{% if user_form.errors %}
 					<span style="color: red;">{{user_form.email.errors}}</span>
@@ -65,7 +65,7 @@
 
 
 						<span class="form-field-icon"><i class="fas fa-envelope"></i></span>
-						<input type="email" name="email" placeholder="Email" class="form-control">
+						<input type="email" name="email" placeholder="Email" class="form-control" {% if user_form.email.value %} value="{{user_form.email.value}}" {% endif %}>
 					</div>
 					{% if user_form.errors %}
 					
@@ -94,7 +94,7 @@
 
 
 						<span class="form-field-icon"><i class="fas fa-phone"></i></span>
-						<input type="number" name="number" placeholder="Number" class="form-control">
+						<input type="number" name="number" placeholder="Number" class="form-control" {% if profile_form.number.value %} value="{{profile_form.number.value}}" {% endif %}>
 					</div>
 					<div class="form-field">
 						<span>Are you an Employeer or a Job Seeker?</span>&nbsp;&nbsp;

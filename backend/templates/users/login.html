@@ -40,7 +40,7 @@
 						<label class="test" >Username</label>
 						
 						
-						<div class=""><input name="username" placeholder="Username/Phone Number" class="form-control" required></div>
+						<div class=""><input name="username" placeholder="Username/Phone Number" class="form-control" {% if form.username.value %} value="{{form.username.value}}" {% endif %} required></div>
 					</div>
 					{% if form.errors %}
 					

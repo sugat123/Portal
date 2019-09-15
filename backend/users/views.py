@@ -7,7 +7,7 @@ from .models import ActivationCode
 from django.core.mail import send_mail
 from .forms import *
 from django.http import Http404
-
+from jobs.views import dashboard
 
 def login_user(request):
     if request.user.is_authenticated:
