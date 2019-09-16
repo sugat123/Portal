@@ -250,6 +250,7 @@
             <div class="popup">
                 <h4>Please enter the prefer facility</h4>
                 <a class="close" href="#">&times;</a>
+               
                 <div class="popup-content">
                     <form action="{% url 'jobs:add_facility' %}" method="POST">
                         {% csrf_token %}
@@ -270,6 +271,9 @@
             </div>
         </div>
     </section>
+    <script>
+       
+    </script>
 
     {% endif %}
     {% endblock %}

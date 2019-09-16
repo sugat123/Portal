@@ -26,7 +26,7 @@
                 </div>
                 {% if user.profile.user_type == 'Job Seeker' %}
                 {% for apply in applied %}
-                {% if person.id == apply.user_id %}
+                {% if match.applied_id == apply.user_id and match.job_type == apply.job_type.id %}
                 <form action="https://rc.esewa.com.np/epay/main" method="POST">
 
                     <input value="{{ apply.job_type.commission }}" name="tAmt" type="hidden">
@@ -35,7 +35,7 @@
                     <input value="0" name="psc" type="hidden">
                     <input value="0" name="pdc" type="hidden">
                     <input value="NP-ES-EPAY" name="scd" type="hidden">
-                    <input value="{{ apply.job_type.id }}" name="pid" type="hidden">
+                    <input value="{{apply.job_type.id|rnd}}" name="pid" type="hidden">
                     <input value="http://127.0.0.1:8000/jobs/" type="hidden" name="su">
                     <input value="http://127.0.0.1:8000/jobs/" type="hidden" name="fu">
 
@@ -49,7 +49,7 @@
                 {% else %}
 
                 {% for post in posted %}
-                {% if person.id == post.user_id %}
+                {% if match.posted_id == post.user_id and match.job_type == post.job_type.id %}
                 <form action="https://rc.esewa.com.np/epay/main" method="POST">
 
                     <input value="{{ post.job_type.commission }}" name="tAmt" type="hidden">
@@ -58,7 +58,7 @@
                     <input value="0" name="psc" type="hidden">
                     <input value="0" name="pdc" type="hidden">
                     <input value="NP-ES-EPAY" name="scd" type="hidden">
-                    <input value="112233223" name="pid" type="hidden">
+                    <input value="{{post.job_type.id|rnd}}" name="pid" type="hidden">
                     <input value="http://127.0.0.1:8000/jobs/" type="hidden" name="su">
                     <input value="http://127.0.0.1:8000/jobs/" type="hidden" name="fu">
 
@@ -94,15 +94,16 @@
     <!-- Place this where you need payment button -->
 
     {% if user.profile.user_type == 'Job Seeker' %}
+
     {% for apply in applied %}
 
     <script>
-        {% if person.id == apply.user_id %}
+        {% if match.applied_id == apply.user_id and match.job_type == apply.job_type.id %}
         var config = {
             // replace the publicKey with yours
 
             "publicKey": "test_public_key_dd62f6822b3e4ae7b1561839081e9e97",
-            "productIdentity": "{{person.id}}",
+            "productIdentity": "{{apply.job_type.id}}",
             "productName": "{{apply.job_type.title}}",
             "productUrl": "http://127.0.0.1:8000",
             "eventHandler": {
@@ -112,7 +113,7 @@
                     alert("Transaction Confirmed.");
 
                     $.ajax({
-                        url: "{% url 'jobs:khalti' user.id %}",
+                        url: "{% url 'jobs:khalti' match.id %}",
                         type: "post",
                         data: payload,
                         dataType: 'json'
@@ -141,12 +142,12 @@
     {% else %}
     {% for post in posted %}
     <script>
-        {% if person.id == post.user_id %}
+        {% if match.posted_id == post.user_id and  match.job_type == post.job_type.id %}
         var config = {
             // replace the publicKey with yours
 
             "publicKey": "test_public_key_dd62f6822b3e4ae7b1561839081e9e97",
-            "productIdentity": "{{person.id}}",
+            "productIdentity": "{{post.job_type.id}}",
             "productName": "{{post.job_type.title}}",
             "productUrl": "http://127.0.0.1:8000",
             "eventHandler": {
@@ -155,7 +156,7 @@
                     console.log(payload);
                     alert("Transaction Confirmed.");
                     $.ajax({
-                        url: "{% url 'jobs:khalti' user.id %}",
+                        url: "{% url 'jobs:khalti' match.id %}",
                         type: "post",
                         data: payload,
                         dataType: 'json'

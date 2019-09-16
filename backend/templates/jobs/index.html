@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
-{% load custom_tags %}
 {% load class_name %}
 {% load bootstrap3 %}
 
@@ -89,18 +88,14 @@
 								<a href="" class="dropdown-toggle" data-toggle="dropdown">
 									<i class="fas fa-bell"></i>
 									{% for match in matches %}
+
 									{% if  user.id == match.applied_id or user.id == match.posted_id%}
-									<span class="badge">{{forloop.counter}}</span>
-
-
-									{% for verify in verified %}
-									{% if user.id == verify.user_id and verify.paid_status is True %}
-									<span class="badge">0</span>
+									<span class="badge"></span>
 									{% endif %}
 									{% endfor %}
 
-									{% endif %}
-									{% endfor %}
+
+
 								</a>
 								<ul class="dropdown-menu cart-list">
 									<div id="testDiv">
@@ -111,60 +106,64 @@
 										{% for match in matches %}
 										{% if user.id == match.applied_id%}
 
-										
+
 										<!-- <li class="notify-title">
 											<div class="n-title">None
 											</div>
 
 										</li> -->
-										
+
 										<li class="notify-title">
-											<div class="n-title"><a href="{% url 'jobs:khalti' user.id %}">We
+											<div class="n-title"><a href="{% url 'jobs:khalti' match.id %}">We
 													have
 													found a match for the job you
-													applied with user {{ match.posted_id }}</a></div>
+													applied with user {{ match.posted_id }}.</a>
+												<br>
+												{% for verify in verified %}
+												{% if user.id == verify.user_id and match.id == verify.match_id %}
+												<h4><span class="label label-success">PAID</span></h4>
+
+												{% endif %}
+
+												{% endfor %}
+											</div>
 
 										</li>
-
-										
-
-
-
-
-
 
 
 										{% endif %}
 										{% endfor %}
 
 
-
-
 										{% else %}
-
-
-
 
 
 										{% for match in matches %}
 										{% if user.id == match.posted_id %}
 
-										
+
 										<!-- <li class="notify-title">
 											<div class="n-title">None
 											</div>
 
 										</li> -->
-										
-										
+
+
 										<li class="notify-title">
-											<div class="n-title"><a href="{% url 'jobs:khalti' user.id %}">We
+											<div class="n-title"><a href="{% url 'jobs:khalti' match.id %}">We
 													have
 													found a match for the job you
-													applied with user {{ match.applied_id }}</a></div>
+													applied with user {{ match.applied_id }}</a>
+												<br>
+												{% for verify in verified %}
+												{% if user.id == verify.user_id and match.id == verify.match_id %}
+												<h4><span class="label label-success">PAID</span></h4>
+												{% endif %}
+												{% endfor %}
+											</div>
 
 										</li>
-									
+
 
 										{% endif %}
 										{% endfor %}
@@ -462,25 +461,18 @@
 						<p>{{setting.about_text}}</p>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="footer-term">
-						<h4 class="ft-title">Job seeker</h4>
-						<ul class="ft-list">
-							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Register</a></li>
-							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Login</a></li>
-							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Search job</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="footer-term">
-						<h4 class="ft-title">Employers</h4>
-						<ul class="ft-list">
-							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Register</a></li>
-							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Login</a></li>
-							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Post job</a></li>
-						</ul>
-					</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div style="overflow:hidden;width: 500px;position: relative;"><iframe width="500" height="250"
+							src="https://maps.google.com/maps?width=500&amp;height=500&amp;hl=en&amp;q=DJ%20group%20of%20company+(DJ%20group%20of%20Company)&amp;ie=UTF8&amp;t=&amp;z=15&amp;iwloc=B&amp;output=embed"
+							frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+
+						<style>
+							#gmap_canvas img {
+								max-width: none !important;
+								background: none !important
+							}
+						</style>
+					</div><br />
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="footer-term">

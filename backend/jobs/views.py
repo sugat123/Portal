@@ -85,8 +85,12 @@ def dashboard(request):
             paid.profile_id = request.user.id
             paid.name = request.user.username
             paid.amount = data[1]
-            for temp in JobType.objects.filter(id = data[0]):
-                paid.product = temp.title
+            
+            pid = data[0]
+            p = int(pid[0])
+           
+            for temp in JobType.objects.filter(id = p):
+                paid.product = temp.id
             paid.mobile = request.user.profile.number
             paid.created_on = datetime.datetime.now()
             paid.save()
@@ -96,7 +100,6 @@ def dashboard(request):
 
     verify()
     exchange()
-
 
     context = {'job_types': job_types}
     return render(request, 'jobs/dashboard.html', context)
@@ -285,7 +288,9 @@ def sms(number, text):
 
 @csrf_exempt
 def khalti(request, id):
-    person = get_object_or_404(User, id=id)
+    person = User.objects.all()
+    match = get_object_or_404(Match, id=id)
+
     applied = AppliedJob.objects.all()
     posted = PostedJob.objects.all()
     
@@ -294,20 +299,20 @@ def khalti(request, id):
 
         token = request.POST['token']
         amount = request.POST['amount']
-        user_id = request.POST['product_identity']
-        product = request.POST['product_name']
+        # user_id = request.POST['product_identity']
+        product = request.POST['product_identity']
 
         v = verification(token, amount)
 
         if v['state']['name'] == "Completed":
             print("Completed")
             paid = Payment()
-            paid.profile_id = user_id
+            paid.profile_id = request.user.id
             paid.name = v['user']['name']
-            paid.amount = v['amount']
+            paid.amount = int(v['amount']) / 100
             paid.mobile = v['user']['mobile']
             paid.created_on = v['created_on']
-            paid.product = product
+            paid.product = int(product)
             paid.save()
 
    
@@ -322,7 +327,7 @@ def khalti(request, id):
                         #     print(i['user']['mobile'] + "\n")
                         # print(t[''])
 
-    context = {'person': person, 'applied': applied, 'posted': posted}
+    context = {'person': person, 'applied': applied, 'posted': posted, 'match':match}
     return render(request, 'jobs/khalti.html', context)
 
 
@@ -330,7 +335,7 @@ class SearchView(ListView):
     model = JobType
     template_name = 'jobs/search_results.html'
     count = 0
-    paginate_by = 1
+    paginate_by = 12
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -340,7 +345,7 @@ class SearchView(ListView):
 
     def get_queryset(self):
         request = self.request
-        query = request.GET.get('q', None)
+        query = request.GET.get('q', None).replace(" ", "")
 
         if query is not None:
             job_results = JobType.objects.search(query)

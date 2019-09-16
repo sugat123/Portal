@@ -32,6 +32,9 @@ class JobType(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name_plural = 'Job Types'
+
 
 class Skills(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -43,9 +46,6 @@ class Skills(models.Model):
 
     def __str__(self):
         return "{0}'s Skill: {1}".format(self.job_type, self.title)
-
-    class Meta:
-        verbose_name_plural = 'Skill'
 
 
 class Facility(models.Model):
@@ -87,6 +87,9 @@ class PostedJob(models.Model):
     def get_facility(self):
         return "\n, ".join([f.title for f in self.facility.all()])
 
+    class Meta:
+        verbose_name_plural = 'Posted Jobs'
+
 
 class AppliedJob(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -103,6 +106,9 @@ class AppliedJob(models.Model):
 
     def get_skills(self):
         return "\n, ".join([s.title for s in self.skills.all()])
+
+    class Meta:
+        verbose_name_plural = 'Applied Jobs'
 
 
 class SiteSetting(models.Model):
@@ -135,16 +141,22 @@ class Match(models.Model):
     score = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    job_type = models.CharField(max_length=55, null=True)
+    job_type = models.IntegerField(null=True)
+
+    class Meta:
+        verbose_name_plural = 'Matched Jobs'
 
 
 class Payment(models.Model):
     profile_id = models.IntegerField(null=True)
     name = models.CharField(max_length=100, null=True)
-    amount = models.CharField(max_length=200, null=True)
-    product = models.CharField(max_length=100, null=True)
+    amount = models.IntegerField(null=True)
+    product = models.IntegerField(null=True)
     mobile = models.CharField(max_length=20, null=True)
     created_on = models.DateTimeField(null=True)
+
+    class Meta:
+        verbose_name_plural = 'Payments'
 
 
 class Verification(models.Model):
@@ -152,6 +164,9 @@ class Verification(models.Model):
     user_id = models.IntegerField(null=True)
     paid_status = models.BooleanField(default=False, null=True)
     match_id = models.IntegerField(null=True)
+
+    class Meta:
+        verbose_name_plural = 'Verified Payments'
 
 
 class Exchange(models.Model):

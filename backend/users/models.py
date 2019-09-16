@@ -18,7 +18,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     number = models.CharField(max_length=15, null=False, blank=False, unique=True)
     user_type = models.CharField(
-        max_length=15,  default='Job Seeker')
+        max_length=15, choices=[('Employeer', 'Employeer'), ('Job Seeker', 'Job Seeker')],default='Job Seeker')
 
     def __str__(self):
         return '{}'.format(self.user.username)
@@ -44,5 +44,5 @@ def generate_activation_code():
 
 class ActivationCode(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.PROTECT)
+                             on_delete=models.CASCADE)
     code = models.CharField(max_length=6, default=generate_activation_code)

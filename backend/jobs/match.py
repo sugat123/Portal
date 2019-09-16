@@ -40,7 +40,7 @@ def count():
                 p_matched.append(s.user_id)
                 a_matched.append(x.user_id)
                 score.append(score_temp)
-                job_type.append(x.job_type.title)
+                job_type.append(x.job_type.id)
 
     return [p_matched, a_matched, score, job_type]
 
@@ -64,15 +64,19 @@ def match(c):
         test_a.append((n.applied_id))
 
     for i, j, l in zip(p, a, s):
+
         if (i, j, l) not in test:
             for post in PostedJob.objects.filter(user_id=i):
                 posted.append(post.user.email)
+
                 text1 = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
                 jobs.views.email_match([post.user.email], text1)
 
                 # sms(post.user.profile.number, text1)
             for apply in AppliedJob.objects.filter(user_id=j):
+
                 applied.append(apply.user.email)
+
                 text2 = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
                 jobs.views.email_match([apply.user.email], text2)
 
@@ -86,7 +90,7 @@ def match(c):
             match.posted_id = p[k]
             match.applied_id = a[k]
             match.score = s[k]
-            match.job_type = job[k]
+            match.job_type = int(job[k])
             match.save()
 
     print(matches)

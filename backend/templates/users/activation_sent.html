@@ -1,39 +1,48 @@
-
 {% extends "users/login.html" %}
-{% block content %}
-{% load static %}
 
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
 
 <style>
     .activation {
-    text-align: center;
-}
-.active-button {
-    background: #005f34;
-    color: #fff;
-    border: none;
-    padding: 7px 25px;
-    border-radius: 7px;
-}
-.mtitle {
-    font-size: 17px;
-    margin-bottom: 10px;
-}
-.form-control {
-    width: 60%;
-    margin: 0 auto;
-}
-.form-content {
-    width: 36%;
-    margin-top: 100px;
-}
+        text-align: center;
+    }
+
+    .active-button {
+        background: #005f34;
+        color: #fff;
+        border: none;
+        padding: 7px 25px;
+        border-radius: 7px;
+    }
+
+    .mtitle {
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .form-content {
+        width: 36%;
+        margin-top: 100px;
+    }
 </style>
-    <div class="activation">
-        <form action="{% url 'users:activation' %}" method="POST">
-            {% csrf_token %}
-            <label class="mtitle">Please enter activation code to continue:</label><br>
-            <input type="text" class="form-control" name="activation_code" /><br>
-            <button type="submit" class="active-button">Activate</button>
-    </div>
+<div class="text-center" id="alert_message">
+    {% bootstrap_messages %}
+</div>
+<div class="activation">
+
+    <form action="{% url 'users:activation' %}" method="POST">
+        {% csrf_token %}
+        <label class="mtitle">Please enter activation code to continue:</label><br>
+        <input type="text" class="form-control" name="activation_code" /><br>
+        <button type="submit" class="active-button">Activate</button>
+</div>
 
 {% endblock %}

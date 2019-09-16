@@ -1,9 +1,10 @@
-.news-banner{
-	background-image: url(../img/banner.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+.news-banner {
+    background-image: url(../img/banner.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
+
 .news-title {
     color: #fff;
     text-align: center;
@@ -11,19 +12,23 @@
     font-size: 50px;
     text-transform: uppercase;
 }
+
 .newsfeed {
     margin-top: 50px;
 }
+
 .news-content {
     background: #EFEFEF;
     width: 65%;
     margin: 0 auto;
     padding: 30px;
 }
+
 .news-content h3 {
     margin-top: 0;
     padding-bottom: 20px;
 }
+
 .jobseeker-list {
     display: flex;
     justify-content: space-between;
@@ -31,6 +36,7 @@
     padding: 15px;
     margin-bottom: 20px;
 }
+
 .jsv-btn a {
     background: #006034;
     color: #fff;
@@ -41,6 +47,7 @@
     float: right;
     margin-bottom: 30px;
 }
+
 .add-button a {
     background: #0981EF;
     color: #fff;
@@ -49,25 +56,33 @@
     font-weight: 600;
     padding: 10px 32px;
 }
-.add-button a:hover{
+
+.add-button a:hover {
     background: #006034;
 }
+
 span.badge {
     position: absolute;
-    top: 0px;
-    left: 33px;
+    top: -3px;
+    left: 37px;
     border-radius: 50%;
-    width: 15px;
-    height: 15px;
+    min-width: 6px;
+    height: 6px;
     background: #00AEEF;
-    padding: 2px 4px;
+    padding: 5px 5px;
 }
+
+.badge:empty {
+    display: block;
+}
+
 .dropdown-menu {
     top: 58px;
     left: -195px;
     border-radius: 0;
     border: none;
-}    
+}
+
 li.notify-title {
     display: flex;
     justify-content: space-between;
@@ -76,22 +91,25 @@ li.notify-title {
     padding-bottom: 5px;
     padding: 10px;
 }
+
 .dropdown-menu.cart-list .notify-button a {
     background: #006034;
     color: #fff;
     padding: 5px 10px 5px 10px;
 }
+
 .dropdown-menu.cart-list .notify-button a:hover {
     background: #0981EF;
 }
-.dropdown-menu{
+
+.dropdown-menu {
     min-width: 255px;
     padding-bottom: 10px;
 }
+
 .notify-button {
     padding-left: 14px;
 }
-
 
 input[type=search] {
     -webkit-appearance: textfield;
@@ -105,11 +123,9 @@ input[type=search] {
     border: solid 1px #ccc;
     padding: 9px 10px 9px 32px;
     width: 55px;
-    
     -webkit-border-radius: 10em;
     -moz-border-radius: 10em;
     border-radius: 10em;
-    
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     transition: all .5s;
@@ -122,9 +138,11 @@ input[type=search] {
     color: transparent;
     cursor: pointer;
 }
+
 #search input[type=search]:hover {
     background-color: #fff;
 }
+
 #search input[type=search]:focus {
     width: 130px;
     padding-left: 32px;

@@ -9,6 +9,7 @@ from .forms import *
 from django.http import Http404
 
 
+
 def login_user(request):
     if request.user.is_authenticated:
         redirect('jobs:dashboard')
@@ -41,7 +42,7 @@ def login_user(request):
                 messages.info(request, 'Your account is not active now.')
             else:
 
-                messages.error(request, 'Invalid Username and Password')
+                messages.error(request, 'Invalid Username or Password')
 
         else:
 
@@ -50,6 +51,7 @@ def login_user(request):
     else:
 
         form = LoginForm()
+    
 
     return render(request, 'users/login.html', {'form': form})
 
@@ -58,7 +60,7 @@ def logout_user(request):
 
     if request.user.is_authenticated:
         logout(request)
-       
+
         return redirect('/')
 
 
@@ -66,7 +68,7 @@ def register(request):
     if request.method == "POST":
         user_form = AddUserForm(request.POST or None)
         profile_form = ProfileForm(request.POST or None)
-        
+
         if user_form.is_valid() and profile_form.is_valid():
 
             user = user_form.save(commit=False)
@@ -93,19 +95,16 @@ def register(request):
 
 
 def check_activation_code(request):
-    try:
-        for i in ActivationCode.objects.all():
-            if request.method == 'POST':
-                if i.code == request.POST['activation_code']:
-                    i.user.is_active = True
-                    i.user.save()
-                    i.delete()
+    for i in ActivationCode.objects.all():
+        if request.method == 'POST':
+            if i.code == request.POST['activation_code']:
+                i.user.is_active = True
+                i.user.save()
+                i.delete()
 
-                    messages.success(
-                        request, 'Your account has been successfully activated. Please login to continue')
-                    return redirect('users:login_user')
-
-    except ActivationCode.DoesNotExist:
-        raise Http404
-
+                messages.success(
+                    request, 'Your account has been successfully activated. Please login to continue')
+                return redirect('users:login_user')
+            else:
+                messages.error(request, "Please enter a valid code.")
     return render(request, 'users/activation_sent.html', {})

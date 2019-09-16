@@ -16,13 +16,3 @@ class ProfileAdmin(admin.ModelAdmin):
     
     def email(self, object):
         return object.user.email
-
-    actions = [
-        'send_email'
-    ]
-
-    def send_email(self, request, queryset):
-        for profile in queryset:
-            send_mail(subject="Employer/Employee Details", message="Hello", from_email='raktim.thapa9999.com',
-                       recipient_list=[profile.user.email]) 
-    send_email.short_description = "Send email"
