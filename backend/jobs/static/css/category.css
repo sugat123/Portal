@@ -32,14 +32,12 @@
 	left: 51%;
 	transform: translate(-50%, -50%) rotateY(90deg);
 	transform-origin: 50%;
-	background: rgba(49, 59, 73, 0.51);
-	opacity: 0;
+	background: rgba(49, 59, 73, 0.3);
 	transition: all 0.4s ease-in;
 }
 
-.frame:hover .description {
+.frame .description {
 	transform: translate(-50%, -50%) rotateY(0deg);
-	opacity: 4;
 }
 
 .description h4 {
@@ -48,6 +46,7 @@
 	font-family: 'Montserrat Alternates', sans-serif;
 	margin-top: 0px;
 	margin-bottom: 0px;
+	font-size: 24px;
 }
 
 .title {

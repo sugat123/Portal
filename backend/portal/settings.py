@@ -150,5 +150,4 @@ USE_DJANGO_JQUERY = True
 AUTHENTICATION_BACKENDS = (
     'users.backend.AuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
-    )
-
+)

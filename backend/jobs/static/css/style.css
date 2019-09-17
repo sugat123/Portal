@@ -537,3 +537,9 @@ ul.ft-list .ft-item a:hover {
     border: 1px solid #ddd;
     padding: 0px 10px 10px 10px;
 }
+
+.map iframe {
+
+    width: 100%;
+
+}
