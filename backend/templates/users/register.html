@@ -30,6 +30,7 @@
 					{% bootstrap_messages %}
 				</div>
 				<h3>Register Form</h3>
+
 				<form action="{% url 'users:register' %}" method="post">
 					{% csrf_token %}
 

@@ -6,7 +6,6 @@ from .models import Profile
 class AuthenticationBackend(backends.ModelBackend):
     def authenticate(self, request,  username=None, password=None, **kwargs):
         usermodel = get_user_model()
-        print(usermodel)
        
         try:
             user = usermodel.objects.get(Q(username__iexact=username) | Q(

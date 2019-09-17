@@ -85,66 +85,21 @@ def dashboard(request):
             paid.profile_id = request.user.id
             paid.name = request.user.username
             paid.amount = data[1]
-            for temp in JobType.objects.filter(id = data[0]):
-                paid.product = temp.title
+            
+            pid = data[0]
+            p = int(pid[0])
+           
+            for temp in JobType.objects.filter(id = p):
+                paid.product = temp.id
             paid.mobile = request.user.profile.number
             paid.created_on = datetime.datetime.now()
             paid.save()
 
     c = count()
     match(c)
-    
+
     verify()
     exchange()
-
-   
-    # match = Match()
-
-    # p = c[0]
-    # a = c[1]
-    # s = c[2]
-    # job = c[3]
-
-    # posted = []
-    # applied = []
-    # matches = []
-    # test = []
-    # test_p = []
-    # test_a = []
-
-    # for n in Match.objects.all():
-    #     test.append((n.posted_id, n.applied_id, n.score))
-    #     test_p.append((n.posted_id))
-    #     test_a.append((n.applied_id))
-
-    # for i, j, l in zip(p, a, s):
-    #     if (i, j, l) not in test:
-    #         for post in PostedJob.objects.filter(id=i):
-    #             posted.append(post.user.email)
-    #             text1 = ' We have found the best match for the job you had posted. Please Check you account to find the detail and for payment '
-    #             email_match([post.user.email], text1)
-                
-    #             # sms(post.user.profile.number, text1)
-    #         for apply in AppliedJob.objects.filter(id=j):
-    #             applied.append(apply.user.email)
-    #             text2 = ' We have found the best match for the job you needed. Please Check you account to find the detail and for payment '
-    #             email_match([apply.user.email], text2)
-                
-    #             # sms(apply.user.profile.number, text2)
-
-    # for k in range(len(p)):
-
-    #     matches.append((p[k], a[k], s[k]))
-    #     if (p[k], a[k], s[k]) not in test:
-    #         match = Match()
-    #         match.posted_id = p[k]
-    #         match.applied_id = a[k]
-    #         match.score = s[k]
-    #         match.job_type = job[k]
-    #         match.save()
-
-    # print(matches)
-
 
     context = {'job_types': job_types}
     return render(request, 'jobs/dashboard.html', context)
@@ -333,7 +288,9 @@ def sms(number, text):
 
 @csrf_exempt
 def khalti(request, id):
-    person = get_object_or_404(User, id=id)
+    person = User.objects.all()
+    match = get_object_or_404(Match, id=id)
+
     applied = AppliedJob.objects.all()
     posted = PostedJob.objects.all()
     
@@ -342,20 +299,20 @@ def khalti(request, id):
 
         token = request.POST['token']
         amount = request.POST['amount']
-        user_id = request.POST['product_identity']
-        product = request.POST['product_name']
+        # user_id = request.POST['product_identity']
+        product = request.POST['product_identity']
 
         v = verification(token, amount)
 
         if v['state']['name'] == "Completed":
             print("Completed")
             paid = Payment()
-            paid.profile_id = user_id
+            paid.profile_id = request.user.id
             paid.name = v['user']['name']
-            paid.amount = v['amount']
+            paid.amount = int(v['amount']) / 100
             paid.mobile = v['user']['mobile']
             paid.created_on = v['created_on']
-            paid.product = product
+            paid.product = int(product)
             paid.save()
 
    
@@ -370,7 +327,7 @@ def khalti(request, id):
                         #     print(i['user']['mobile'] + "\n")
                         # print(t[''])
 
-    context = {'person': person, 'applied': applied, 'posted': posted}
+    context = {'person': person, 'applied': applied, 'posted': posted, 'match':match}
     return render(request, 'jobs/khalti.html', context)
 
 

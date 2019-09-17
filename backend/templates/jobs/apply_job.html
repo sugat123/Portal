@@ -9,18 +9,15 @@
 {% if user.is_authenticated %}
 {% if user.profile.user_type == 'Job Seeker' %}
 
-{% for banner in banners %}
-<section class="eskill-banner" style="background-image: url('/media/{{ banner.job }}');">
-    <div class="eskill-title">Apply for the Job</div>
-</section>
-{% endfor %}
 
 <div class="text-center" id="alert_message">
     {% bootstrap_messages %}
 </div>
 
-<section class="skill-employer">
-
+<section class="image-back">
+    <div class="form-heading">
+        <h2>Apply for the job</h2>
+    </div>
 
     <div class="skill-content">
         <div class="skill-list">
@@ -82,7 +79,6 @@
 
                             <input type="text" name="location" class="form-control" {% if form.location.value %} value='{{form.location.value}}' {% endif %} required>
                         </div>
-
                     </div>
                 </div>
                 <div class="experiance red">
@@ -99,19 +95,15 @@
             </form>
         </div>
     </div>
+</section>
 
+{% else %}
 
-    {% else %}
-
-
-
-    {% for banner in banners %}
-    <section class="eskill-banner" style="background-image: url('/media/{{ banner.job }}');">
-        <div class="eskill-title">Post your Job</div>
-    </section>
-    {% endfor %}
-
-    <section class="skill-employer">
+<section class="image-back">
+    <div class="form-heading">
+        <h2>Post your job</h2>
+    </div>
+    
         <div class="skill-content">
             <div class="skill-list">
                 <div class="choose-skill green">
@@ -140,9 +132,8 @@
                                 <span class="other"><i class="fas fa-angle-right"></i><a
                                         href="#popup1">Others</a></span>
 
-                        </div>
                     </div>
-
+                </div>
                 </div>
 
                 
@@ -165,21 +156,21 @@
                         <span class="other"><i class="fas fa-angle-right"></i><a href="#popup2">Others</a></span>
                     </div>
 
-                    <div class="row facilities">
-                        <div class="form-input">
+                <div class="row facilities">
+                    <div class="form-input">
 
-                            <select name="user" required class="form-control" style="display:none;">
-                                <option value="{{user.id}}">{{user.username}}</option>
-                            </select>
+                        <select name="user" required class="form-control" style="display:none;">
+                            <option value="{{user.id}}">{{user.username}}</option>
+                        </select>
 
-                        </div>
-                        <div class="form-input">
+                    </div>
+                    <div class="form-input">
+                        <select name="job_type" class="form-control" required style="display:none;">
+                            <option value="{{type.id}}">{{type.title}}</option>
+                        </select>
+                    </div>
 
-                            <select name="job_type" class="form-control" required style="display:none;">
-                                <option value="{{type.id}}">{{type.title}}</option>
-                            </select>
-
-                        </div>
+                        
                         {% if form.errors %}
                         
                         <span style="color: red;">{{form.salary.errors}}</span>
@@ -202,10 +193,10 @@
                                 <div class="col-md-6">
                                     <input type="text" name="working_time" class="form-control" {% if form.working_time.value %} value='{{form.working_time.value}}' {% endif %} >
                                 </div>
-
-                            </div>
-                        </div>
-
+                                </div>
+                    </div>
+                   
+                   
                         {% if form.errors %}
                         
                         <span style="color: red;">{{form.number_of_employee.errors}}</span>
@@ -218,10 +209,10 @@
                                 <div class="col-md-6">
                                     <input type="number" min="1" name="number_of_employee" class="form-control" {% if form.number_of_employee.value %} value='{{form.number_of_employee.value}}' {% endif %}>
                                 </div>
-
-                            </div>
                         </div>
+                    </div>
 
+                   
                         {% if form.errors %}
                         
                         <span style="color: red;">{{form.number_of_employee.errors}}</span>
@@ -232,74 +223,79 @@
                             <label>Location</label>
                             <input type="text" name="location" class="form-control" {% if form.location.value %} value='{{form.location.value}}' {% endif %} required>
                         </div>
-
                     </div>
-                </div>
+            </div>
 
-                <div class="experiance red">
-                    <h3>Your experience in this field</h3>
-                    <div class="slidecontainer">
-                        <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
-                        <p>Experiance in year: <span id="demo"></span></p>
+            <div class="experiance red">
+                <h3> Experience you require. (In years)</h3>
+                <div class="slidecontainer">
+                    <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
+                    <p>Experiance in year: <span id="demo"></span></p>
+                </div>
+            </div>
+            <div class="submit-btn">
+                <button type="submit" class="btn-submit">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+
+
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <h4>Please enter the prefer skills</h4>
+            <a class="close" href="#">&times;</a>
+            <div class="popup-content">
+                <form action="{% url 'jobs:add_skill' %}" method="POST">
+                    {% csrf_token %}
+                    <select name="job_type" class="form-control" required style="display:none;">
+                        <option value="{{type.id}}">{{type.title}}</option>
+                    </select>
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {{form.title.errors}}
                     </div>
-                </div>
-                <div class="submit-btn">
-                    <button type="submit" class="btn-submit">Submit</button>
-                </div>
+                    {% endif %}
+
+                    <textarea name="title" required></textarea>
+                    <div class="more-btn"><button type="submit">Add</a></div>
                 </form>
             </div>
         </div>
-        {% endif %}
+    </div>
 
 
+    <div id="popup2" class="overlay">
+        <div class="popup">
+            <h4>Please enter the prefer facility</h4>
+            <a class="close" href="#">&times;</a>
 
-        <div id="popup1" class="overlay">
-            <div class="popup">
-                <h4>Please enter the prefer skills</h4>
-                <a class="close" href="#">&times;</a>
-                <div class="popup-content">
-                    <form action="{% url 'jobs:add_skill' %}" method="POST">
-                        {% csrf_token %}
-                        <select name="job_type" class="form-control" required style="display:none;">
-                            <option value="{{type.id}}">{{type.title}}</option>
-                        </select>
+            <div class="popup-content">
+                <form action="{% url 'jobs:add_facility' %}" method="POST">
+                    {% csrf_token %}
+                    <select name="job_type" class="form-control" required style="display:none;">
+                        <option value="{{type.id}}">{{type.title}}</option>
+                    </select>
 
-                        {% if form.errors %}
-                        <div class="alert alert-danger">
-                            {{form.title.errors}}
-                        </div>
-                        {% endif %}
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {{form.title.errors}}
+                    </div>
+                    {% endif %}
 
-                        <textarea name="title" required></textarea>
-                        <div class="more-btn"><button type="submit">Add</a></div>
-                    </form>
-                </div>
+                    <textarea name="title" required></textarea>
+                    <div class="more-btn"><button type="submit">Add</a></div>
+                </form>
             </div>
         </div>
-        <div id="popup2" class="overlay">
-            <div class="popup">
-                <h4>Please enter the prefer facility</h4>
-                <a class="close" href="#">&times;</a>
-                <div class="popup-content">
-                    <form action="{% url 'jobs:add_facility' %}" method="POST">
-                        {% csrf_token %}
-                        <select name="job_type" class="form-control" required style="display:none;">
-                            <option value="{{type.id}}">{{type.title}}</option>
-                        </select>
+    </div>
+</section>
+<script>
 
-                        {% if form.errors %}
-                        <div class="alert alert-danger">
-                            {{form.title.errors}}
-                        </div>
-                        {% endif %}
+</script>
 
-                        <textarea name="title" required></textarea>
-                        <div class="more-btn"><button type="submit">Add</a></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {% endif %}
-    {% endblock %}
+{% endif %}
+{% endblock %}

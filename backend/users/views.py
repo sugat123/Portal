@@ -53,6 +53,7 @@ def login_user(request):
     else:
 
         form = LoginForm()
+    
 
     return render(request, 'users/login.html', {'form': form})
 
@@ -61,7 +62,7 @@ def logout_user(request):
 
     if request.user.is_authenticated:
         logout(request)
-       
+
         return redirect('/')
 
 
@@ -72,7 +73,7 @@ def register(request):
     if request.method == "POST":
         user_form = AddUserForm(request.POST or None)
         profile_form = ProfileForm(request.POST or None)
-       
+
         if user_form.is_valid() and profile_form.is_valid():
 
             user = user_form.save(commit=False)
@@ -112,5 +113,5 @@ def check_activation_code(request):
                     request, 'Your account has been successfully activated. Please login to continue')
                 return redirect('users:login_user')
             else:
-                messages.error(request,"Please enter a valid code.")
+                messages.error(request, "Please enter a valid code.")
     return render(request, 'users/activation_sent.html', {})

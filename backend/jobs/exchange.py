@@ -13,7 +13,6 @@ def exchange():
         for j in Verification.objects.filter(match_id=match.id):
             if (j.match_id, j.user_id) not in test:
                 count = count + 1
-                print(count)
                 if count == 2:
                     # for n in User.objects.filter(id=j.user_id):
                     #     if n.profile.user_type == 'Job Seeker':
@@ -44,13 +43,13 @@ def verify():
     test = []
     for l in Verification.objects.all():
         test.append(l.payment_id)
-    print(test)
 
     for i in Match.objects.all():
         for j in Payment.objects.all():
             if j.id not in test:
+               
                 if i.applied_id == j.profile_id and i.job_type == j.product:
-
+                   
                     v = Verification()
                     v.payment_id = j.id
                     v.user_id = j.profile_id

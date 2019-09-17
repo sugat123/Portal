@@ -141,7 +141,7 @@ class Match(models.Model):
     score = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    job_type = models.CharField(max_length=55, null=True)
+    job_type = models.IntegerField(null=True)
 
     class Meta:
         verbose_name_plural = 'Matched Jobs'
@@ -150,8 +150,8 @@ class Match(models.Model):
 class Payment(models.Model):
     profile_id = models.IntegerField(null=True)
     name = models.CharField(max_length=100, null=True)
-    amount = models.CharField(max_length=200, null=True)
-    product = models.CharField(max_length=100, null=True)
+    amount = models.IntegerField(null=True)
+    product = models.IntegerField(null=True)
     mobile = models.CharField(max_length=20, null=True)
     created_on = models.DateTimeField(null=True)
 

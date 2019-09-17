@@ -1,3 +1,106 @@
+.category-banner{
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.category-title {
+    color: #fff;
+    text-align: center;
+    padding: 60px 0;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+.cook{
+	background-image: url(../img/chef.jpg);
+}
+.overseer{
+	background-image: url(../img/overseer.jpg);
+}
+.reception{
+	background-image: url(../img/reception.jpg);
+}
+.security{
+	background-image: url(../img/security.jpg);
+}
+.helper{
+	background-image: url(../img/helper.png);
+}
+.teacher{
+	background-image: url(../img/teacher.jpg);
+}
+.accountant{
+	background-image: url(../img/accountant.jpg);
+}
+.plumber{
+	background-image: url(../img/plumber.jpg);
+}
+.sales{
+	background-image: url(../img/sales.jpg);
+}
+.waiter{
+	background-image: url(../img/waiter.jpg);
+}
+.delivery{
+	background-image: url(../img/delivery.jpg);
+}
+.marketing{
+	background-image: url(../img/marketing.jpg);
+}
+.store{
+	background-image: url(../img/store.jpg);
+}
+.driver{
+	background-image: url(../img/driver.jpg);
+}
+.typist{
+	background-image: url(../img/typist.jpg);
+}
+.operator{
+	background-image: url(../img/operator.jpg);
+}
+.hostel{
+	background-image: url(../img/hostel.jpg);
+}
+.washer{
+	background-image: url(../img/washer.jpg);
+}
+.electrician{
+	background-image: url(../img/electrician.jpg);
+}
+.technician{
+	background-image: url(../img/technician.jpg);
+}
+.beauty{
+	background-image: url(../img/beauty.jpg);
+}
+.contractor{
+	background-image: url(../img/contractor.jpg);
+}
+.sweeper{
+	background-image: url(../img/sweeper.jpg);
+}
+.baby{
+	background-image: url(../img/baby.jpg);
+}
+.job-main {
+    padding: 40px 0px;
+    background: rgba(41, 37, 37, 0.51);
+}
+.job-category {
+    padding: 20px 30px;
+    margin-top: 50px;
+}    
+.job-category{
+	text-shadow: none;
+}     
+.job-categories{
+	margin: 0px;
+}
+.job-title {
+    height: 40px;
+}
+
 
 /**/
 .banner-parallax{
@@ -36,7 +139,7 @@
 	transition: all 0.4s ease-in;
 	
 }
-.frame .description {
+.frame:hover .description {
 	transform: translate(-50%, -50%) rotateY(0deg);
 	opacity: 4;
 }
