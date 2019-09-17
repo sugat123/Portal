@@ -32,27 +32,22 @@
 	left: 51%;
 	transform: translate(-50%, -50%) rotateY(90deg);
 	transform-origin: 50%;
-	background: rgba(49, 59, 73, 0.2);
-<<<<<<< HEAD
-	opacity: 1;
-=======
+	background: rgba(49, 59, 73, 0.51);
 	opacity: 0;
->>>>>>> c05fad853efc4ec22ad57404f725a14fa2678038
 	transition: all 0.4s ease-in;
 }
 
-.frame .description {
+.frame:hover .description {
 	transform: translate(-50%, -50%) rotateY(0deg);
-	opacity: 1;
+	opacity: 4;
 }
 
 .description h4 {
 	text-align: center;
-	color: #ffffff;
+	color: #fff;
 	font-family: 'Montserrat Alternates', sans-serif;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	font-size: 24px;
 }
 
 .title {

@@ -1,24 +1,32 @@
 /*employer skills*/
 
-.eskill-banner {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+/*.eskill-banner{
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
-
 .eskill-title {
     color: #fff;
     text-align: center;
     padding: 60px 0;
     font-size: 50px;
     text-transform: uppercase;
-}
+}*/
 
 .skill-content {
-    background: #EFEFEF;
+    /*background: #EFEFEF;*/
     margin: 0 auto;
     width: 65%;
     padding: 30px;
+}
+
+.form-heading h2 {
+    text-align: center;
+    padding-top: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
 }
 
 .skill-employer {
@@ -114,7 +122,9 @@ span.other i {
 }
 
 .choose-skill, .facility-all, .experiance {
-    border: 1px solid #fff;
+    /* background: #7cb4b8; */
+    background: #7cb4b8;
+    /*border: 1px solid #fff;*/
     padding: 25px 20px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, .3);
 }
@@ -125,38 +135,89 @@ span.other i {
 }
 
 .facility-all, .experiance {
-    margin-top: 25px;
+    margin-top: 50px;
 }
 
-.green {
+/*.green{
     background: #1abc9c;
     box-shadow: 0 5px 25px rgb(26, 188, 156);
 }
-
-.blue {
-    background: #00a1c6;
+.blue{
+    background: #3498db;
     box-shadow: 0 5px 25px rgb(52, 152, 219);
 }
-
-.red {
-    background: #611c35;
-    box-shadow: 0 5px 25px rgb(231, 76, 60);
-    ;
-}
+.red{
+    background: #e74c3c;
+    box-shadow: 0 5px 25px rgb(231, 76, 60);;
+}*/
 
 /*jobseeker skill*/
 
-.jsskill-banner {
-    background-image: url(../img/banner.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+/*.jsskill-banner{
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
-
 .jsskill-title {
     color: #fff;
     text-align: center;
     padding: 60px 0;
     font-size: 50px;
     text-transform: uppercase;
+}*/
+
+/*newslill*/
+
+/*.tabber .nav-tabs {
+    border: none;
+    background: none;
+    border-bottom: solid 2px #005F34;
+}
+
+.tabber .nav-tabs a {
+    font-size: 16px;
+    padding: 10px 20px;
+}    
+
+.tabber .nav-tabs > .active > a,
+.tabber .nav-tabs > .active > a:hover,
+.tabber .nav-tabs > .active > a:focus {
+    color: #fff;
+    border: none;
+    background: #005F34;
+}
+
+.tabber .nav-tabs > li > a {
+    border: none;
+    color: #444;
+}
+.tabber .nav-tabs > li > a:hover {
+    color: #fff;
+    background: #005F34;
+}
+
+.tabber .tab-content {
+    padding: 25px 0;
+}
+
+.tabber .tab-content img {
+    margin-top: 4px;
+    margin-bottom: 15px;
+}
+
+.tabber .tab-content img.img-tab-space {
+    margin-top: 7px;
+}
+.tab {
+    margin-top: 60px;
+}*/
+
+/*bgskill*/
+
+.image-back {
+    background-image: url(/static/img/back-form.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

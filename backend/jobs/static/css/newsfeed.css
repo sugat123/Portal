@@ -1,9 +1,9 @@
-.news-banner {
+/* .news-banner {
     background-image: url(../img/banner.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-}
+} */
 
 .news-title {
     color: #fff;
@@ -14,14 +14,17 @@
 }
 
 .newsfeed {
-    margin-top: 50px;
+    background-image: url(/static/img/back-form.jpg);
+    padding-bottom: 30px;
+    /* margin-top: 50px; */
 }
 
 .news-content {
-    background: #EFEFEF;
+    background: #7cb4b8;
     width: 65%;
     margin: 0 auto;
     padding: 30px;
+    margin-top: 30px;
 }
 
 .news-content h3 {
@@ -45,7 +48,8 @@
 
 .news-add {
     float: right;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
+    margin-top: 30px;
 }
 
 .add-button a {
@@ -64,12 +68,12 @@
 span.badge {
     position: absolute;
     top: -3px;
-    left: 37px;
+    left: 38px;
     border-radius: 50%;
     min-width: 6px;
-    height: 6px;
+    height: 8px;
     background: #00AEEF;
-    padding: 5px 5px;
+    padding: 2px 4px;
 }
 
 .badge:empty {
