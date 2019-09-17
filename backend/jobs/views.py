@@ -413,3 +413,7 @@ class SearchView(ListView):
     #         Q(title__icontains=query) | Q(slug__icontains=query)
     #     )
     #     return object_list
+
+
+def error_404_view(request, exception):
+    return render(request, 'jobs/error_404.html',{})

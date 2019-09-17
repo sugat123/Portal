@@ -29,6 +29,11 @@
 
             <form action="{% url 'jobs:apply_job' type.slug %}" method="post">
                 {% csrf_token %}
+
+                {% if form.errors %}
+                <span style="color: red;">{{form.skills.errors}}</span>
+                {% endif %}
+
                 <div class="choose-skill green">
                     <h3>Choose the below skills:</h3>
                     <div class="row skills">
@@ -72,9 +77,7 @@
                             <label>Address</label>
 
                             {% if form.errors %}
-                            
                             <span style="color: red;">{{form.location.errors}}</span>
-                            
                             {% endif %}
 
                             <input type="text" name="location" class="form-control" {% if form.location.value %} value='{{form.location.value}}' {% endif %} required>
@@ -111,8 +114,11 @@
     <section class="skill-employer">
         <div class="skill-content">
             <div class="skill-list">
-
                 <div class="choose-skill green">
+                    {% if form.errors %}
+                    <span style="color: red;">{{form.skills.errors}}</span>
+                    {% endif %}
+
                     <h3>Choose the below skills:</h3>
                     <div class="row skills">
                         <div class="col-md-6 col-sm-6 col-xs-6 list-img">
@@ -138,7 +144,13 @@
                     </div>
 
                 </div>
+
+                
                 <div class="facility-all blue">
+                    {% if form.errors %}
+                    <span style="color: red;">{{form.facility.errors}}</span>
+                    {% endif %}
+
                     <div class="facility">
                         <h3>Choose the facilities below:</h3>
                         {% for facility in facilities %}

@@ -1,6 +1,10 @@
 from django.urls import path, reverse_lazy
 from users import views
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import user_passes_test
+
+
+login_forbidden = user_passes_test(lambda u: u.is_anonymous(), '/')
 
 app_name = 'users'
 urlpatterns = [
