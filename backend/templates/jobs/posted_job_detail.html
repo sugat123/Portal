@@ -8,18 +8,14 @@
 
 {% if user.is_authenticated %}
 
-{% for banner in banners %}
-<section class="eskill-banner" style="background-image: url('/media/{{ banner.newsfeed_detail }}');">
-	<div class="eskill-title">Detail</div>
-</section>
-{% endfor %}
+
 
 <div class="text-center" id="alert_message">
 	{% bootstrap_messages %}
 </div>
 
 <section class="detail">
-	
+
 	<div class="detail-content">
 		<h3>Posted Job details</h3>
 		<div class="table-responsive">

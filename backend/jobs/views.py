@@ -188,8 +188,9 @@ def add_facility(request):
     if request.method == 'POST':
         form = AddFacilityForm(request.POST or None)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Facility added')
+            facility = form.save(commit=False)
+            facility.save()
+            # messages.success(request, 'Facility added')
             return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddFacilityForm()
@@ -204,7 +205,7 @@ def add_skill(request):
         if form.is_valid():
             form.save()
 
-        messages.success(request, 'Skill Added Successfully')
+        # messages.success(request, 'Skill Added Successfully')
         return redirect(request.META['HTTP_REFERER'])
     else:
         form = AddSkillForm()
@@ -370,3 +371,7 @@ class SearchView(ListView):
     #         Q(title__icontains=query) | Q(slug__icontains=query)
     #     )
     #     return object_list
+
+
+def error_404_view(request, exception):
+    return render(request, 'jobs/error_404.html',{})

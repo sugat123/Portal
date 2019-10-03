@@ -26,6 +26,11 @@
 
             <form action="{% url 'jobs:apply_job' type.slug %}" method="post">
                 {% csrf_token %}
+
+                {% if form.errors %}
+                <span style="color: red;">{{form.skills.errors}}</span>
+                {% endif %}
+
                 <div class="choose-skill green">
                     <h3>Choose the below skills:</h3>
                     <div class="row skills">
@@ -35,7 +40,8 @@
                             {% for skill in skills %}
                             {% if skill.job_type_id == type.id %}
                             <div class="form-check">
-                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
+                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}"
+                                    required>
                                 <label for="skill-{{ skill.id }}">{{skill.title}}</label>
                             </div>
                             {% endif %}
@@ -69,24 +75,16 @@
                             <label>Address</label>
 
                             {% if form.errors %}
-                            <div class="alert alert-danger">
-                                {{form.location.errors}}
-                            </div>
+                            <span style="color: red;">{{form.location.errors}}</span>
                             {% endif %}
 
-                            <input type="text" name="location" class="form-control">
+                            <input type="text" name="location" class="form-control" {% if form.location.value %}
+                                value='{{form.location.value}}' {% endif %} required>
                         </div>
-
                     </div>
                 </div>
                 <div class="experiance red">
                     <h3>Your experience in this field</h3>
-
-                    {% if form.errors %}
-                    <div class="alert alert-danger">
-                        {{form.experience.errors}}
-                    </div>
-                    {% endif %}
 
                     <div class="slidecontainer">
                         <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
@@ -103,20 +101,18 @@
 
 {% else %}
 
-
-
 <section class="image-back">
     <div class="form-heading">
         <h2>Post your job</h2>
     </div>
+
     <div class="skill-content">
         <div class="skill-list">
-
-            {% if form.errors %}
-            {{form.errors}}
-            {% endif %}
-
             <div class="choose-skill green">
+                {% if form.errors %}
+                <span style="color: red;">{{form.skills.errors}}</span>
+                {% endif %}
+
                 <h3>Choose the below skills:</h3>
                 <div class="row skills">
                     <div class="col-md-6 col-sm-6 col-xs-6 list-img">
@@ -125,9 +121,14 @@
 
                             {% for skill in skills %}
                             {% if skill.job_type_id == type.id %}
+
                             <div class="form-check">
-                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
+                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}"
+                                    required>
+
                                 <label for="skill-{{ skill.id }}">{{skill.title}}</label>
+
+
                             </div>
                             {% endif %}
                             {% endfor %}
@@ -135,19 +136,25 @@
 
                     </div>
                 </div>
-
             </div>
+
+
             <div class="facility-all blue">
+                {% if form.errors %}
+                <span style="color: red;">{{form.facility.errors}}</span>
+                {% endif %}
+
                 <div class="facility">
                     <h3>Choose the facilities below:</h3>
                     {% for facility in facilities %}
                     {% if facility.job_type_id == type.id %}
                     <div class="form-check">
-                        <input type="checkbox" name="facility" id="facility-{{facility.id}}" value="{{ facility.id }}">
-                        <label for="facility-{{facility.id}}">{{ facility.title }}</label>
+                        <input type="checkbox" name="facility" id="id_category" value="{{ facility.id }}" required>
+                        <label for="facility-{{facility.id}}" id="id_category">{{ facility.title }}</label>
                     </div>
                     {% endif %}
                     {% endfor %}
+
                     <span class="other"><i class="fas fa-angle-right"></i><a href="#popup2">Others</a></span>
                 </div>
 
@@ -160,41 +167,69 @@
 
                     </div>
                     <div class="form-input">
-
                         <select name="job_type" class="form-control" required style="display:none;">
                             <option value="{{type.id}}">{{type.title}}</option>
                         </select>
-
                     </div>
+
+
+                    {% if form.errors %}
+
+                    <span style="color: red;">{{form.salary.errors}}</span>
+
+                    {% endif %}
                     <div class="form-input">
                         <label>Salary (in Rs.)</label>
-                        <input type="number" name="salary" class="form-control">
+                        <input type="number" name="salary" class="form-control" {% if form.salary.value %}
+                            value='{{form.salary.value}}' {% endif %}>
                     </div>
+
+                    {% if form.errors %}
+
+                    <span style="color: red;">{{form.working_time.errors}}</span>
+
+                    {% endif %}
+
                     <div class="form-input">
                         <label>Office time (From-To)</label>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" name="working_time" class="form-control">
+                                <input type="text" name="working_time" class="form-control"
+                                    {% if form.working_time.value %} value='{{form.working_time.value}}' {% endif %}>
                             </div>
-
                         </div>
                     </div>
+
+
+                    {% if form.errors %}
+
+                    <span style="color: red;">{{form.number_of_employee.errors}}</span>
+
+                    {% endif %}
 
                     <div class="form-input">
                         <label>Number of Employees Required</label>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="number" min="1" name="number_of_employee" class="form-control">
+                                <input type="number" min="1" name="number_of_employee" class="form-control"
+                                    {% if form.number_of_employee.value %} value='{{form.number_of_employee.value}}'
+                                    {% endif %}>
                             </div>
-
                         </div>
                     </div>
 
+
+                    {% if form.errors %}
+
+                    <span style="color: red;">{{form.number_of_employee.errors}}</span>
+
+                    {% endif %}
+
                     <div class="form-input">
                         <label>Location</label>
-                        <input type="text" name="location" class="form-control">
+                        <input type="text" name="location" class="form-control" {% if form.location.value %}
+                            value='{{form.location.value}}' {% endif %} required>
                     </div>
-
                 </div>
             </div>
 
@@ -264,9 +299,41 @@
             </div>
         </div>
     </div>
+
+
+
 </section>
 <script>
+    $(document).ready(function () {
+        var $facilityForm = $('#facility-form')
+        $facilityForm.submit(function (event) {
+            event.preventDefault()
+            event.stopPropagation()
+            var $formData = $(this).serialize()
+            var $thisURL = $facilityForm.attr('data-url')
+            $.ajax({
+                method: "POST",
+                url: $thisURL,
+                data: $formData,
+                success: handleFormSuccess,
 
+            });
+
+        });
+
+        function handleFormSuccess(data, textStatus, jqXHR) {
+            $("#id_category").append(new Option(data.id, data.title));
+
+            $('#id_category').val(data.id);
+            $("#id_category").html(data);
+            $('#popup2').modal('toggle');
+            console.log(data)
+
+
+            // $categoryForm.reset(); // reset form data
+        }
+
+    });
 </script>
 
 {% endif %}

@@ -7,12 +7,14 @@ from .models import ActivationCode
 from django.core.mail import send_mail
 from .forms import *
 from django.http import Http404
+from jobs.views import dashboard
+from django.views.decorators.cache import never_cache
 
 
-
+@never_cache
 def login_user(request):
     if request.user.is_authenticated:
-        redirect('jobs:dashboard')
+        return HttpResponseRedirect(reverse('jobs:dashboard'))
     if request.method == 'POST':
         form = LoginForm(request.POST or None)
         if form.is_valid():
@@ -51,7 +53,6 @@ def login_user(request):
     else:
 
         form = LoginForm()
-    
 
     return render(request, 'users/login.html', {'form': form})
 
@@ -64,7 +65,10 @@ def logout_user(request):
         return redirect('/')
 
 
+@never_cache
 def register(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('jobs:dashboard'))
     if request.method == "POST":
         user_form = AddUserForm(request.POST or None)
         profile_form = ProfileForm(request.POST or None)
@@ -94,7 +98,10 @@ def register(request):
     return render(request, 'users/register.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
+@never_cache
 def check_activation_code(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('jobs:dashboard'))
     for i in ActivationCode.objects.all():
         if request.method == 'POST':
             if i.code == request.POST['activation_code']:

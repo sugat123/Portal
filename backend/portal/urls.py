@@ -21,6 +21,8 @@ import jobs
 import users
 from jobs import views
 from users import views
+from django.conf.urls import handler404
+
 
 urlpatterns = [
     # path('chaining/', include('smart_selects.urls')),
@@ -31,3 +33,5 @@ urlpatterns = [
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'jobs.views.error_404_view'

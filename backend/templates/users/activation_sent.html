@@ -5,6 +5,8 @@
 
 {% block content %}
 
+
+
 <style>
     .activation {
         text-align: center;
@@ -33,10 +35,14 @@
         margin-top: 100px;
     }
 </style>
+
 <div class="text-center" id="alert_message">
+
     {% bootstrap_messages %}
 </div>
+
 <div class="activation">
+
 
     <form action="{% url 'users:activation' %}" method="POST">
         {% csrf_token %}
@@ -44,5 +50,7 @@
         <input type="text" class="form-control" name="activation_code" /><br>
         <button type="submit" class="active-button">Activate</button>
 </div>
+
+
 
 {% endblock %}
