@@ -83,7 +83,7 @@ if 'aa1hihfy0ni4ce9.cenqftt2gi2y.ap-south-1.rds.amazonaws.com' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ['portal'],
+            'NAME': os.environ['ebdb'],
             'USER': os.environ['djgroup'],
             'PASSWORD': os.environ['djgroup1234'],
             'HOST': os.environ['aa1hihfy0ni4ce9.cenqftt2gi2y.ap-south-1.rds.amazonaws.com'],
