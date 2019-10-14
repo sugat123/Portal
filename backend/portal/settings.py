@@ -26,7 +26,7 @@ SECRET_KEY = '#8tmpdrett)8jzca*#gf)53s-f&lc^=kv9&##cok_mp*lx8uzw'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'djdreamfocus.ap-south-1.elasticbeanstalk.com', 'djdreamfocus.com']
+    'djdreamfocus.us-west-2.elasticbeanstalk.com', 'www.djdreamfocus.com', '127.0.0.1']
 
 
 # Application definition
