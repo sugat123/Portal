@@ -85,8 +85,8 @@ def register(request):
             code = ActivationCode.objects.create(user=user)
             send_mail(
                 'Activate Your Account',
-                'Here is the activation code: %s' % code.code,
-                'from@example.com',
+                'This is the activation code for your account: %s' % code.code,
+                'DJ Group <settings.EMAIL_HOST_USER>',
                 [user.email]
             )
 
