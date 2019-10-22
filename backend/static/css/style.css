@@ -47,16 +47,16 @@ header {
     padding: 15px;
 }
 
-.formclick> :first-child a {
+.username a {
     background: #006034;
     text-transform: uppercase;
     padding: 10px;
-    color: #fff;
+    color: #fff !important;
     font-weight: bold;
 }
 
-.formclick> :first-child a:hover {
-    color: #fff;
+.username a:hover {
+    color: #fff !important;
     background: #0981EF;
 }
 
@@ -539,7 +539,5 @@ ul.ft-list .ft-item a:hover {
 }
 
 .map iframe {
-
     width: 100%;
-
 }
