@@ -44,6 +44,9 @@ class Skills(models.Model):
     title = models.CharField(
         max_length=255)
 
+    class Meta:
+        unique_together = (("job_type", "title"),)
+
     def __str__(self):
         return "{0}'s Skill: {1}".format(self.job_type, self.title)
 
@@ -61,6 +64,7 @@ class Facility(models.Model):
         return "{0}'s Facility: {1}".format(self.job_type, self.title)
 
     class Meta:
+        unique_together = (("job_type", "title"),)
         verbose_name_plural = 'Facility'
 
 

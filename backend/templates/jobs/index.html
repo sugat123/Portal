@@ -72,7 +72,7 @@
 						<ul class="formclick">
 
 
-							<li>
+							<li class="username">
 
 								<a href="{% url 'jobs:dashboard' %}">{{ user.username }}
 								</a>
@@ -188,7 +188,7 @@
 				<div class="header-right">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						<ul class="formclick">
-							<li><a href="">Post Job</a></li>
+							<!-- <li><a href="">Post Job</a></li> -->
 							<li><i class="fas fa-lock"></i><a href="{% url 'users:register' %}">Register</a></li>
 							<li><i class="fas fa-user"></i><a href="{% url 'users:login_user' %}">Login</a></li>
 

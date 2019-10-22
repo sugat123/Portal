@@ -60,7 +60,7 @@ def index(request):
     return render(request, 'jobs/index.html', context)
 
 
-@login_required
+
 def dashboard(request):
     job_types = JobType.objects.all()
     path = request.get_full_path()[2:]
