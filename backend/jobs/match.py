@@ -3,9 +3,6 @@ import jobs.views
 
 
 def count():
-    for exchange in Exchange.objects.all():
-        for match in Match.objects.all():
-            pass
     p = PostedJob.objects.all()
     a_matched = []
     p_matched = []
