@@ -32,8 +32,6 @@ urlpatterns = [
     path('', jobs.views.dashboard)
 
 
-]
-
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'jobs.views.error_404_view'
