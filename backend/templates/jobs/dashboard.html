@@ -43,8 +43,10 @@
             </h1>
 
 
-            {% else %}
+            {% elif user.profile.user_type == 'Employeer' %}
             <h1>What are you looking for?</h1>
+            {% else %}
+            <h1>Browse Jobs</h1>
             {% endif %}
 
 
