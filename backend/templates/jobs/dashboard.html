@@ -54,7 +54,7 @@
             <div class="row">
                 {% for job in job_types %}
                 <div class="frame col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <img src="/media/jobtypes/{{ job.image }}">
+                    <img src="/{{ job.image }}">
                     <a href="  {% if user.is_authenticated %}
                 {% url 'jobs:job_list' job.slug %}
                 {% else %}
