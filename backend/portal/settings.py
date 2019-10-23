@@ -150,7 +150,7 @@ STATIC_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -192,7 +192,7 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-# AWS_LOCATION = 'media'
+AWS_LOCATION = 'media'
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static'),
@@ -200,4 +200,4 @@ AWS_S3_OBJECT_PARAMETERS = {
 # STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'portal.storage_backends.MediaStorage'
-MEDIA_URL = 'https://%s/' % (AWS_S3_CUSTOM_DOMAIN)
+MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
