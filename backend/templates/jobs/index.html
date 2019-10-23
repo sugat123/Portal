@@ -59,7 +59,7 @@
 					<div class="col-lg-6 col-md-6 col-sm-4 col-xs-1">
 						{% for setting in settings%}
 						<a href="{% url 'jobs:dashboard' %}">
-							<img src="/media/{{ setting.logo}}" alt="djgroup" style="height: 60px; width:60px;">
+							<img src="{{ setting.logo.url }}" alt="djgroup" style="height: 60px; width:60px;">
 						</a>
 
 						{% endfor %}
