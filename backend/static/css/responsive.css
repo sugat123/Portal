@@ -1,0 +1,149 @@
+@media screen and (min-width :1401px) and (max-width:2200px) {}
+
+@media screen and (min-width: 1201px) and (max-width:1400px) {}
+
+@media screen and (min-width: 992px) and (max-width:1200px) {}
+
+@media screen and (min-width: 768px) and (max-width:991px) {
+	.form-content {
+		width: 77%;
+	}
+	.skill-content, .efacilities-content {
+		width: 77%;
+	}
+	.list-img img {
+		display: none;
+	}
+	.detail-content {
+		width: 77%;
+	}
+	.booking-content {
+		width: 77%;
+	}
+	.news-content {
+		width: 77%;
+	}
+}
+
+@media screen and (min-width: 480px) and (max-width:767px) {
+	.formclick> :first-child {
+		display: none;
+	}
+	.form-content {
+		width: 100%
+	}
+	.formclick li {
+		padding-left: 10px;
+	}
+	.skill-content, .efacilities-content {
+		width: 100%;
+	}
+	.list-img img {
+		display: none;
+	}
+	.get-app {
+		margin-bottom: 20px;
+	}
+	.cat-right {
+		text-align: center;
+	}
+	.detail-content {
+		width: 100%;
+	}
+	.news-content {
+		width: 100%;
+	}
+	.booking-content {
+		width: 100%;
+	}
+	span.badge {
+		left: 19px;
+	}
+	.dropdown-menu {
+		left: -215px;
+	}
+	.input-field {
+		margin-bottom: 5px;
+	}
+	.login-form {
+		padding: 70px;
+	}
+	.register-form {
+		padding: 70px;
+	}
+	.frame .description {
+		width: 32%;
+		left: 50%;
+	}
+}
+
+@media screen and (min-width: 340px) and (max-width:479px) {
+	.formclick> :first-child {
+		display: none;
+	}
+	.form-content {
+		width: 100%
+	}
+	.formclick li {
+		padding-left: 10px;
+	}
+	.job-category {
+		margin-bottom: 10px;
+	}
+	.cat-right {
+		text-align: center;
+	}
+	.skill-content, .efacilities-content {
+		width: 100%;
+	}
+	.list-img img {
+		display: none;
+	}
+	.get-app {
+		margin-bottom: 20px;
+	}
+	.cat-right {
+		text-align: center;
+	}
+	.detail-content {
+		width: 100%;
+	}
+	.news-content {
+		width: 100%;
+	}
+	.booking-content {
+		width: 100%;
+	}
+	.formclick li i {
+		padding-right: 3px;
+	}
+	span.badge {
+		left: 24px;
+	}
+	.dropdown-menu {
+		left: -227px
+	}
+	li.notify-title {
+		padding-left: 6px;
+	}
+	.banner-text h1 {
+		font-size: 25px;
+	}
+	.job-category {
+		padding: 34px;
+	}
+	.input-field {
+		margin-bottom: 5px;
+	}
+	.login-form {
+		padding: 32px;
+	}
+	.register-form {
+		padding: 32px;
+	}
+	.frame .description {
+
+		width: 58%;
+		left: 50%;
+	}
+}

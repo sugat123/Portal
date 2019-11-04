@@ -46,7 +46,7 @@
 
     <form action="{% url 'users:activation' %}" method="POST">
         {% csrf_token %}
-        <label class="mtitle">Please enter activation code to continue:</label><br>
+        <label class="mtitle">Please enter activation code sent to your mail or phone to continue:</label><br>
         <input type="text" class="form-control" name="activation_code" /><br>
         <button type="submit" class="active-button">Activate</button>
 </div>

@@ -44,6 +44,9 @@ class Skills(models.Model):
     title = models.CharField(
         max_length=255)
 
+    class Meta:
+        unique_together = (("job_type", "title"),)
+
     def __str__(self):
         return "{0}'s Skill: {1}".format(self.job_type, self.title)
 
@@ -61,6 +64,7 @@ class Facility(models.Model):
         return "{0}'s Facility: {1}".format(self.job_type, self.title)
 
     class Meta:
+        unique_together = (("job_type", "title"),)
         verbose_name_plural = 'Facility'
 
 
@@ -68,7 +72,7 @@ class PostedJob(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     experience = models.IntegerField(blank=True, null=True)
-    skills = models.ManyToManyField(Skills)
+    skills = models.ManyToManyField(Skills, blank=True)
     facility = models.ManyToManyField(Facility, blank=True)
     salary = models.IntegerField(blank=True, null=True)
     working_time = models.CharField(max_length=100, blank=True, null=True)
@@ -95,7 +99,7 @@ class AppliedJob(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     experience = models.IntegerField(null=True, blank=True)
-    skills = models.ManyToManyField(Skills)
+    skills = models.ManyToManyField(Skills, blank=True)
     location = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

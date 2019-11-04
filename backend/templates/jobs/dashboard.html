@@ -28,7 +28,6 @@
 </section>
 
 
-{% if user.is_authenticated %}
 
 <div class="text-center" id="alert_message">
     {% bootstrap_messages %}
@@ -44,8 +43,10 @@
             </h1>
 
 
-            {% else %}
+            {% elif user.profile.user_type == 'Employeer' %}
             <h1>What are you looking for?</h1>
+            {% else %}
+            <h1>Browse Jobs</h1>
             {% endif %}
 
 
@@ -55,7 +56,7 @@
             <div class="row">
                 {% for job in job_types %}
                 <div class="frame col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <img src="/media/{{ job.image }}">
+                    <img src="{{ job.image.url }}">
                     <a href="  {% if user.is_authenticated %}
                 {% url 'jobs:job_list' job.slug %}
                 {% else %}
@@ -79,5 +80,5 @@
 </section>
 
 
-{% endif %}
+
 {% endblock %}

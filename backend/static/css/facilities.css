@@ -1,0 +1,61 @@
+/*employer facilities*/
+.efacilities-banner{
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.efacilities-title {
+    color: #fff;
+    text-align: center;
+    padding: 60px 0;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+.efacilities-content {
+    background: #EFEFEF;
+    margin: 0 auto;
+    width: 65%;
+    padding: 30px;
+}
+.efacilities-employer {
+    margin-top: 50px;
+}
+.list-img img {
+    width: 100%;
+}
+.skills {
+    margin-top: 20px;
+}
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+.more-btn {
+    text-align: unset;
+    margin-top: 0;
+}
+.submit-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}  
+.fill-facilities {
+    margin-left: 15px;
+}      
+.submit-btn span a {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #000;
+    font-weight: bold;
+}
+.submit-btn span i {
+    font-size: 17px;
+    padding-right: 5px;
+}
+.popup-content textarea {
+    width: 100%;
+    margin-bottom: 14px;
+}
+.popup h4 {
+    margin-top: 0;
+}

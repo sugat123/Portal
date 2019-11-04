@@ -26,7 +26,7 @@ SECRET_KEY = '#8tmpdrett)8jzca*#gf)53s-f&lc^=kv9&##cok_mp*lx8uzw'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'djdreamfocus.us-west-1.elasticbeanstalk.com', 'djdreamfocus.com']
+    'djdreamfocus.us-west-2.elasticbeanstalk.com', 'www.djdreamfocus.com', '127.0.0.1']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'jobs',
     'users',
     'bootstrap3',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -79,20 +80,31 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'portal',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
-        'PORT': '',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'portal',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
+            'PORT': '',
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
+        }
+    }
 
 
 # Password validation
@@ -135,16 +147,17 @@ STATIC_URL = '/static/'
 STATIC_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'allstatics')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'raktim.thapa9999@gmail.com'
-EMAIL_HOST_PASSWORD = 'Test@123'
+EMAIL_HOST_USER = 'd.j.08042076@gmail.com'
+EMAIL_HOST_PASSWORD = 'julfmiwzsqlrmxji'
 
 USE_DJANGO_JQUERY = True
 
@@ -152,3 +165,40 @@ AUTHENTICATION_BACKENDS = (
     'users.backend.AuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+# AWS_LOCATION = 'static'
+# AWS_ACCESS_KEY_ID = 'AKIATE25KQNUY2GWWHJ5'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'djdreamfocus'
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# DEFAULT_FILE_STORAGE = 'app.storage_backends.MediaStorage'
+# STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# # STATICFILES_DIRS = [
+# #     os.path.join(BASE_DIR, 'static'),
+# # ]
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+# STATICFILES_FINDERS = ('django.contrib.staticfiles.finders.FileSystemFinder',    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#                        )
+# AWS_DEFAULT_ACL = None
+
+AWS_ACCESS_KEY_ID = 'AKIATE25KQNUY2GWWHJ5'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'djdreamfocus'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'media'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'portal.storage_backends.MediaStorage'
+MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+MEDIA_ROOT = MEDIA_URL

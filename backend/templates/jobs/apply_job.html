@@ -34,14 +34,13 @@
                 <div class="choose-skill green">
                     <h3>Choose the below skills:</h3>
                     <div class="row skills">
-                        <div class="col-md-6 col-sm-6 col-xs-6 list-img">
+                        <div class="col-md-12 col-sm-12 col-xs-12 list-img">
 
 
                             {% for skill in skills %}
                             {% if skill.job_type_id == type.id %}
                             <div class="form-check">
-                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}"
-                                    required>
+                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
                                 <label for="skill-{{ skill.id }}">{{skill.title}}</label>
                             </div>
                             {% endif %}
@@ -83,14 +82,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="experiance red">
+                <!-- <div class="experiance red">
                     <h3>Your experience in this field</h3>
 
                     <div class="slidecontainer">
                         <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
                         <p>Experiance in year: <span id="demo"></span></p>
                     </div>
-                </div>
+                </div> -->
                 <div class="submit-btn">
                     <button type="submit" class="btn-submit">Submit</button>
                 </div>
@@ -115,7 +114,7 @@
 
                 <h3>Choose the below skills:</h3>
                 <div class="row skills">
-                    <div class="col-md-6 col-sm-6 col-xs-6 list-img">
+                    <div class="col-md-12 col-sm-12 col-xs-12 list-img">
                         <form action="{% url 'jobs:post_job' type.slug %}" method="post">
                             {% csrf_token %}
 
@@ -123,8 +122,7 @@
                             {% if skill.job_type_id == type.id %}
 
                             <div class="form-check">
-                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}"
-                                    required>
+                                <input type="checkbox" name="skills" id="skill-{{skill.id}}" value="{{skill.id}}">
 
                                 <label for="skill-{{ skill.id }}">{{skill.title}}</label>
 
@@ -149,7 +147,7 @@
                     {% for facility in facilities %}
                     {% if facility.job_type_id == type.id %}
                     <div class="form-check">
-                        <input type="checkbox" name="facility" id="id_category" value="{{ facility.id }}" required>
+                        <input type="checkbox" name="facility" id="id_category" value="{{ facility.id }}">
                         <label for="facility-{{facility.id}}" id="id_category">{{ facility.title }}</label>
                     </div>
                     {% endif %}
@@ -233,13 +231,13 @@
                 </div>
             </div>
 
-            <div class="experiance red">
+            <!-- <div class="experiance red">
                 <h3> Experience you require. (In years)</h3>
                 <div class="slidecontainer">
                     <input type="range" name="experience" min="1" max="10" value="1" class="slider" id="range">
                     <p>Experiance in year: <span id="demo"></span></p>
                 </div>
-            </div>
+            </div> -->
             <div class="submit-btn">
                 <button type="submit" class="btn-submit">Submit</button>
             </div>

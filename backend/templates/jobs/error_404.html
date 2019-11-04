@@ -1,17 +1,18 @@
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
 
-<style>
-body {
-background: #dedede;
-}
-.page-wrap {
-min-height: 100vh;
-}
-</style>
+    <style>
+        body {
+            background: #dedede;
+        }
+
+        .page-wrap {
+            min-height: 100vh;
+        }
+    </style>
 </head>
 
 <div class="page-wrap d-flex flex-row align-items-center">
@@ -20,7 +21,11 @@ min-height: 100vh;
             <div class="col-md-12 text-center">
                 <span class="display-1 d-block">404</span>
                 <div class="mb-4 lead">The page you are looking for was not found.</div>
+                {% if user.is_authenticated %}
                 <a href="{% url 'jobs:dashboard' %}" class="btn btn-link">Back to Home</a>
+                {% else %}
+                <a href="{% url 'users:login_user' %}" class="btn btn-link">Back to Home</a>
+                {% endif %}
             </div>
         </div>
     </div>
