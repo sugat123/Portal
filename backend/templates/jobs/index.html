@@ -118,7 +118,7 @@
 											<div class="n-title"><a href="{% url 'jobs:khalti' match.id %}">We
 													have
 													found a match for the job you
-													applied with user {{ match.posted_id }}.</a>
+													applied with user {{ match.posted.username }}.</a>
 												<br>
 												{% for verify in verified %}
 												{% if user.id == verify.user_id and match.id == verify.match_id %}
@@ -154,7 +154,7 @@
 											<div class="n-title"><a href="{% url 'jobs:khalti' match.id %}">We
 													have
 													found a match for the job you
-													applied with user {{ match.applied_id }}</a>
+													applied with user {{ match.applied.username }}</a>
 												<br>
 												{% for verify in verified %}
 												{% if user.id == verify.user_id and match.id == verify.match_id %}

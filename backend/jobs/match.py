@@ -1,4 +1,5 @@
 from .models import *
+from django.contrib.auth.models import User
 import jobs.views
 
 
@@ -59,9 +60,9 @@ def match(c):
     test_a = []
 
     for n in Match.objects.all():
-        test.append((n.posted_id, n.applied_id, n.score))
-        test_p.append((n.posted_id))
-        test_a.append((n.applied_id))
+        test.append((n.posted.id, n.applied.id, n.score))
+        test_p.append((n.posted.id))
+        test_a.append((n.applied.id))
 
     for i, j, l in zip(p, a, s):
 
@@ -87,8 +88,10 @@ def match(c):
         matches.append((p[k], a[k], s[k]))
         if (p[k], a[k], s[k]) not in test:
             match = Match()
-            match.posted_id = p[k]
-            match.applied_id = a[k]
+            user1 = User.objects.get(id=p[k])
+            match.posted = user1
+            user2 = User.objects.get(id=a[k])
+            match.applied = user2
             match.score = s[k]
             match.job_type = int(job[k])
             match.save()

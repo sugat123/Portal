@@ -140,8 +140,10 @@ class Banner(models.Model):
 
 
 class Match(models.Model):
-    posted_id = models.IntegerField()
-    applied_id = models.IntegerField()
+    posted = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='%(class)s_posted_user_id')
+    applied = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='%(class)s_aplied_user_id')
     score = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
