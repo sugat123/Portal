@@ -2,6 +2,10 @@ branch-defaults:
   default:
     environment: djdreamfocus-dev
     group_suffix: null
+environment-defaults:
+  djdreamfocus-dev:
+    branch: null
+    repository: null
 global:
   application_name: djdreamfocus
   branch: null
