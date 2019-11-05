@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#8tmpdrett)8jzca*#gf)53s-f&lc^=kv9&##cok_mp*lx8uzw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'djdreamfocus.us-west-2.elasticbeanstalk.com', 'www.djdreamfocus.com', '127.0.0.1']
@@ -186,14 +186,14 @@ AUTHENTICATION_BACKENDS = (
 # AWS_DEFAULT_ACL = None
 
 
-# AWS_ACCESS_KEY_ID = 'AKIATE25KQNUY2GWWHJ5'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'djdreamfocus'
-# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-# AWS_S3_OBJECT_PARAMETERS = {
-#     'CacheControl': 'max-age=86400',
-# }
-# AWS_LOCATION = 'media'
+AWS_ACCESS_KEY_ID = 'AKIATE25KQNUV3F27ZNU'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'djdreamfocus'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'media'
 
 
 # STATICFILES_DIRS = [
@@ -203,6 +203,6 @@ AUTHENTICATION_BACKENDS = (
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
-# DEFAULT_FILE_STORAGE = 'portal.storage_backends.MediaStorage'
-# MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# MEDIA_ROOT = MEDIA_URL
+DEFAULT_FILE_STORAGE = 'portal.storage_backends.MediaStorage'
+MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+MEDIA_ROOT = MEDIA_URL
