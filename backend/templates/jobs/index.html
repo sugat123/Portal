@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
-{% load class_name %}
-{% load bootstrap3 %}
+{% load static %} {% load class_name %} {% load bootstrap3 %}
 
 <head>
-	<title>JobPortal</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/skill.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/newsfeed.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/jsbooking.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/category.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static '/css/responsive.css' %}">
+
+    <title> {% block title %} JobPortal {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/skill.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/newsfeed.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jsbooking.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/category.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/responsive.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/roomtype.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/facility.css' %}">
+
+
+
+
+
 
 </head>
 
 <body>
-	<header class="head">
-		<div class="container">
-			<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <header class="head">
+        <div class="container">
+            <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
 				<div class="container">
 					<a class="navbar-brand" href="#">
 						 <img src="http://placehold.it/150x50?text=Logo" alt="">
@@ -55,153 +61,127 @@
 					</div>
 				</div>
 			</nav> -->
-			<div class="row">
-				<div class="header-left">
-					<div class="col-lg-6 col-md-6 col-sm-4 col-xs-1">
-						{% for setting in settings%}
-						<a href="{% url 'jobs:dashboard' %}">
-							<img src="{{ setting.logo.url }}" alt="djgroup" style="height: 60px; width:60px;">
-						</a>
+            <div class="row">
+                <div class="header-left">
+                    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-1">
+                        {% for setting in settings%}
+                        <a href="{% url 'jobs:dashboard' %}">
+                            <img src="{{ setting.logo.url }}" alt="djgroup" style="height: 60px; width:60px;">
+                        </a>
 
-						{% endfor %}
-					</div>
-				</div>
+                        {% endfor %}
+                    </div>
+                </div>
 
-				{% if user.is_authenticated %}
-				<div class="header-right">
-					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-11">
-						<ul class="formclick">
-
-
-							<li class="username">
-
-								<a href="{% url 'jobs:dashboard' %}">{{ user.username }}
-								</a>
+                {% if user.is_authenticated %}
+                <div class="header-right">
+                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-11">
+                        <ul class="formclick">
 
 
+                            <li class="username">
 
-							</li>
-
-							<li><i class="fas fa-user"></i><a href="{% url 'users:logout' %}">Logout</a></li>
-
-
-							<li class="dropdown">
-								<a href="" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="fas fa-bell"></i>
-									{% for match in matches %}
-
-									{% if  user.id == match.applied_id or user.id == match.posted_id%}
-									<span class="badge"></span>
-									{% endif %}
-									{% endfor %}
+                                <a href="{% url 'jobs:dashboard' %}">{{ user.username }}
+                                </a>
 
 
 
-								</a>
-								<ul class="dropdown-menu cart-list">
-									<div id="testDiv">
-										{% if user.profile.user_type == 'Job Seeker' %}
+                            </li>
+
+                            <li><i class="fas fa-user"></i><a href="{% url 'users:logout' %}">Logout</a></li>
+
+
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fas fa-bell"></i> {% for match in matches %}
+                                    {% if user.id == match.applied_id or user.id == match.posted_id%}
+                                    <span class="badge"></span> {% endif %} {% endfor %}
 
 
 
-										{% for match in matches %}
-										{% if user.id == match.applied_id%}
+                                </a>
+                                <ul class="dropdown-menu cart-list">
+                                    <div id="testDiv">
+                                        {% if user.profile.user_type == 'Job Seeker' %} {% for match in matches %}
+                                        {% if user.id == match.applied_id%}
 
 
-										<!-- <li class="notify-title">
+                                        <!-- <li class="notify-title">
 											<div class="n-title">None
 											</div>
 
 										</li> -->
 
-										<li class="notify-title">
-											<div class="n-title"><a href="{% url 'jobs:khalti' match.id %}">We
-													have
-													found a match for the job you
-													applied with user {{ match.posted.username }}.</a>
-												<br>
-												{% for verify in verified %}
-												{% if user.id == verify.user_id and match.id == verify.match_id %}
-												<h4><span class="label label-success">PAID</span></h4>
+                                        <li class="notify-title">
+                                            <div class="n-title"><a href="{% url 'jobs:khalti' match.id %}">We
+                                                    have
+                                                    found a match for the job you
+                                                    applied with user {{ match.posted.username }}.</a>
+                                                <br> {% for verify in verified %}
+                                                {% if user.id == verify.user_id and match.id == verify.match_id %}
+                                                <h4><span class="label label-success">PAID</span></h4>
 
-												{% endif %}
+                                                {% endif %} {% endfor %}
+                                            </div>
 
-												{% endfor %}
-											</div>
-
-										</li>
+                                        </li>
 
 
-										{% endif %}
-										{% endfor %}
+                                        {% endif %} {% endfor %} {% else %} {% for match in matches %}
+                                        {% if user.id == match.posted_id %}
 
 
-										{% else %}
-
-
-										{% for match in matches %}
-										{% if user.id == match.posted_id %}
-
-
-										<!-- <li class="notify-title">
+                                        <!-- <li class="notify-title">
 											<div class="n-title">None
 											</div>
 
 										</li> -->
 
 
-										<li class="notify-title">
-											<div class="n-title"><a href="{% url 'jobs:khalti' match.id %}">We
-													have
-													found a match for the job you
-													applied with user {{ match.applied.username }}</a>
-												<br>
-												{% for verify in verified %}
-												{% if user.id == verify.user_id and match.id == verify.match_id %}
-												<h4><span class="label label-success">PAID</span></h4>
-												{% endif %}
-												{% endfor %}
-											</div>
+                                        <li class="notify-title">
+                                            <div class="n-title"><a href="{% url 'jobs:khalti' match.id %}">We
+                                                    have
+                                                    found a match for the job you
+                                                    applied with user {{ match.applied.username }}</a>
+                                                <br> {% for verify in verified %}
+                                                {% if user.id == verify.user_id and match.id == verify.match_id %}
+                                                <h4><span class="label label-success">PAID</span></h4>
+                                                {% endif %} {% endfor %}
+                                            </div>
 
-										</li>
+                                        </li>
 
 
-										{% endif %}
-										{% endfor %}
+                                        {% endif %} {% endfor %} {% endif %}
 
 
-
-
-										{% endif %}
-
-
-										<!-- <li class="notify-button">
+                                        <!-- <li class="notify-button">
 											<a href="">View all</a>
 										</li> -->
-									</div>
-								</ul>
-							</li>
+                                    </div>
+                                </ul>
+                            </li>
 
-						</ul>
-					</div>
-				</div>
-				{% else %}
-				<div class="header-right">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<ul class="formclick">
-							<!-- <li><a href="">Post Job</a></li> -->
-							<li><i class="fas fa-lock"></i><a href="{% url 'users:register' %}">Register</a></li>
-							<li><i class="fas fa-user"></i><a href="{% url 'users:login_user' %}">Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% else %}
+                <div class="header-right">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <ul class="formclick">
+                            <!-- <li><a href="">Post Job</a></li> -->
+                            <li><i class="fas fa-lock"></i><a href="{% url 'users:register' %}">Register</a></li>
+                            <li><i class="fas fa-user"></i><a href="{% url 'users:login_user' %}">Login</a></li>
 
-						</ul>
-					</div>
-				</div>
-				{% endif %}
-			</div>
-		</div>
-	</header>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
 
-	<!-- <div id="popup1" class="overlay">
+    <!-- <div id="popup1" class="overlay">
 		<div class="popup">
 			<h2>Signup</h2>
 			<a class="close" href="#">&times;</a>
@@ -225,23 +205,22 @@
 			</div>
 		</div>
 	</div> -->
-	{% block content %}
-	{% for banner in banners %}
-	<div class="banner-image" style="background-image: url('/media/{{ banner.index }}');">
-		{% endfor %}
-		<div class="banner-text">
-			<div class="container">
-				<h1>Join us & Explore Thousands of Jobs</h1>
-				<div class="search-form">
-					<div class="row">
-						<div class="col-md-10">
-							<div class="input-field">
-								<form action="{% url 'jobs:search' %}" method="get">
-									<input type="text" name="q" placeholder="Jobs,skills,company" class="form-control">
+    {% block content %} {% for banner in banners %}
+    <div class="banner-image" style="background-image: url('/media/{{ banner.index }}');">
+        {% endfor %}
+        <div class="banner-text">
+            <div class="container">
+                <h1>Join us & Explore Thousands of Jobs</h1>
+                <div class="search-form">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="input-field">
+                                <form action="{% url 'jobs:search' %}" method="get">
+                                    <input type="text" name="q" placeholder="Jobs,skills,company" class="form-control">
 
-							</div>
-						</div>
-						<!-- <div class="col-md-4">
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-4">
 
 							<div class="input-field">
 								<select id="location" name="location" class="location">
@@ -252,267 +231,256 @@
 								</select>
 							</div>
 						</div> -->
-						<div class="col-md-2">
-							<div class="input-field">
-								<input type="submit" name="search" value="Search" class="search-btn">
-							</div>
-						</div>
+                        <div class="col-md-2">
+                            <div class="input-field">
+                                <input type="submit" name="search" value="Search" class="search-btn">
+                            </div>
+                        </div>
 
-					</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="text-center" id="alert_message">
-		{% bootstrap_messages %}
-	</div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" id="alert_message">
+        {% bootstrap_messages %}
+    </div>
 
-	<section class="job-all">
+    <section class="job-all">
 
-		<div class="container">
-			{{resp}}
-			<div class="job-title">
-				<h1>Browse Jobs</h1>
+        <div class="container">
+            {{resp}}
+            <div class="job-title">
+                <h1>Browse Jobs</h1>
 
-			</div>
+            </div>
 
-			<div class="job-categories">
-				<div class="row">
-					{% if object_list %}
-					<h3>{{ count }} results for <b>{{ query }}</b></h3>
-					{% for object in object_list %}
-					{% with object|class_name as klass %}
-					{% if klass == 'JobType' %}
+            <div class="job-categories">
+                <div class="row">
+                    {% if object_list %}
+                    <h3>{{ count }} results for <b>{{ query }}</b></h3>
+                    {% for object in object_list %} {% with object|class_name as klass %} {% if klass == 'JobType' %}
 
 
 
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                        <a href="
 						{% if user.is_authenticated %}
 						{% url 'jobs:job_list' object.slug %}
 						{% else %}
 						{% url 'users:login_user' %}
 					   {% endif %}
 						">
-							<div class="job-category">
-								<div class="job-icon"><i class="{{ object.icon }}"></i></div>
-								<div class="job-title">{{object.title}}</div>
-							</div>
-						</a>
-					</div>
+                            <div class="job-category">
+                                <div class="job-icon"><i class="{{ object.icon }}"></i></div>
+                                <div class="job-title">{{object.title}}</div>
+                            </div>
+                        </a>
+                    </div>
 
 
 
-					{% endif %}
-
-					{% endwith %}
-					{% endfor %}
-
-					{% else %}
-					{% for job in job_types %}
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-						<a href="
+                    {% endif %} {% endwith %} {% endfor %} {% else %} {% for job in job_types %}
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                        <a href="
 						{% if user.is_authenticated %}
 						{% url 'jobs:job_list' job.slug %}
 						{% else %}
 						{% url 'users:login_user' %}
 					   {% endif %}
 						">
-							<div class="job-category">
-								<div class="job-icon"><i class="{{ job.icon }}"></i></div>
-								<div class="job-title">{{job.title}}</div>
-							</div>
-						</a>
-					</div>
-					{% endfor %}
-					{% endif %}
+                            <div class="job-category">
+                                <div class="job-icon"><i class="{{ job.icon }}"></i></div>
+                                <div class="job-title">{{job.title}}</div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %} {% endif %}
 
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
 
-	</section>
-	<section class="featured-job">
-		<div class="container">
-			<h1>Featured Jobs</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce at rhoncus diam, quis
-				convallis ligula. Cras et ligula aliquet, ultrices leo non, scelerisque justo. Nunc a vehicula augue.
-			</p>
-			<div class="feature-categories">
-				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<div class="feature-category">
-							<div class="row">
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-									<div class="cat-left">
-										<i class="fas fa-layer-group"></i>
-									</div>
-								</div>
-								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-									<div class="cat-right">
-										<div class="feature-title"><a href="">Web designer</a></div>
-										<div class="company-name">DJ group of company</div>
-										<a href=""><button type="button" class="btn">Part time</button></a>
-										<a href=""><button type="button" class="btn1">Apply now</button></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<div class="feature-category">
-							<div class="row">
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-									<div class="cat-left">
-										<i class="fas fa-layer-group"></i>
-									</div>
-								</div>
-								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-									<div class="cat-right">
-										<div class="feature-title"><a href="">Web designer</a></div>
-										<div class="company-name">DJ group of company</div>
-										<a href=""><button type="button" class="btn">Part time</button></a>
-										<a href=""><button type="button" class="btn1">Apply now</button></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<div class="feature-category">
-							<div class="row">
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-									<div class="cat-left">
-										<i class="fas fa-layer-group"></i>
-									</div>
-								</div>
-								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-									<div class="cat-right">
-										<div class="feature-title"><a href="">Web designer</a></div>
-										<div class="company-name">DJ group of company</div>
-										<a href=""><button type="button" class="btn">Part time</button></a>
-										<a href=""><button type="button" class="btn1">Apply now</button></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<div class="feature-category">
-							<div class="row">
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-									<div class="cat-left">
-										<i class="fas fa-layer-group"></i>
-									</div>
-								</div>
-								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-									<div class="cat-right">
-										<div class="feature-title"><a href="">Web designer</a></div>
-										<div class="company-name">DJ group of company</div>
-										<a href=""><button type="button" class="btn">Part time</button></a>
-										<a href=""><button type="button" class="btn1">Apply now</button></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="more-btn"><a href="">View More</a></div>
-		</div>
-	</section>
-	{% for banner in banners%}
-	<section class="app-field" style="background-image: url('/media/{{ banner.app_bg }}');">
-		<div class="container">
-			<div class="app-content">
-				<div class="row">
-					<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-						<div class="app-left">
+    </section>
+    <section class="featured-job">
+        <div class="container">
+            <h1>Featured Jobs</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce at rhoncus diam, quis
+                convallis ligula. Cras et ligula aliquet, ultrices leo non, scelerisque justo. Nunc a vehicula augue.
+            </p>
+            <div class="feature-categories">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="feature-category">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="cat-left">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <div class="cat-right">
+                                        <div class="feature-title"><a href="">Web designer</a></div>
+                                        <div class="company-name">DJ group of company</div>
+                                        <a href=""><button type="button" class="btn">Part time</button></a>
+                                        <a href=""><button type="button" class="btn1">Apply now</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="feature-category">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="cat-left">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <div class="cat-right">
+                                        <div class="feature-title"><a href="">Web designer</a></div>
+                                        <div class="company-name">DJ group of company</div>
+                                        <a href=""><button type="button" class="btn">Part time</button></a>
+                                        <a href=""><button type="button" class="btn1">Apply now</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="feature-category">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="cat-left">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <div class="cat-right">
+                                        <div class="feature-title"><a href="">Web designer</a></div>
+                                        <div class="company-name">DJ group of company</div>
+                                        <a href=""><button type="button" class="btn">Part time</button></a>
+                                        <a href=""><button type="button" class="btn1">Apply now</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="feature-category">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="cat-left">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <div class="cat-right">
+                                        <div class="feature-title"><a href="">Web designer</a></div>
+                                        <div class="company-name">DJ group of company</div>
+                                        <a href=""><button type="button" class="btn">Part time</button></a>
+                                        <a href=""><button type="button" class="btn1">Apply now</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="more-btn"><a href="">View More</a></div>
+        </div>
+    </section>
+    {% for banner in banners%}
+    <section class="app-field" style="background-image: url('/media/{{ banner.app_bg }}');">
+        <div class="container">
+            <div class="app-content">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                        <div class="app-left">
 
-							<img src="/media/{{ banner.app }}">
-							{% endfor %}
-						</div>
-					</div>
-					<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-						<div class="app-right pull-right">
-							<div class="get-app">
-								<h1>Get app for your mobile</h1>
+                            <img src="/media/{{ banner.app }}"> {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                        <div class="app-right pull-right">
+                            <div class="get-app">
+                                <h1>Get app for your mobile</h1>
 
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce
-									at rhoncus diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non,
-									scelerisque justo. Nunc a vehicula augue.</p>
-								<a href=""><button type="button" class="btn2"><i
-											class="fab fa-android"></i>Download</button></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	{% endblock %}
-	<section class="footer">
-		<div class="container">
-			<div class="footer-part">
-				{% for setting in settings%}
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="footer-term">
-						<h4 class="ft-title">Who we are</h4>
-						<p>{{setting.about_text}}</p>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="map"><iframe width="500" height="250"
-							src="https://maps.google.com/maps?width=500&amp;height=500&amp;hl=en&amp;q=DJ%20group%20of%20company+(DJ%20group%20of%20Company)&amp;ie=UTF8&amp;t=&amp;z=15&amp;iwloc=B&amp;output=embed"
-							frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-					</div><br />
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="footer-term">
-						<h4 class="ft-title">Contact us</h4>
-						<ul class="link">
-							<li><i class="fas fa-home"></i>{{ setting.address}}</li>
-							<li><i class="fas fa-envelope"></i>{{ setting.email}}</li>
-							<li><i class="fas fa-phone"></i>{{ setting.phone}}</li>
-							<li><i class="fas fa-globe"></i><a href="{{ setting.website}}">{{ setting.website}}</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-		</div>
-	</section>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et viverra nulla. Fusce
+                                    at rhoncus diam, quis convallis ligula. Cras et ligula aliquet, ultrices leo non,
+                                    scelerisque justo. Nunc a vehicula augue.</p>
+                                <a href=""><button type="button" class="btn2"><i
+                                            class="fab fa-android"></i>Download</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+    <section class="footer">
+        <div class="container">
+            <div class="footer-part">
+                {% for setting in settings%}
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="footer-term">
+                        <h4 class="ft-title">Who we are</h4>
+                        <p>{{setting.about_text}}</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="map"><iframe width="500" height="250"
+                            src="https://maps.google.com/maps?width=500&amp;height=500&amp;hl=en&amp;q=DJ%20group%20of%20company+(DJ%20group%20of%20Company)&amp;ie=UTF8&amp;t=&amp;z=15&amp;iwloc=B&amp;output=embed"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    </div><br />
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="footer-term">
+                        <h4 class="ft-title">Contact us</h4>
+                        <ul class="link">
+                            <li><i class="fas fa-home"></i>{{ setting.address}}</li>
+                            <li><i class="fas fa-envelope"></i>{{ setting.email}}</li>
+                            <li><i class="fas fa-phone"></i>{{ setting.phone}}</li>
+                            <li><i class="fas fa-globe"></i><a href="{{ setting.website}}">{{ setting.website}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
 </body>
 <script src="{% static '/js/jquery.min.js' %}"></script>
 <script src="{% static '/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
-	$(window).scroll(function () {
-		if ($(window).scrollTop() >= 50) {
-			$('.head').addClass('header-fixed');
-		}
-		else {
-			$('.head').removeClass('header-fixed');
-		}
-	});
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= 50) {
+            $('.head').addClass('header-fixed');
+        } else {
+            $('.head').removeClass('header-fixed');
+        }
+    });
 </script>
 
 <script>
-	var slider = document.getElementById("range");
-	var output = document.getElementById("demo");
-	output.innerHTML = slider.value;
+    var slider = document.getElementById("range");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
 
-	slider.oninput = function () {
-		output.innerHTML = this.value;
-	}
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
 </script>
 
 <script type="text/javascript">
-	window.setTimeout(function () {
-		$("#alert_message").fadeTo(500, 0).slideUp(500, function () {
-			$(this).remove();
-		});
-	}, 3500);
+    window.setTimeout(function () {
+        $("#alert_message").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3500);
 </script>
 
 </html>

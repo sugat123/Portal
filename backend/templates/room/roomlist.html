@@ -1,0 +1,78 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %} Roomlist {%endblock %}
+{% block content%}
+{% if user.is_authenticated %}
+
+<section class="newsfeed">
+  <div class="container">
+    <!-- roomseeker -->
+    {% if user.profile.user_type == 'Job Seeker' %}
+    <div class="news-add">
+      <div class="add-button"><a href="{% url 'room:findroom' room.id %}">Search</a></div>
+    </div>
+    {% else %}
+    <div class="news-add">
+      <div class="add-button">
+        <a href="{% url 'room:postroom' room.id %}">Add</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% if user.profile.user_type == 'Job Seeker' %}
+  <div class="news-content">
+    <h3>Posted Rooms</h3>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="news-content">
+    <h3>Applied Room List</h3>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+    <div class="jobseeker-list">
+      <div class="js-title">Bhaktapur located house</div>
+      <div class="jsv-btn"><a href="detail.html">View</a></div>
+    </div>
+  </div>
+  {% for image in images %}
+  <!-- {{image.posted_room.id}} -->
+  <img src="{{ image.image__set.all.url }}" alt="">
+  {% endfor %}
+  {% endif %}
+</section>
+{% endif %}
+{% endblock %}

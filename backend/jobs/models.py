@@ -10,7 +10,7 @@ class JobTypeManager(models.Manager):
     def search(self, query=None):
         qs = self.get_queryset()
         if query is not None:
-            or_lookup = (Q(title__icontains=query) |
+            or_lookup = (Q(title__icontains=query),
                          Q(slug__icontains=query)
                          )
             # distinct() is often necessary with Q lookups

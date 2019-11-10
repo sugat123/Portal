@@ -1,0 +1,188 @@
+{% extends 'jobs/index.html' %} {% load static %} {% block title %} Roomtype {% endblock %} {% block content%}
+<section class="roomtype-banner">
+    <div class="roomtype-title">Choose the room types</div>
+</section>
+
+<section class="room-type-all">
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<a href="">
+							<div class="room-test">
+							<div class="room-type green">
+								<div class="room-icon"><i class="fas fa-home"></i></div>
+								<div class="room-items">
+			                        <div class="room-item"> 1 <i class="fas fa-bed"></i><div>Bed</div></div>
+			                        <div class="room-item"> 1 <i class="fas fa-utensils"></i><div>Kitchen</div></div>
+			                    </div>
+							</div>
+						</div>
+						</a>
+					</div> -->
+
+            <!-- <a href="">
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+							<div class="room-test">
+							<div class="room-type blue">
+								<div class="room-icon"><i class="fas fa-home"></i></div>
+								<div class="room-items">
+			                        <div class="room-item">Single room</div>
+			                    </div>
+							</div>
+						</div>
+						</div>
+					</a> -->
+            {% for room in roomtype %} {% if room.kitchen and room.bedroom or room.kitchen and room.hall or room.hall and room.bedroom %}
+            <a href="{% url 'room:roomlist' room.id %}">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="room-test">
+                        <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                            <div class="room-icon"><i class="fas fa-home"></i></div>
+                            <div class="room-items">
+                                {% if room.bedroom > 0 %}
+                                <div class="room-item">
+                                    {{ room.bedroom }} <i class="fas fa-bed"></i>
+                                    <div>Bed</div>
+                                </div>
+                                {% endif %} {% if room.kitchen > 0 %}
+                                <div class="room-item">
+                                    {{ room.kitchen }} <i class="fas fa-utensils"></i>
+                                    <div>Kitchen</div>
+                                </div>
+                                {% endif %} {% if room.hall > 0 %}
+                                <div class="room-item">
+                                    {{ room.hall }} <i class="fas fa-university"></i>
+                                    <div>Hall</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endif %} {% if room.hall == 0 and room.kitchen == 0 and room.bedroom == 1 %}
+            <a href="{% url 'room:roomlist' room.id %}">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="room-test">
+                        <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                            <div class="room-icon"><i class="fas fa-home"></i></div>
+                            <div class="room-items">
+                                <div class="room-item">Single room</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endif %} {% if room.hall == 1 and room.kitchen == 0 and room.bedroom == 0 %}
+                <a href="{% url 'room:roomlist' room.id %}">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="room-test">
+                            <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                                <div class="room-icon"><i class="fas fa-home"></i></div>
+                                <div class="room-items">
+                                    <div class="room-item">Single hall</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+
+                {% endif %} {% if room.hall == 0 and room.kitchen == 0 and room.bedroom > 1 %}
+                <a href="{% url 'room:roomlist' room.id %}">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="room-test">
+                            <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                                <div class="room-icon"><i class="fas fa-home"></i></div>
+                                <div class="room-items">
+                                    <div class="room-item">Multiple rooms</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %} {% if room.hall > 1 and room.kitchen == 0 and room.bedroom == 0 %}
+                    <a href="{% url 'room:roomlist' room.id %}">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="room-test">
+                                <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                                    <div class="room-icon"><i class="fas fa-home"></i></div>
+                                    <div class="room-items">
+                                        <div class="room-item">Multiple halls</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %} {% endfor %}
+
+                        <!-- <a href="">
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+							<div class="room-test">
+							<div class="room-type blue">
+								<div class="room-icon"><i class="fas fa-home"></i></div>
+								<div class="room-items">
+			                        <div class="room-item"> 3 <i class="fas fa-bed"></i><div>Bed</div></div>
+			                        <div class="room-item"> 1 <i class="fas fa-utensils"></i><div>Kitchen</div></div>
+			                    </div>
+							</div>
+						</div>
+						</div>
+					</a>
+					<a href="">
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+							<div class="room-test">
+							<div class="room-type green">
+								<div class="room-icon"><i class="fas fa-home"></i></div>
+								<div class="room-items">
+			                        <div class="room-item">Single hall</div>
+			                    </div>
+							</div>
+						</div>
+						</div>
+					</a>
+					<a href="">
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+							<div class="room-test">
+							<div class="room-type blue">
+								<div class="room-icon"><i class="fas fa-home"></i></div>
+								<div class="room-items">
+			                        <div class="room-item"> 1 <i class="fas fa-bed"></i><div>Bed</div></div>
+			                        <div class="room-item"> 1 <i class="fas fa-utensils"></i><div>Kitchen</div></div>
+			                        <div class="room-item"> 1 <i class="fas fa-university"></i><div>Hall</div></div>
+			                    </div>
+							</div>
+						</div>
+						</div>
+					</a>
+					<!-- added for testing -->
+
+                        <!-- <a href="">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+              <div class="room-test">
+                <div class="room-type blue">
+                  <div class="room-icon"><i class="fas fa-home"></i></div>
+                  <div class="room-items">
+                    <div class="room-item">
+                      1<i class="fas fa-bed"></i>
+                      <div>Bed</div>
+                    </div>
+
+                    <div class="room-item">
+                      1 <i class="fas fa-utensils"></i>
+                      <div>Kitchen</div>
+                    </div>
+
+                    <div class="room-item">
+                      1 <i class="fas fa-university"></i>
+                      <div>Hall</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a> -->
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
