@@ -60,6 +60,8 @@ def index(request):
     return render(request, 'jobs/index.html', context)
 
 
+def main(request):
+    return render(request, 'jobs/main.html')
 
 def dashboard(request):
     job_types = JobType.objects.all()
@@ -160,7 +162,7 @@ def apply_job(request, slug):
     skills = Skills.objects.all()
     facilities = Facility.objects.all()
     if request.method == 'POST':
-        form = AddAppliedJobForm(request.POST or none)
+        form = AddAppliedJobForm(request.POST or None)
         if form.is_valid():
             form.save()
             messages.success(request, 'Job Applied')

@@ -1,0 +1,119 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %} Add Room {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+
+{% if user.profile.user_type == 'Employeer'%}
+<section class="eskill-banner">
+	<div class="eskill-title">Features</div>
+</section>
+
+<section class="room-back">
+	<div class="skill-content">
+		<div>
+			<h3>Fill the features below:</h3>
+			<div class="row facilities">
+				<form class="fill-facilities" action="{% url 'room:postroom' room.id %}" method="post"
+					enctype="multipart/form-data">
+					{% csrf_token %}
+
+					{% if postedroom_form.errors %}
+					<span style="color: red;">{{postedroom_form.errors}}</span>
+					{% endif %}
+					<select name="room_type" class="form-control" required style="display:none;">
+						<option value="{{room.id}}"></option>
+					</select>
+
+					<select name="user" class="form-control" required style="display:none;">
+						<option value="{{user.id}}"></option>
+					</select>
+
+					<div class="form-input">
+						<label>Owner name</label>
+						<input type="text" name="owner_name" class="form-control">
+					</div>
+					<div class="form-input">
+						<label>Location</label>
+						<input type="text" name="location" class="form-control">
+					</div>
+					<div class="form-input">
+						<label>Conatct no.</label>
+						<input type="number" name="contact" class="form-control">
+					</div>
+
+					<div class="form-input">
+						<label>Condition of rooms/flats</label>
+						<input type="text" name="condition" class="form-control">
+					</div>
+					<div class="form-input">
+						<label>Facilities</label>
+						{% for facility in facilities %}
+						{% if facility.room_type_id == room.id %}
+						<div class="form-check">
+							<input type="checkbox" name="facility" id="id_category" value="{{ facility.id }}">
+							<label for="facility-{{facility.id}}" id="id_category"> {{ facility.title }} </label>
+						</div>
+						{% endif %}
+						{% endfor %}
+						<br>
+						<span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
+					</div>
+					<div class="form-input">
+						<label>Rent price</label>
+						{{ postedroom_form.price }}
+					</div>
+					<div class="form-input">
+						<label>Upload image</label>
+						{{ formset.management_form }}
+						{{ formset.as_p }}
+
+						<input type="file" id="file" name="image" accept="image/png, image/jpeg">
+					</div>
+					<!-- <div class="form-input">
+						<label>Upload video</label>
+						<input type="file" id="file" name="file" accept="video/*">
+					</div> -->
+
+			</div>
+
+			<div class="submit-btn">
+				<button type="submit" class="btn-submit">Submit</button>
+			</div>
+			</form>
+		</div>
+
+	</div>
+
+	<div id="popup1" class="overlay">
+		<div class="popup">
+			<h4>Please enter the prefer facilities</h4>
+			<a class="close" href="#">&times;</a>
+			<div class="popup-content">
+				<form action="{% url 'room:add_facility' %}" method="POST">
+					{% csrf_token %}
+					<select name="room_type" class="form-control" required style="display:none;">
+						<option value="{{room.id}}"></option>
+					</select>
+					{% if form.errors %}
+					<div class="alert alert-danger">
+						{{form.title.errors}}
+					</div>
+					{% endif %}
+
+					<textarea name="title" required></textarea>
+					<div class="more-btn"><button type="submit">Add</a></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+{% endif %}
+
+
+{% endif %}
+{% endblock %}

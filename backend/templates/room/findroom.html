@@ -1,0 +1,59 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %} Roomlist {%endblock %}
+{% block content%}
+{% if user.is_authenticated %}
+
+<section class="eskill-banner">
+	<div class="eskill-title">Features</div>
+</section>
+
+<section class="skill-employer">
+	<div class="skill-content">
+		<div class="skill-list">
+			<h3>Fill the features below:</h3>
+			<div class="row facilities">
+				<form class="fill-facilities" action="{% url 'room:searchroom' room.id %}" method="post">
+					{% csrf_token %}
+					<select name="room_type" class="form-control" required style="display:none;">
+						<option value="{{room.id}}"></option>
+					</select>
+
+					<select name="user" class="form-control" required style="display:none;">
+						<option value="{{user.id}}"></option>
+					</select>
+					<div class="form-input">
+						<label>Rent price</label>
+						{{ form.price }}
+					</div>
+					<div class="form-input">
+						<label>Location</label>
+						<input type="text" name="location" class="form-control">
+					</div>
+
+			</div>
+			<span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
+			<div class="submit-btn">
+				<button type="submit" class="btn-submit">Submit</button>
+			</div>
+		</div>
+	</div>
+	<div id="popup1" class="overlay">
+		<div class="popup">
+			<h4>Please enter the prefer features</h4>
+			<a class="close" href="#">&times;</a>
+			<div class="popup-content">
+				<form>
+					<textarea name="message" id="message" rows="5"></textarea>
+					<div class="more-btn"><a href="">Add</a></div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</form>
+</section>
+
+
+
+{% endif %}
+{% endblock %}

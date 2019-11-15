@@ -1,0 +1,68 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %} Add Room {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="detail-banner">
+	<div class="detail-title">Detail</div>
+</section>
+
+<section class="detail">
+	<div class="detail-content">
+		<h3>Room details</h3>
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr class="table-row">
+						<td>Publish date</td>
+						<td>:</td>
+						<td>{{ room.created }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Owner name</td>
+						<td>:</td>
+						<td>{{ room.owner }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Location</td>
+						<td>:</td>
+						<td>{{ room.location }}</td>
+					</tr>
+
+					<tr class="table-row">
+						<td>Price</td>
+						<td>:</td>
+						<td>{{ room.price }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Condition of rooms/flats</td>
+						<td>:</td>
+						<td><span class="stext">{{ room.condition }}</span></td>
+					</tr>
+					<tr class="table-row">
+						<td>Facilities</td>
+						<td>:</td>
+						<td><span class="stext">Water</span>
+							<span class="stext">Electricity</span>
+							<span class="stext">AC</span>
+						</td>
+					</tr>
+					<tr class="table-row">
+						<td>Rent price</td>
+						<td>:</td>
+						<td><span class="stext">{{room.price}}</span></td>
+					</tr>
+					<tr class="table-row">
+						<td>Image</td>
+						<td>:</td>
+						<td><img src="img/esewa.png"></td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+{% endif %}
+{% endblock %}

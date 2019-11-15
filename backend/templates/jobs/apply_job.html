@@ -31,7 +31,7 @@
                 <span style="color: red;">{{form.skills.errors}}</span>
                 {% endif %}
 
-                <div class="choose-skill green">
+                <div class="choose-skill">
                     <h3>Choose the below skills:</h3>
                     <div class="row skills">
                         <div class="col-md-12 col-sm-12 col-xs-12 list-img">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="facility-all blue">
+                <div class="facility-all">
                     <div class="row facilities">
                         <div class="form-input">
 
@@ -105,9 +105,9 @@
         <h2>Post your job</h2>
     </div>
 
-    <div class="skill-content">
-        <div class="skill-list">
-            <div class="choose-skill green">
+    <div class="skill-content job">
+        <div>
+            <div class="choose-skill">
                 {% if form.errors %}
                 <span style="color: red;">{{form.skills.errors}}</span>
                 {% endif %}
@@ -137,7 +137,7 @@
             </div>
 
 
-            <div class="facility-all blue">
+            <div class="facility-all">
                 {% if form.errors %}
                 <span style="color: red;">{{form.facility.errors}}</span>
                 {% endif %}
@@ -148,7 +148,8 @@
                     {% if facility.job_type_id == type.id %}
                     <div class="form-check">
                         <input type="checkbox" name="facility" id="id_category" value="{{ facility.id }}">
-                        <label for="facility-{{facility.id}}" id="id_category">{{ facility.title }}</label>
+                        <label for="facility-{{facility.id}}"
+                            id="id_category"> {{ facility.title }}</label>
                     </div>
                     {% endif %}
                     {% endfor %}
