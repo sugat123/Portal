@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Land/features</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/facilities.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+</head>
+<body>
+	<header class="head">
+			<div class="container">
+				<div class="row">
+					<div class="header-left">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-4">
+							<a href="" class="logo"><img src="img/logo.png"></a>
+						</div>
+					</div>
+					<div class="header-right">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+							<ul class="formclick">
+								<li><a href="">Post</a></li>
+								<li><i class="fas fa-lock"></i><a href="register.html">Register</a></li>
+								<li><i class="fas fa-user"></i><a href="login.html">Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+	</header>
+
+	<section class="eskill-banner">
+		<div class="eskill-title">Features</div>
+	</section>
+
+	<section class="skill-employer">
+		<div class="skill-content">
+			<div class="skill-list">
+				<h3>Fill the features below:</h3>
+				<div class="row facilities">
+					<form class="fill-facilities">
+						<div class="form-input">
+							<label>Price</label>
+							<input type="number" name="salary" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Location</label>
+							<input type="text" name="location" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Area</label>
+							<input type="number" name="location" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Upload image</label>
+							<input type="file" id="file" name="file" accept="image/png, image/jpeg">
+						</div>
+						<div class="form-input">
+							<label>Upload video</label>
+							<input type="file" id="file" name="file" accept="video/*">
+						</div>
+					</form>
+				</div>
+				<span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
+				<div class="submit-btn">
+					<button type="button" class="btn-submit">Submit</button>
+				</div>
+			</div>
+		</div>
+		<div id="popup1" class="overlay">
+			<div class="popup">
+				<h4>Please enter the prefer features</h4>
+				<a class="close" href="#">&times;</a>
+				<div class="popup-content">
+					<form>
+						<textarea name="message" id="message" rows="5"></textarea>
+						<div class="more-btn"><a href="">Add</a></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="footer">	
+		<div class="container">
+			<div class="footer-part">
+				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+					<div class="footer-term">
+						<h4 class="ft-title">Who we are</h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet quam eu purus rutrum suscipit eget ac lacus. Donec vel euismod odio. Suspendisse consectetur quis risus sit amet aliquam.</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+					<div class="footer-term">
+						<h4 class="ft-title">Land seeker</h4>
+						<ul class="ft-list">
+							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Register</a></li>
+							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Login</a></li>
+							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Search</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+					<div class="footer-term">
+						<h4 class="ft-title">Land owner</h4>
+						<ul class="ft-list">
+							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Register</a></li>
+							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Login</a></li>
+							<li class="ft-item"><i class="fas fa-angle-right"></i><a href="">Post</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+					<div class="footer-term">
+						<h4 class="ft-title">Contact us</h4>
+						<ul class="link">
+							<li><i class="fas fa-home"></i>Bhatbhateni, Koteswor</li>
+							<li><i class="fas fa-envelope"></i>info@djgroup.com</li>
+							<li><i class="fas fa-phone"></i>+9840236521</li>
+							<li><i class="fas fa-globe"></i><a href="">http://www.djgroup.com</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(window).scroll(function(){
+    if ($(window).scrollTop() >= 50) {
+        $('.head').addClass('header-fixed');
+    }
+    else {
+        $('.head').removeClass('header-fixed');
+    }
+});
+</script>
+</html>

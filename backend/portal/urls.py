@@ -28,6 +28,7 @@ urlpatterns = [
     # path('chaining/', include('smart_selects.urls')),
     path('admin/', admin.site.urls),
     path('jobs/', include('jobs.urls')),
+    path('land/', include('land.urls')),
     path('users/', include('users.urls')),
     path('', jobs.views.dashboard)
 
