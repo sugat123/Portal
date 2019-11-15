@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'bootstrap3',
     'storages',
+    'land',
 ]
 
 MIDDLEWARE = [
