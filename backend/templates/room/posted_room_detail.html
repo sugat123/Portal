@@ -17,7 +17,7 @@
 					<tr class="table-row">
 						<td>Publish date</td>
 						<td>:</td>
-						<td>{{ posted_room.created }}</td>
+						<td>{{ posted_room.created|date:"Y-m-d"}}</td>
 					</tr>
 					<tr class="table-row">
 						<td>Owner name</td>
@@ -38,14 +38,16 @@
 					<tr class="table-row">
 						<td>Condition of room/flats</td>
 						<td>:</td>
-						<td><span class="stext">{{ posted_room.condition }}</span></td>
+						<td><span class="stext">{{ posted_room.conditon }}</span></td>
 					</tr>
 					<tr class="table-row">
 						<td>Facilities</td>
 						<td>:</td>
-						<td><span class="stext">Water</span>
-							<span class="stext">Electricity</span>
-							<span class="stext">AC</span>
+						<td>
+							{% for facility in posted_room.facility.all %}
+							<span class="stext">{{facility.title}}</span>
+
+							{% endfor %}
 						</td>
 					</tr>
 

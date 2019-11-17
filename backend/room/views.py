@@ -14,7 +14,7 @@ def roomtype(request):
     roomtype = RoomType.objects.all()
     return render(request, 'room/roomtype.html', {'roomtype':roomtype})
 
-@login_required(login_url='/users/login/')
+@login_required(login_url='/users/login/',redirect_field_name='/room/roomlist/')
 def roomlist(request, roomtype_id):
     roomtype = get_object_or_404(RoomType, pk=roomtype_id)
     searchedroom = SearchedRoom.objects.filter(room_type_id = roomtype_id)
@@ -169,10 +169,13 @@ def posted_room_detail(request, roomtype_id, id):
 def searched_room_detail(request, roomtype_id, id):
     roomtype = get_object_or_404(RoomType, id=roomtype_id)
     searched_room = get_object_or_404(SearchedRoom.objects.order_by('-created'), id=id)
+    price=PRICE[int(searched_room.price)][1]
+
     # applied_jobs = AppliedJob.objects.get(id=id)
 
     context = {'searched_room': searched_room,
                #   'applied_jobs': applied_jobs,
+               'price':price,
                'roomtype': roomtype}
 
     return render(request, 'room/searched_room_detail.html', context)

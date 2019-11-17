@@ -17,7 +17,7 @@
                     <tr class="table-row">
                         <td>Publish date</td>
                         <td>:</td>
-                        <td>{{ searched_room.created }}</td>
+                        <td>{{ searched_room.created|date:"Y-m-d" }}</td>
                     </tr>
 
                     <tr class="table-row">
@@ -25,6 +25,18 @@
                         <td>:</td>
                         <td>{{ searched_room.location }}</td>
                     </tr>
+
+                    <tr class="table-row">
+                        <td>Facilities</td>
+                        <td>:</td>
+                        <td>
+                            {% for facility in searched_room.facility.all %}
+                            <span class="stext">{{facility.title}}</span>
+
+                            {% endfor %}
+                        </td>
+                    </tr>
+
 
                     <!-- <tr class="table-row">
                         <td>Price</td>
@@ -43,7 +55,7 @@
                     <tr class="table-row">
                         <td>Rent price</td>
                         <td>:</td>
-                        <td><span class="stext">{{searched_room.price}}</span></td>
+                        <td><span class="stext">{{ price }}</span></td>
                     </tr>
 
                 </tbody>
