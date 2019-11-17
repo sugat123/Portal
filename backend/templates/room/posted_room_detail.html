@@ -48,15 +48,18 @@
 							<span class="stext">AC</span>
 						</td>
 					</tr>
-					<tr class="table-row">
-						<td>Rent price</td>
-						<td>:</td>
-						<td><span class="stext">{{posted_room.price}}</span></td>
-					</tr>
+
 					<tr class="table-row">
 						<td>Image</td>
 						<td>:</td>
-						<td><img src="img/esewa.png"></td>
+						<td>
+							{% for image in images %}
+							{% if image.posted_room.id == posted_room.id %}
+							<img style="height:150px; width:auto;" src="/media/{{image.image}}">
+							&nbsp;&nbsp;&nbsp;
+							{% endif %}
+							{% endfor %}
+						</td>
 					</tr>
 
 				</tbody>

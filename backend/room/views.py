@@ -155,10 +155,12 @@ def posted_room_detail(request, roomtype_id, id):
     # applied_jobs = AppliedJob.objects.get(id=id)
     print(type(int(posted_room.price)))
     price=PRICE[int(posted_room.price)][1]
+    image= Image.objects.all()
     context = {'posted_room': posted_room,
                #   'applied_jobs': applied_jobs,
                'price': price,
-               'roomtype': roomtype}
+               'roomtype': roomtype,
+               'images':image,}
 
     return render(request, 'room/posted_room_detail.html', context)
 
