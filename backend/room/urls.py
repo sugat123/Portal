@@ -9,5 +9,7 @@ urlpatterns = [
     path('<int:roomtype_id>/roomlist/searchroom/', views.searchroom, name='searchroom'),
     path('<int:roomtype_id>/roomlist/postroom/', views.postroom, name='postroom'),
     path('add_facility/', views.add_facility, name='add_facility'),
-    path('<str:user_type>/room detail/<int:room_id>', views.detail, name='detail')
+    path('<int:roomtype_id>/posted_room_detail/<int:id>/', views.posted_room_detail, name='posted_room_detail'),
+    path('<int:roomtype_id>/searched_room_detail/<int:id>/', views.searched_room_detail, name='searched_room_detail')
+
 ]

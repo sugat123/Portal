@@ -66,6 +66,7 @@ class SearchedRoom(models.Model):
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
     price = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
+    facility = models.ManyToManyField(Facility)
 
     def __str__(self):
         return "Searched Room in location {}".format(self.location)

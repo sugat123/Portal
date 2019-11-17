@@ -9,43 +9,44 @@ from django.http import HttpResponseRedirect
 
 
 # Create your views here.
-
+@login_required(login_url='/users/login/')
 def roomtype(request):
     roomtype = RoomType.objects.all()
     return render(request, 'room/roomtype.html', {'roomtype':roomtype})
 
 @login_required(login_url='/users/login/')
 def roomlist(request, roomtype_id):
-    room = get_object_or_404(RoomType, pk=roomtype_id)
+    roomtype = get_object_or_404(RoomType, pk=roomtype_id)
     searchedroom = SearchedRoom.objects.filter(room_type_id = roomtype_id)
     postedroom = PostedRoom.objects.filter(room_type_id = roomtype_id)
     # image = Image.objects.all()
-    context ={'searchedroom':searchedroom, 'postedroom':postedroom, 'room':room}
+    context ={'searchedroom':searchedroom, 'postedroom':postedroom, 'roomtype':roomtype}
     return render(request, 'room/roomlist.html', context)
 
-@login_required
+@login_required(login_url='/users/login/')
 def searchroom(request, roomtype_id):
-    room = get_object_or_404(RoomType, pk=roomtype_id)
+    roomtype = get_object_or_404(RoomType, pk=roomtype_id)
+    facilities =  Facility.objects.all()
     if request.method == "POST":
         form = SearchRoomForm(request.POST or None)
         if form.is_valid():
-            searched_room = form.save(commit=False)
-            searched_room.save()
+            # searched_room = form.save(commit=False)
+            form.save()
             return redirect('room:roomtype')
         else:
             print(form.errors)
     else:
         form = SearchRoomForm()
     
-    context = {'form':form, 'room':room}
+    context = {'form':form, 'roomtype':roomtype, 'facilities':facilities}
     return render(request, 'room/findroom.html', context)
 
-@login_required
+@login_required(login_url='/users/login/')
 def postroom(request, roomtype_id):
     # roomtype = get_object_or_404(RoomType, pk=roomtype_id)
-    room = get_object_or_404(RoomType, pk=roomtype_id)
+    roomtype = get_object_or_404(RoomType, pk=roomtype_id)
     facilities =  Facility.objects.all()
-    ImageFormSet = modelformset_factory(Image, fields=('image',), extra=5)
+    ImageFormSet = modelformset_factory(Image, fields=('image',), extra=4)
     if request.method == "POST":
         print("1")
         postedroom_form = PostedRoomForm(request.POST or None)
@@ -55,23 +56,27 @@ def postroom(request, roomtype_id):
 
         if postedroom_form.is_valid() and formset.is_valid():
             print("3")
-    
-            postedroom = postedroom_form.save(commit=False)
-            postedroom.save()
-           
+
+
+            postedroom_form.save()
+            posted_room = postedroom_form.save(commit=False)
+                         
             # image = image.save(commit=False)
             print("4")
             for form in formset:
                 # image = form['image']
                 try:
-                    photo = Image(posted_room=postedroom, image=form.cleaned_data['image'])
+                    photo = Image(posted_room=posted_room, image=form.cleaned_data['image'])
                     photo.save()
-                    
+
                 except Exception as e:
                     print(e)
                     print("5")
-                    
-                
+
+            
+            
+
+            # working without commit = False
                 
             print("6")
             
@@ -83,7 +88,8 @@ def postroom(request, roomtype_id):
         print("7")
         postedroom_form = PostedRoomForm()
         formset = ImageFormSet(queryset=Image.objects.none())
-        context ={'room':room,'facilities':facilities,'postedroom_form':postedroom_form, 'formset': formset}
+    
+    context ={'roomtype':roomtype,'facilities':facilities,'postedroom_form':postedroom_form, 'formset': formset}
 
     return render(request, 'room/addroom.html', context)
 
@@ -129,7 +135,7 @@ def postroom(request, roomtype_id):
 #     print("7")
 #     return render(request, 'room/addroom.html', context)
         
-@login_required
+@login_required(login_url='/users/login/')
 def add_facility(request):
     if request.method == 'POST':
         form = AddFacilityForm(request.POST or None)
@@ -142,14 +148,29 @@ def add_facility(request):
         form = AddFacilityForm()
     return render(request, 'room/add_facility.html', {'form': form})
 
-@login_required
-def detail(request, user_type, room_id):
-    if user_type == 'Job Seeker':
-        room = PostedRoom.objects.get(id=room_id)
-        # facility = Facility.objects.filter(room_type_id=)
-    else:
-        room = SearchedRoom.objects.get(id=room_id)
+@login_required(login_url='/users/login/')
+def posted_room_detail(request, roomtype_id, id):
+    roomtype = get_object_or_404(RoomType, id=roomtype_id)
+    posted_room = get_object_or_404(PostedRoom.objects.order_by('-created'), id=id)
+    # applied_jobs = AppliedJob.objects.get(id=id)
 
-    return render(request, 'room/detail.html', {'room':room})
+    context = {'posted_room': posted_room,
+               #   'applied_jobs': applied_jobs,
+               'roomtype': roomtype}
+
+    return render(request, 'room/posted_room_detail.html', context)
+
+
+@login_required(login_url='/users/login/')
+def searched_room_detail(request, roomtype_id, id):
+    roomtype = get_object_or_404(RoomType, id=roomtype_id)
+    searched_room = get_object_or_404(SearchedRoom.objects.order_by('-created'), id=id)
+    # applied_jobs = AppliedJob.objects.get(id=id)
+
+    context = {'searched_room': searched_room,
+               #   'applied_jobs': applied_jobs,
+               'roomtype': roomtype}
+
+    return render(request, 'room/searched_room_detail.html', context)
         
 
