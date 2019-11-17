@@ -153,9 +153,11 @@ def posted_room_detail(request, roomtype_id, id):
     roomtype = get_object_or_404(RoomType, id=roomtype_id)
     posted_room = get_object_or_404(PostedRoom.objects.order_by('-created'), id=id)
     # applied_jobs = AppliedJob.objects.get(id=id)
-
+    print(type(int(posted_room.price)))
+    price=PRICE[int(posted_room.price)][1]
     context = {'posted_room': posted_room,
                #   'applied_jobs': applied_jobs,
+               'price': price,
                'roomtype': roomtype}
 
     return render(request, 'room/posted_room_detail.html', context)
