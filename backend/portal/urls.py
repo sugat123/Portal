@@ -19,6 +19,7 @@ from portal import settings
 from django.urls import path, include
 import jobs
 import users
+import room
 from jobs import views
 from users import views
 from django.conf.urls import handler404
@@ -30,7 +31,8 @@ urlpatterns = [
     path('jobs/', include('jobs.urls')),
     path('land/', include('land.urls')),
     path('users/', include('users.urls')),
-    path('', jobs.views.dashboard)
+    path('room/', include('room.urls')),
+    path('', jobs.views.main, name='main')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

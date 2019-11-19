@@ -1,0 +1,76 @@
+{% extends 'jobs/index.html' %} {% load static %} {% block content%}
+<section class="job-all">
+  <div class="container">
+    <div class="job-title">
+      <h1>Browse Jobs</h1>
+    </div>
+    <div class="job-categories">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+          <a href="{% url 'jobs:dashboard' %}">
+            <div class="job-category red">
+              <div class="job-cross"></div>
+              <div class="job-icon">
+                <i class="fas fa-universal-access"></i>
+              </div>
+              <div class="job-title">Job</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+          <a href="eskill.html">
+            <div class="job-category green">
+              <div class="job-cross"></div>
+              <div class="job-icon"><i class="fas fa-book-open"></i></div>
+              <div class="job-title">Book</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+          <a href="eskill.html">
+            <div class="job-category blue">
+              <div class="job-cross"></div>
+              <div class="job-icon"><i class="fas fa-home"></i></div>
+              <div class="job-title">House</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+          <a href="{% if user.is_authenticated %}
+          {% url 'land:landform' %}
+          {% else %}
+          {% url 'users:login_user' %}
+          {% endif %}">
+            <div class="job-category green">
+              <div class="job-cross"></div>
+              <div class="job-icon"><i class="fas fa-vector-square"></i></div>
+              <div class="job-title">Land</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+          <a href="{% url 'room:roomtype' %}">
+            <div class="job-category blue">
+              <div class="job-cross"></div>
+              <div class="job-icon"><i class="fas fa-landmark"></i></div>
+              <div class="job-title">Room</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+          <a href="eskill.html">
+            <div class="job-category red">
+              <div class="job-cross"></div>
+              <div class="job-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+              <div class="job-title">Others</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
