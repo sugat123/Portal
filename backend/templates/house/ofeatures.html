@@ -1,0 +1,214 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block title %} {% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+	{% if user.profile.user_type == 'Employeer' %}
+	<section class="eskill-banner">
+		<div class="eskill-title">Features</div>
+	</section>
+	<div class="news-add">
+			<div class="add-button"><a href="{% url 'house:house_list' %} ">View List</a></div>
+		</div>
+	<section class="skill-employer">
+		<div class="skill-content">
+			<div class="skill-list">
+				<h3>Fill the House Detail:</h3>
+				<div class="row facilities">
+					{{ sellerpost_form.errors }}
+					<form class="fill-facilities" action="{% url 'house:owner' %}" method="post"  enctype="multipart/form-data">
+						{% csrf_token %}
+							<div class="form-input">
+									<label>Owner name</label>
+									<input type="text" name="owner_name" class="form-control">
+								</div>
+								<select name="user" class="form-control" required style="display:none;">
+									<option value="{{user.id}}"></option>
+								</select>		
+						<div class="form-input">
+							<label>Price</label>
+								{{sellerpost_form.price}}
+							<!-- <input type="number" name="price" class="form-control"> -->
+						</div>
+						<div class="form-input">
+							<label>Location</label>
+							<input type="text" name="location" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Area</label>
+							<input type="text" name="area" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>No of floors</label>
+							<input type="number" name="floor" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>No of rooms</label>
+							<input type="text" name="no_of_room" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Direction Faced</label>
+							<input type="text" name="direction_faced" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Contact</label>
+							<input type="text" name="contact" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Facilities</label>
+							{% for facility in facilities %}
+							<div class="form-check">
+
+							<input type="checkbox" name="facility" id="id_category" value="{{ facility.id}}">
+							<label for="facility-{{facility.id}}" id="id_category ">{{ facility.title}}</label>
+							</div>
+						
+							{% endfor %}
+							<br>
+							<span class="other"> <i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
+
+						</div>
+						<div class="form-input">
+							<label>Upload image</label>
+						
+
+							
+							{{ formset.management_form}}
+							{{ formset.as_p}}
+						</div>
+						<!-- <div class="form-input">
+							<label>Upload video</label>
+							<input type="file" id="file" name="file" accept="video/*">
+						</div>
+					 -->
+				</div>
+							<div class="submit-btn">
+					<button type="submit" class="btn-submit">Submit</button>
+				</div>
+			</form>
+			</div>
+		</div>
+		<div id="popup1" class="overlay">
+			<div class="popup">
+				<h4>Please enter the prefer facilities</h4>
+				<a class="close" href="#">&times;</a>
+				<div class="popup-content">
+					<form action="{% url 'house:add_facility' %}" method="POST" >
+						{% csrf_token %}
+						{% if form.error %}
+						<div class='alert alert-danger'>
+							{{ form.title.error}}
+						</div>
+						{% endif %} 
+						<textarea name="title" required></textarea>
+						<div class="more-btn"><button type="submit">Add</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	{% else %}
+	<!-- <section class="eskill-banner">
+		<div class="eskill-title">Features</div>
+	</section> -->
+	<div class="news-add">
+			<div class="add-button"><a href="{% url 'house:house_list' %} ">View List</a></div>
+		</div>
+	<section class="skill-employer">
+		<div class="skill-content">
+			<div class="skill-list">
+				<h3>Fill the required house detail :</h3>
+				<div class="row facilities">
+					<form class="fill-facilities" action="{% url 'house:buyer' %}" method="post" >
+						{% csrf_token %}
+						<div class="form-input">
+							<label>Price</label>
+								{{ sellerpost_form.price }}
+							<!-- <input type="number" name="price" class="form-control"> -->
+						</div>
+						<select name="user" class="form-control" required style="display:none;">
+							<option value="{{user.id}}"></option>
+						</select>
+						<div class="form-input">
+							<label>Location</label>
+							<input type="text" name="location" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Area</label>
+							<input type="text" name="area" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>No of floors</label>
+							<input type="number" name="floor" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>No of rooms</label>
+							<input type="text" name="no_of_room" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Direction Faced</label>
+							<input type="text" name="direction_faced" class="form-control">
+						</div>
+						<div class="form-input">
+							<label>Contact</label>
+							<input type="text" name="contact" class="form-control">
+						</div>
+						<div class="form-input">
+								<label>Facilities</label>
+								{% for facility in facilities %}
+								<div class="form-check">
+	
+								<input type="checkbox" name="facility" id="id_category" value="{{ facility.id}}">
+								<label for="facility-{{facility.id}}" id="id_category ">{{ facility.title}}</label>
+								</div>
+							
+								{% endfor %}
+								<br>
+								<span class="other"> <i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
+	
+							</div>
+						<div class="submit-btn">
+							<button type="submit" class="btn-submit">Submit</button>
+						</div>
+					</form>
+					<div id="popup1" class="overlay">
+							<div class="popup">
+								<h4>Please enter the prefer facilities</h4>
+								<a class="close" href="#">&times;</a>
+								<div class="popup-content">
+									<form action="{% url 'house:add_facility' %}" method="POST" >
+										{% csrf_token %}
+										{% if form.error %}
+										<div class='alert alert-danger'>
+											{{ form.title.error}}
+										</div>
+										{% endif %} 
+										<textarea name="title" required></textarea>
+										<div class="more-btn"><button type="submit">Add</div>
+									</form>
+								</div>
+							</div>
+						</div>
+				</div>
+				
+			</div>
+		</div>
+
+		
+	</section>
+
+
+	
+	{% endif %}
+	{% endif %}
+
+{% endblock %}
+
+	
+
+
+	

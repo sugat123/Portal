@@ -1,0 +1,11 @@
+
+<h2> ADD Facility </h2>
+
+<form action ="{% url 'house:add_facility' %}" method="POST">
+
+    {% csrf_token %}
+    {{ form.as_P}}
+    <button type="submit">ADD</button>
+    <button onclick="javascript:history.go(-1);">
+        GO back</button>
+</form>

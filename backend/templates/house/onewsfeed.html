@@ -1,0 +1,49 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+	<!-- <section class="news-banner">
+		<div class="news-title">Newsfeed</div>
+	</section> -->
+	{% if user.is_authenticated %}
+	<section class="newsfeed">
+		<div class="container">
+			<div class="news-add">
+				<div class="add-button"><a href="">Add</a></div>
+			</div>
+		</div>
+		
+	{% if user.profile.user_type == 'Employeer' %}
+		<div class="news-content">
+			<h3>Home seeker features list</h3>
+			{% for b in buyer  %}
+			<div class="jobseeker-list" >
+		
+				<div class="js-title">{{b.floor}} 'r floor house</div>
+				<div class="jsv-btn"><a href="{% url 'house:buyerhouse_detail' b.id %}">View</a></div>
+			</div>
+			{% endfor %}
+			
+		</div>
+	</section>
+	{% else %}
+	<div class="news-content">
+			<h3>Home Owner features list</h3>
+			{% for s in seller %}
+
+			<div class="jobseeker-list">
+				<div class="js-title">{{ s.floor}} 'r floor house</div>
+				<div class="jsv-btn"><a href="{% url 'house:sellerhouse_detail' s.id %}">View</a></div>
+			</div>
+			{% endfor %}
+		</div>
+	</section>
+	{% endif %}
+	{% endif %}
+	{% endblock %}
+
+
+	

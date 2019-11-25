@@ -20,8 +20,10 @@ from django.urls import path, include
 import jobs
 import users
 import room
+import house
 from jobs import views
 from users import views
+from house import views
 from django.conf.urls import handler404
 
 
@@ -31,7 +33,8 @@ urlpatterns = [
     path('jobs/', include('jobs.urls')),
     path('users/', include('users.urls')),
     path('room/', include('room.urls')),
-    path('', jobs.views.main)
+    path('house/' , include ('house.urls')),
+    path('', jobs.views.main, name='main')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
