@@ -31,7 +31,7 @@ def login_user(request):
 
                 messages.success(
                     request, '{} Logged in successfully'.format(user.username))
-                return redirect('jobs:dashboard')
+                return redirect('main')
 
             # elif user and user.is_staff:
             #     login(request, user)

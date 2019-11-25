@@ -1,0 +1,33 @@
+.detail-banner{
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.detail-title {
+    color: #fff;
+    text-align: center;
+    padding: 60px 0;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+.detail-content {
+    background: #EFEFEF;
+    margin: 0 auto;
+    width: 65%;
+    padding: 30px;
+}
+.detail {
+    margin-top: 50px;
+}
+.table .stext {
+    background: #0981EF;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 10px;
+}
+.detail-content h3 {
+    margin-top: 0;
+    padding-bottom: 15px;
+}
+

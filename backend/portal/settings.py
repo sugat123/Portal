@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'room',
     'bootstrap3',
     'storages',
+    'house',
 ]
 
 MIDDLEWARE = [

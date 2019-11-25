@@ -1,0 +1,88 @@
+{% extends 'jobs/index.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+	<section class="detail-banner">
+		<div class="detail-title">Detail</div>
+	</section>
+
+	<section class="detail">
+		<!-- <div class="detail-content">
+			<div class="skill-field">
+				<span>MySql</span>
+				<span>Database</span>
+				<span>Photoshop</span>
+			</div>
+			<div class="facility-field">
+				<span></span>
+			</div>
+			<div class="experiance-field">
+				
+			</div>
+		</div> -->
+		<div class="detail-content">
+			<h3>Home details</h3>
+			<div class="table-responsive">
+				<table class="table">
+				<tbody>
+					<tr class="table-row">
+						<td>Price</td>
+						<td>:</td>
+						<td>{{ price }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Area</td>
+						<td>:</td>
+						<td>{{ home.area }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Stored</td>
+						<td>:</td>
+						<td>{{ home.floor}}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Location</td>
+						<td>:</td>
+						<td><span class="stext">{{ home.location}}</span></td>
+					</tr>
+					<tr class="table-row">
+						<td>No. of room</td>
+						<td>:</td>
+						<td>{{ home.no_of_room }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Direction faced</td>
+						<td>:</td>
+						<td>{{ home.direction_faced }}</td>
+					</tr>
+					<tr class="table-row">
+						<td>Conatct</td>
+						<td>:</td>
+						<td>{{ home.contact }}</td>
+					</tr>
+					<!-- {% if user.profile.user_type == 'Job Seeker' %}
+					<tr class="table-row">
+						<td>Images</td>
+						<td>:</td>
+						<td>
+						{% for image in images %}
+						
+						{% if image.seller_post.id == house.id %}
+						
+						<img style="height: 150px ; width:auto ;" src="/media/{{image.image}}">
+						&nbsp;&nbsp;&nbsp;
+						{% endif %}
+						{% endfor %}
+						</td>
+					</tr>
+					{% endif %} -->
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+
+	{% endblock %}

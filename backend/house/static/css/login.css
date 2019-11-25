@@ -1,0 +1,62 @@
+.login-banner{
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.login-title {
+    color: #fff;
+    text-align: center;
+    padding: 60px 0;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+.form-content {
+    background: #EFEFEF;
+    margin: 0 auto;
+    width: 65%;
+    padding: 30px;
+}
+.login-form {
+    margin-top: 50px;
+}
+.form-content h3 {
+    margin-top: 0;
+    padding-bottom: 20px;
+}
+.form-field {
+    margin-bottom: 15px;
+}
+.login-btn .l-btn {
+    background: #006034;
+    color: #fff;
+    padding: 8px 12px;
+    width: 100%;
+    border: none;
+    font-size: 19px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.remember {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.rem-right a {
+    color: #00AEEF;
+}
+.new-user {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #000;
+}
+.u-icon i {
+    font-size: 13px;
+    padding-right: 5px;
+}
+.u-icon span a {
+    color: #00AEEF;
+    padding-left: 7px;
+}
