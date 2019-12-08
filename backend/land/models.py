@@ -51,6 +51,7 @@ class SearchedLand(models.Model):
     owner_name = models.CharField(max_length=50, null=False, blank=False)
     price = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
+    facility = models.ManyToManyField(Facility)
     contact = models.CharField(max_length=15)
 
     def __str__(self):

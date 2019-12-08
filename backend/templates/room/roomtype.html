@@ -32,11 +32,13 @@
 						</div>
 						</div>
 					</a> -->
-            {% for room in roomtype %} {% if room.kitchen and room.bedroom or room.kitchen and room.hall or room.hall and room.bedroom %}
+            {% for room in roomtype %}
+            {% if room.kitchen and room.bedroom or room.kitchen and room.hall or room.hall and room.bedroom %}
             <a href="{% url 'room:roomlist' room.id %}">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="room-test">
-                        <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                        <div
+                            class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
                             <div class="room-icon"><i class="fas fa-home"></i></div>
                             <div class="room-items">
                                 {% if room.bedroom > 0 %}
@@ -64,7 +66,8 @@
             <a href="{% url 'room:roomlist' room.id %}">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="room-test">
-                        <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                        <div
+                            class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
                             <div class="room-icon"><i class="fas fa-home"></i></div>
                             <div class="room-items">
                                 <div class="room-item">Single room</div>
@@ -77,7 +80,8 @@
                 <a href="{% url 'room:roomlist' room.id %}">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="room-test">
-                            <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                            <div
+                                class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
                                 <div class="room-icon"><i class="fas fa-home"></i></div>
                                 <div class="room-items">
                                     <div class="room-item">Single hall</div>
@@ -92,7 +96,8 @@
                 <a href="{% url 'room:roomlist' room.id %}">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="room-test">
-                            <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                            <div
+                                class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
                                 <div class="room-icon"><i class="fas fa-home"></i></div>
                                 <div class="room-items">
                                     <div class="room-item">Multiple rooms</div>
@@ -104,7 +109,8 @@
                     <a href="{% url 'room:roomlist' room.id %}">
                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="room-test">
-                                <div class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
+                                <div
+                                    class="room-type {% if forloop.counter0|divisibleby:2 %} green {% else %} blue {% endif %}">
                                     <div class="room-icon"><i class="fas fa-home"></i></div>
                                     <div class="room-items">
                                         <div class="room-item">Multiple halls</div>

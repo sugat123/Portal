@@ -13,22 +13,43 @@
 		<div class="skill-list">
 			<h3>Enter the details of the land you want to buy</h3>
 			<div class="row facilities">
-				<form class="fill-facilities">
+				<form class="fill-facilities" action="{% url 'land:landformbuy' %}" method="post">
+					{% csrf_token %}
+
+					<select name="user" class="form-control" required style="display:none;">
+						<option value="{{user.id}}"></option>
+					</select>
 					<div class="form-input">
 						<label>Owner's Name</label>
-						<input type="text" name="" class="form-control">
+						<input type="text" name="owner_name" class="form-control">
 					</div>
 					<div class="form-input">
 						<label>Contact</label>
-						<input type="text" name="" class="form-control">
+						<input type="text" name="contact" class="form-control">
 					</div>
 					<div class="form-input">
 						<label>Price</label>
-						<input type="number" name="salary" class="form-control">
+
+						{{ searched_form.price }}
+
 					</div>
 					<div class="form-input">
 						<label>Location</label>
 						<input type="text" name="location" class="form-control">
+					</div>
+					<div class="form-input">
+						<label>Facilities</label>
+
+						{% for facility in facilities %}
+
+						<div class="form-check">
+							<input type="checkbox" name="facility" id="id_category" value="{{ facility.id }}">
+							<label for="facility-{{facility.id}}" id="id_category"> {{ facility.title }} </label>
+						</div>
+
+						{% endfor %}
+						<br>
+						<span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
 					</div>
 
 
@@ -49,18 +70,24 @@
 		<div class="skill-list">
 			<h3>Enter the details of the land you are selling</h3>
 			<div class="row facilities">
-				<form class="fill-facilities">
+				<form class="fill-facilities" action="{% url 'land:landformsell' %}" method="post"
+					enctype="multipart/form-data">
+					{% csrf_token %}
+
+					<select name="user" class="form-control" required style="display:none;">
+						<option value="{{user.id}}"></option>
+					</select>
 					<div class="form-input">
 						<label>Owner's Name</label>
-						<input type="text" name="" class="form-control">
+						<input type="text" name="owner_name" class="form-control">
 					</div>
 					<div class="form-input">
 						<label>Contact</label>
-						<input type="text" name="" class="form-control">
+						<input type="text" name="contact" class="form-control">
 					</div>
 					<div class="form-input">
 						<label>Price</label>
-						<input type="number" name="salary" class="form-control">
+						{{ postedland_form.price }}
 					</div>
 					<div class="form-input">
 						<label>Location</label>
@@ -69,18 +96,20 @@
 					<div class="form-input">
 						<label>Facilities</label>
 						{% for facility in facilities %}
-						
+
 						<div class="form-check">
 							<input type="checkbox" name="facility" id="id_category" value="{{ facility.id }}">
 							<label for="facility-{{facility.id}}" id="id_category"> {{ facility.title }} </label>
 						</div>
-						
+
 						{% endfor %}
 						<br>
 						<span class="other"><i class="fas fa-angle-right"></i><a href="#popup1">Others</a></span>
 					</div>
 					<div class="form-input">
 						<label>Upload image</label>
+						{{ formset.management_form }}
+						{{ formset.as_p }}
 						<input type="file" id="file" name="file" accept="image/png, image/jpeg">
 					</div>
 					<!-- <div class="form-input">
@@ -103,12 +132,19 @@
 <!-- end of if user_type block -->
 <div id="popup1" class="overlay">
 	<div class="popup">
-		<h4>Please enter the prefer features</h4>
+		<h4>Please enter the preferd facilities</h4>
 		<a class="close" href="#">&times;</a>
 		<div class="popup-content">
-			<form>
-				<textarea name="message" id="message" rows="5"></textarea>
-				<div class="more-btn"><a href="">Add</a></div>
+			<form action="{% url 'land:add_facility' %}" method="POST">
+				{% csrf_token %}
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{form.title.errors}}
+				</div>
+				{% endif %}
+
+				<textarea name="title" required></textarea>
+				<div class="more-btn"><button type="submit">Add</a></div>
 			</form>
 		</div>
 	</div>

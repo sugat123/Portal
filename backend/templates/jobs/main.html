@@ -37,7 +37,11 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
           <a href="{% if user.is_authenticated %}
-          {% url 'land:landform' %}
+          {% if user.profile.user_type == 'Job Seeker' %}
+          {% url 'land:landformbuy' %}
+          {% else %}
+          {% url 'land:landformsell' %}
+          {% endif %}
           {% else %}
           {% url 'users:login_user' %}
           {% endif %}">

@@ -16,7 +16,7 @@
 		<div>
 			<h3>Fill the features below:</h3>
 			<div class="row facilities">
-				<form class="fill-facilities" action="{% url 'room:postroom' room.id %}" method="post"
+				<form class="fill-facilities" action="{% url 'room:postroom' roomtype.id %}" method="post"
 					enctype="multipart/form-data">
 					{% csrf_token %}
 
@@ -24,7 +24,7 @@
 					<span style="color: red;">{{postedroom_form.errors}}</span>
 					{% endif %}
 					<select name="room_type" class="form-control" required style="display:none;">
-						<option value="{{room.id}}"></option>
+						<option value="{{roomtype.id}}"></option>
 					</select>
 
 					<select name="user" class="form-control" required style="display:none;">
@@ -51,7 +51,7 @@
 					<div class="form-input">
 						<label>Facilities</label>
 						{% for facility in facilities %}
-						{% if facility.room_type_id == room.id %}
+						{% if facility.room_type_id == roomtype.id %}
 						<div class="form-check">
 							<input type="checkbox" name="facility" id="id_category" value="{{ facility.id }}">
 							<label for="facility-{{facility.id}}" id="id_category"> {{ facility.title }} </label>
@@ -95,7 +95,7 @@
 				<form action="{% url 'room:add_facility' %}" method="POST">
 					{% csrf_token %}
 					<select name="room_type" class="form-control" required style="display:none;">
-						<option value="{{room.id}}"></option>
+						<option value="{{roomtype.id}}"></option>
 					</select>
 					{% if form.errors %}
 					<div class="alert alert-danger">

@@ -17,46 +17,51 @@
 					<tr class="table-row">
 						<td>Publish date</td>
 						<td>:</td>
-						<td>{{ room.created }}</td>
+						<td>{{ posted_room.created|date:"Y-m-d"}}</td>
 					</tr>
 					<tr class="table-row">
 						<td>Owner name</td>
 						<td>:</td>
-						<td>{{ room.owner }}</td>
+						<td>{{ posted_room.owner_name }}</td>
 					</tr>
 					<tr class="table-row">
 						<td>Location</td>
 						<td>:</td>
-						<td>{{ room.location }}</td>
+						<td>{{ posted_room.location }}</td>
 					</tr>
 
 					<tr class="table-row">
 						<td>Price</td>
 						<td>:</td>
-						<td>{{ room.price }}</td>
+						<td>{{ price }}</td>
 					</tr>
 					<tr class="table-row">
-						<td>Condition of rooms/flats</td>
+						<td>Condition of room/flats</td>
 						<td>:</td>
-						<td><span class="stext">{{ room.condition }}</span></td>
+						<td><span class="stext">{{ posted_room.conditon }}</span></td>
 					</tr>
 					<tr class="table-row">
 						<td>Facilities</td>
 						<td>:</td>
-						<td><span class="stext">Water</span>
-							<span class="stext">Electricity</span>
-							<span class="stext">AC</span>
+						<td>
+							{% for facility in posted_room.facility.all %}
+							<span class="stext">{{facility.title}}</span>
+
+							{% endfor %}
 						</td>
 					</tr>
-					<tr class="table-row">
-						<td>Rent price</td>
-						<td>:</td>
-						<td><span class="stext">{{room.price}}</span></td>
-					</tr>
+
 					<tr class="table-row">
 						<td>Image</td>
 						<td>:</td>
-						<td><img src="img/esewa.png"></td>
+						<td>
+							{% for image in images %}
+							{% if image.posted_room.id == posted_room.id %}
+							<img style="height:150px; width:auto;" src="/media/{{image.image}}">
+							&nbsp;&nbsp;&nbsp;
+							{% endif %}
+							{% endfor %}
+						</td>
 					</tr>
 
 				</tbody>

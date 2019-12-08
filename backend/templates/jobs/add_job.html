@@ -1,8 +1,6 @@
-
 {% extends 'jobs/index.html' %}
 {% load bootstrap3 %}
-{% block title %}Login{% endblock %}
-
+{% block title %} Login {% endblock %}
 {% block content %}
 
 <div class="text-center" id="alert_message">
@@ -13,8 +11,8 @@
 <form action="{% url 'jobs:add_job' %}" method="POST">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit">Add</button>
-    <button onClick="javascript:history.go(-1);">Go back</button>
+    <button type="submit"> Add </button>
+    <button onClick="javascript:history.go(-1);"> Go back </button>
 </form>
 
 {% endblock %}
